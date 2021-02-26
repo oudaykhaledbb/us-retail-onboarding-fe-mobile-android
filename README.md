@@ -1,4 +1,4 @@
-# US Onboarding Journey for Android
+# SME Onboarding Journey for Android
 
 ## Project setup
 After cloning the app for the first time, you will not be able to build it.
