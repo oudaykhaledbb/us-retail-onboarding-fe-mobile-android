@@ -1,0 +1,207 @@
+import groovy.json.JsonSlurper
+
+def development = 'development'
+def production = 'production'
+def artifactoryUrl = 'https://artifacts.backbase.com'
+def repoUrl = 'https://repo.backbase.com'
+def repoKeyPrefix = "android-flow"
+def mobileZipRepoPrefix = "mobile-flow"
+
+
+subprojects { project ->
+
+    apply plugin: 'maven-publish'
+    apply plugin: 'com.jfrog.artifactory'
+
+    afterEvaluate {
+        def deploymentType = project.hasProperty('deploymentType') ? project.deploymentType : ""
+        def versionName = extractVersionName(project) 
+
+        if (!project.hasProperty('artifactId')) {
+            throw new IllegalStateException("Project must have ext.artifactId defined")
+        }
+
+        if (!project.hasProperty('groupId')) {
+            throw new IllegalStateException("Project must have ext.groupId defined")
+        }
+ 
+        def publishRepoUrl = ''
+        def repoPass = '' 
+        if(deploymentType == development){
+            publishRepoUrl = artifactoryUrl
+            repoPass = mvnArtifactsPass
+        }else if(deploymentType == production){
+            publishRepoUrl = repoUrl
+            repoPass = mvnPass
+        }      
+         
+        def publishName = "${project.artifactId}-${versionName}"
+        //region Mobile ZIPs
+        def mobileZipLocalDir = "$project.buildDir/zip"
+        def mobileZipBuildDir = "$mobileZipLocalDir/contents"
+        def zipName = "${publishName}.zip"
+        def libName = "${publishName}.aar"
+
+ 
+        task prepareAarForMobileZip(type: Copy, dependsOn: 'assembleRelease') {
+            from("$project.buildDir/outputs/aar") {
+                include '*-release.aar'
+                rename "${publishName}-release.aar", "${libName}"
+            }
+            into mobileZipBuildDir
+        }
+
+        task preparePomForMobileZip(type: Copy, dependsOn: "generatePomFileFor${publishName.capitalize()}Publication") {
+            from("$project.buildDir/publications/$publishName") {
+                include '*.pom'
+            }
+            into mobileZipBuildDir
+        }
+
+        task prepareRelease(type: Zip, dependsOn: [
+                prepareAarForMobileZip,
+                preparePomForMobileZip
+        ]) {
+            from mobileZipBuildDir
+            include '*'
+            include '**/**'
+            archiveFileName = zipName
+            destinationDirectory = file(mobileZipLocalDir)
+        }
+
+        //endregion
+
+        //region Publication
+        project.publishing {
+            publications {
+                "$publishName"(MavenPublication) {
+
+                    groupId project.groupId
+                    artifactId project.artifactId
+                    version versionName
+                    artifact source: "$mobileZipBuildDir/${libName}"
+
+                    pom {
+                        packaging = 'aar'
+                        withXml {
+                            final dependenciesNode = asNode().appendNode('dependencies')
+
+                            def addDependency = { Dependency dep, String scope ->
+                                if (!isValid(dep)) return
+
+                                logger.debug("$project.name dependency: $dep")
+
+                                final dependencyNode = dependenciesNode.appendNode('dependency')
+                                        .appendNode('groupId', dep.group).parent()
+                                        .appendNode('artifactId', extractDependencyArtifactId(dep)).parent()
+                                        .appendNode('version', extractVersionName(dep)).parent()
+                                        .appendNode('scope', scope).parent()
+
+                                if (isLocalDependency(dep)) {
+                                    dependencyNode.appendNode('type', "aar").parent()
+                                } else if (dep.artifacts.extension != null &&
+                                        !dep.artifacts.extension.isEmpty()) {
+                                    dependencyNode.appendNode('type', dep.artifacts.extension).parent()
+                                }
+                            }
+
+                            configurations.api.getDependencies().each { dep -> addDependency(dep, "compile") }
+                            configurations.implementation.getDependencies().each { dep ->
+                                addDependency(dep, "runtime")
+                            }
+                            configurations.compile.getDependencies().each { dep -> addDependency(dep, "compile") }
+                        }
+                        developers {
+                            developer {
+                                name = 'Backbase R&D, B.V.'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        "generatePomFileFor${publishName.capitalize()}Publication" {
+            destination file("$buildDir/publications/$publishName/${publishName}.pom")
+        }
+
+        project.artifactory {
+            publish {
+                contextUrl = publishRepoUrl 
+                repository {
+                    repoKey = "$repoKeyPrefix-$deploymentType"
+                    username = mvnUser
+                    password = repoPass
+                    maven = true
+                }
+                defaults {
+                    publications publishName
+                    publishBuildInfo = false
+                }
+            }
+        }
+
+        task releaseZipsToArtifacts(dependsOn: prepareRelease) {
+            doLast {
+                deployArtifact(publishRepoUrl, "$mobileZipRepoPrefix-$deploymentType", "android/$project.artifactId/$versionName", mobileZipLocalDir, zipName)
+            }
+        }   
+    }
+}
+
+private static String extractVersionName(project) {
+    def versionName = project.version
+    if (versionName == null || versionName.isEmpty() || versionName == "unspecified") {
+        if (project.hasProperty('android'))
+            versionName = project.android.defaultConfig.versionName
+    }
+    return versionName
+}
+
+private static String extractDependencyArtifactId(dependency) {
+    def depArtifactId = dependency.name
+
+    // If ext.artifactId is explicitly defined, use that over the module name:
+    if (isLocalDependency(dependency)) {
+        def depProject = dependency.dependencyProject
+        if (depProject.hasProperty('artifactId'))
+            depArtifactId = depProject.artifactId
+    }
+    return depArtifactId
+}
+
+private static boolean isLocalDependency(dependency) {
+    return dependency.hasProperty('dependencyProject')
+}
+
+private static boolean isValid(Dependency dep) {
+    String artifactId = extractDependencyArtifactId(dep)
+    String version = extractVersionName(dep)
+    return dep.group != null && version != null && artifactId != null && artifactId != "unspecified"
+}
+
+private void deployArtifact(String url, String repository, String directory, String localPath, String fileName) {
+    def target = "$url/$repository/$directory/$fileName"
+    def source = "$localPath/$fileName"
+    def user = "$mvnUser:$mvnPass"
+    def curlCommand = "curl -n -u $user -X PUT \"$target\" -T \"$source\""
+    logger.lifecycle curlCommand
+    String response = ['sh', '-c', curlCommand].execute().text
+    parseForErrors response
+}
+
+private static void parseForErrors(String jfrogResponse) {
+    def parsedResult = new JsonSlurper().parseText(jfrogResponse)
+    def errors = parsedResult.errors
+    if (errors != null && !errors.isEmpty()) {
+        StringBuilder errorMessageBuilder = new StringBuilder()
+        errors.each { error ->
+            errorMessageBuilder
+                    .append(error.status)
+                    .append(' ')
+                    .append(error.message)
+                    .append('\n')
+        }
+        throw new IOException(errorMessageBuilder.toString())
+    }
+}

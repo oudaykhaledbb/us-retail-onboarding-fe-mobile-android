@@ -1,0 +1,89 @@
+ apply plugin: 'com.android.application'
+ apply plugin: 'kotlin-android'
+ apply plugin: 'kotlin-android-extensions'
+
+ ext {
+     artifactId = 'alpha-flow'
+     versionName = projectVersions.versionName
+     appCenterName = [
+             production: "Backbase/Flow-Android",
+             beta      : "Backbase/Flow-Android-Beta"
+     ]
+     appCenterGroup = 'Collaborators'
+ }
+
+ apply from: '../publish-app.gradle'
+
+ android {
+     compileSdkVersion projectVersions.targetSdk
+     buildToolsVersion projectVersions.buildToolsVersion
+
+     defaultConfig {
+         applicationId "com.backbase.android.flow.smeo"
+         minSdkVersion projectVersions.minSdk
+         targetSdkVersion projectVersions.targetSdk
+         versionCode projectVersions.versionCode
+         versionName projectVersions.versionName
+
+         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+         setProperty("archivesBaseName", "$artifactId-$projectVersions.versionName")
+         multiDexEnabled true
+     }
+
+     signingConfigs {
+         release {
+             // release configurations are on Jenkins
+         }
+     }
+
+     buildTypes {
+         release {
+             minifyEnabled false
+             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+         }
+     }
+     compileOptions {
+         sourceCompatibility JavaVersion.VERSION_1_8
+         targetCompatibility JavaVersion.VERSION_1_8
+     }
+
+     kotlinOptions {
+         jvmTarget = JavaVersion.VERSION_1_8
+     }
+
+     testOptions {
+         unitTests.returnDefaultValues = true
+     }
+ }
+
+ dependencies {
+     implementation dependency.backbase
+     implementation dependency.flow
+     implementation dependency.flowcommon
+     implementation dependency.flowdesign
+     implementation dependency.deferredresources
+     implementation dependency.designsystem
+     implementation dependency.kotlinstdLib
+     implementation dependency.appcompat
+     implementation dependency.corektx
+     implementation dependency.constraintlayout
+     implementation dependency.material
+     implementation dependency.multidex
+     implementation dependency.gson
+     implementation dependency.rxJava
+     implementation dependency.localbroadcastmanager
+     implementation dependency.apachecommons
+     implementation dependency.koin
+     implementation dependency.koinviewmodel
+     implementation dependency.jetpacknavigation
+     implementation dependency.jetpacknavigationui
+     implementation dependency.fragment
+
+     implementation dependency.legacysupport
+     testImplementation dependency.junit
+
+     androidTestImplementation dependency.junitandroidx
+     androidTestImplementation dependency.espressocore
+     androidTestImplementation 'androidx.test:rules:1.3.0-rc01'
+
+ }

@@ -1,0 +1,90 @@
+apply plugin: 'org.sonarqube'
+
+sonarqube {
+    def gitBranch = getGitBranch()
+    properties {
+        // Metadata:
+        property 'sonar.host.url', 'https://sonar.backbase.eu'
+        property 'sonar.login', "$project.sonarToken" 
+        property 'sonar.projectKey', "FLOW:us-onboarding-android-reference"
+        property 'sonar.projectName', "FLOW:us-onboarding-android-reference"
+        property 'sonar.projectVersion', "$projectVersions.versionName"
+        property 'sonar.java.binaries',
+            'build/intermediates/javac/debug/classes,build/tmp/kotlin-classes/debug'
+
+        // Sources:
+        property 'sonar.sourceEncoding', 'UTF-8'
+        property 'sonar.sources', 'src/main/java'
+        property 'sonar.tests', 'src/test/java,src/androidTest/java'
+
+        // Coverage:
+        property 'sonar.java.coveragePlugin', 'jacoco'
+        property 'sonar.junit.reportsPath', 'build/test-results/testDebugUnitTest'
+        property 'sonar.coverage.jacoco.xmlReportPaths',
+            "build/reports/coverage/debug/report.xml,build/reports/jacocoCombined/debug/jacoco.xml"
+        property 'sonar.swift.lizard.report', 'build/sonar-reports/lizard-report.xml'
+    }
+}
+
+//region Lizard
+task downloadLizard {
+    doFirst {
+        File lizardBin = new File("~/Library/Python/3.7/bin/lizard")
+        if (lizardBin.exists()) {
+            logger.info 'lizard already exists; not downloading it again'
+        } else exec {
+            logger.lifecycle 'downloading lizard'
+            commandLine 'sh', '.sonar/downloadLizard.sh'
+        }
+    }
+}
+
+task runLizard {
+    // See TODO WORKAROUND below
+     mustRunAfter 'downloadLizard'
+}
+subprojects { project ->
+    task runLizardInModule {
+        doFirst {
+            exec {
+                commandLine 'sh', '../.sonar/runLizard.sh', project.name
+            }
+        }
+    }
+    runLizard.dependsOn ":$project.name:runLizardInModule"
+}
+
+// TODO WORKAROUND: Download lizard fails on Jenkins, possibly due to Python 2.7 deprecation
+//tasks.sonarqube.dependsOn 'downloadLizard'
+tasks.sonarqube.dependsOn 'runLizard'
+//endregion
+
+private static def getGitBranch() {
+    def branch = ""
+    // Get a list of branches corresponding to the current HEAD:
+    def process = "git show -s --pretty=%D HEAD".execute()
+    process.in.eachLine { line ->
+        // The list of branches is ", "-delimited, so split by that:
+        def refNames = line.split(", ")
+        for (refName in refNames) {
+            // Don't count "HEAD" or tags:
+            if (refName == "HEAD" || refName.contains('tag: ')) {
+                continue
+            }
+
+            branch = refName
+                // If the branch is from origin, drop the "origin" part:
+                .replace("origin/", "")
+                // If the branch is local and has changes, drop the "HEAD -> " part:
+                .replace("HEAD -> ", "")
+            break
+        }
+    }
+    process.err.eachLine { line -> println line }
+    process.waitFor()
+    return branch
+}
+
+private static def getTimestamp() {
+    return new Date().format("HH:mm:ss")
+}

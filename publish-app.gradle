@@ -1,0 +1,25 @@
+// App module must define ext.appCenterName, ext.appCenterGroup, and ext.versionName
+
+archivesBaseName = "$project.artifactId-$project.versionName"
+
+task publishToAppCenter {
+    doLast {
+        if (!project.hasProperty('releaseType')) {
+            throw new IllegalStateException("Missing releaseType parameter")
+        }
+        def distributeRelease = 'appcenter distribute release'
+        def apkPath = "$buildDir/outputs/apk/release/$archivesBaseName-release.apk"
+        def token = project.hasProperty('appcenterToken') ? project.getProperty('appcenterToken') : 'x'
+        def appName = appCenterName[project.getProperty('releaseType')]
+        def notify = project.hasProperty('shouldNotify') ? project.getProperty('shouldNotify').toBoolean() : false
+        def additionalFlags = ""
+        if(!notify){
+            additionalFlags += "--silent"
+        }
+
+        exec {
+            commandLine 'sh', '-v', '-c',
+                    "$distributeRelease -g \"$appCenterGroup\" -f \"$apkPath\" -a \"$appName\" --token $token $additionalFlags --debug"
+        }
+    }
+}
