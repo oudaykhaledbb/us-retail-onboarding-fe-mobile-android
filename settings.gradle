@@ -1,2 +1,3 @@
+include ':smeo-walkthrough'
 include ':app'
 rootProject.name = "smeo-android-reference"

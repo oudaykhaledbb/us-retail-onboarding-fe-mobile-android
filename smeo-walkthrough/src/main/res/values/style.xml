@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="walkthroughHeaderStyle" parent="">
+        <item name="android:textAppearance">?textAppearanceHeadline2</item>
+        <item name="android:paddingTop">?spacerLarge</item>
+    </style>
+
+    <style name="walkthroughContentStyle" parent="">
+        <item name="android:textAppearance">?textAppearanceBody1</item>
+        <item name="android:paddingTop">?spacerSmall</item>
+    </style>
+
+    <style name="walkthroughSupportStyle" parent="">
+        <item name="android:textAppearance">?textAppearanceBody2</item>
+        <item name="android:paddingTop">?spacerLarge</item>
+    </style>
+
+    <style name="walkthroughCaptionStyle" parent="">
+        <item name="android:textAppearance">?textAppearanceCaption</item>
+        <item name="android:paddingTop">?spacerLarge</item>
+    </style>
+
+    <style name="walkthroughHeaderWithIconStyle" parent="">
+        <item name="android:textAppearance">?textAppearanceBody1</item>
+        <item name="android:paddingTop">?spacerXLarge</item>
+        <item name="android:drawablePadding">?spacerSmall</item>
+        <item name="drawableTint">?colorPrimary</item>
+    </style>
+
+    <style name="walkthroughLabelWithIconStyle" parent="">
+        <item name="android:textAppearance">?textAppearanceCaption</item>
+        <item name="android:paddingTop">?spacerXLarge</item>
+    </style>
+
+</resources>
+
+<!--    data class WalkthroughHeader(val text: DeferredText)-->
+<!--    data class WalkthroughContent(val text: DeferredText)-->
+<!--    data class WalkthroughSupport(val text: DeferredText)-->
+<!--    data class WalkthroughCaption(val text: DeferredText)-->
+<!--    data class WalkthroughIconHeader(val icon: DeferredDrawable, val text: DeferredText)-->
+<!--    data class WalkthroughIconLabel(val icon: DeferredDrawable, val text: DeferredText)-->
+<!--    data class WalkthroughSection(val icon: DeferredDrawable, val title: DeferredText, val subtitle: DeferredText)-->
+
+    <!--        <item name="spacerXSmall">2dp</item>-->
+    <!--        <item name="spacerXSmall">4dp</item>-->
+    <!--        <item name="spacerSmall">8dp</item>-->
+    <!--        <item name="spacerMedium">12dp</item>-->
+    <!--        <item name="spacerLarge">16dp</item>-->
+    <!--        <item name="spacerXLarge">24dp</item>-->

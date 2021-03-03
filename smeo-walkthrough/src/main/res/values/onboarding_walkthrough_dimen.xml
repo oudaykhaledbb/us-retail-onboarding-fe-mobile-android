@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Colors should be overridden in the module -->
+    <dimen name="onboarding_walkthrough_lblTitle">34sp</dimen>
+    <dimen name="onboarding_walkthrough_lblSubTitle">16sp</dimen>
+    <dimen name="onboarding_radius">16sp</dimen>
+
+
+</resources>
