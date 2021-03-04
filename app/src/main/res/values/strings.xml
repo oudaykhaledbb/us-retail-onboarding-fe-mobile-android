@@ -8,7 +8,7 @@
     <string name="walkthrough_label_info_few_documents">walkthrough_label_welcome_header</string>
     <string name="walkthrough_label_info_business_liscence">Business License, DBA certificate*, A valid ID.</string>
     <string name="walkthrough_info_details_about_your_business">Details about your business</string>
-    <string name="walkthrough_info_legal_name">walkthrough_label_legal_name</string>
+    <string name="walkthrough_info_legal_name">Legal name, EIN*, date of establishment, Country of legal formation.</string>
     <string name="walkthrough_info_dba_ccertificate">* A DBA certificate, also known as a trade name, fictitious name, or assumed name, allows you to conduct business under a name other than your legal business name (if applicable).</string>
     <string name="walkthrough_requirements_header">We ❤ all of our customers</string>
     <string name="walkthrough_label_requirements_content">Just like you, we love all of our customers, but for this type of account there are certain requirements you will need to match.</string>
