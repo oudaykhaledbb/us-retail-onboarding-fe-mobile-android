@@ -18,13 +18,3 @@ class WalkthroughCaptionView constructor(context: Context) : MaterialTextView(Co
 class WalkthroughHeaderWithIcon constructor(context: Context) : MaterialTextView(ContextThemeWrapper(context, R.style.walkthroughHeaderWithIconStyle), null, 0)
 
 class WalkthroughLabelWithIcon constructor(context: Context) : MaterialTextView(ContextThemeWrapper(context, R.style.walkthroughLabelWithIconStyle), null, 0)
-
-
-
-//data class WalkthroughHeader(val text: DeferredText)
-//data class WalkthroughContent(val text: DeferredText)
-//data class WalkthroughSupport(val text: DeferredText)
-//data class WalkthroughCaption(val text: DeferredText)
-//data class WalkthroughIconHeader(val icon: DeferredDrawable, val text: DeferredText)
-//data class WalkthroughIconLabel(val icon: DeferredDrawable, val text: DeferredText)
-//data class WalkthroughSection(val icon: DeferredDrawable, val title: DeferredText, val subtitle: DeferredText)
