@@ -1,8 +1,10 @@
-package com.backbase.android.flow.smeo.walkthrough
+package com.backbase.android.flow.smeo.walkthrough.models
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
+import com.backbase.android.flow.smeo.walkthrough.R
+import com.backbase.android.flow.smeo.walkthrough.ui.*
 import com.backbase.deferredresources.DeferredDrawable
 import com.backbase.deferredresources.DeferredText
 import kotlinx.android.synthetic.main.walkthrough_section.view.*
@@ -13,38 +15,38 @@ interface WalkthroughModel {
 }
 
 class WalkthroughHeader(private val headerText: DeferredText) :
-    WalkthroughModel {
+        WalkthroughModel {
     override fun resolve(context: Context) =
         WalkthroughHeaderView(context)
             .apply { text = headerText.resolve(context) }
 }
 
 class WalkthroughContent(private val contentText: DeferredText) :
-    WalkthroughModel {
+        WalkthroughModel {
     override fun resolve(context: Context) =
         WalkthroughContentView(context)
             .apply { text = contentText.resolve(context) }
 }
 
 class WalkthroughSupport(private val supportText: DeferredText) :
-    WalkthroughModel {
+        WalkthroughModel {
     override fun resolve(context: Context) =
         WalkthroughSupportView(context)
             .apply { text = supportText.resolve(context) }
 }
 
 class WalkthroughCaption(private val captionText: DeferredText) :
-    WalkthroughModel {
+        WalkthroughModel {
     override fun resolve(context: Context) =
         WalkthroughCaptionView(context)
             .apply { text = captionText.resolve(context) }
 }
 
 class WalkthroughIconHeader(val icon: DeferredDrawable, private val headerText: DeferredText) :
-    WalkthroughModel {
+        WalkthroughModel {
     override fun resolve(context: Context) =
         WalkthroughHeaderWithIcon(
-            context
+                context
         ).apply {
             setCompoundDrawablesRelativeWithIntrinsicBounds(icon.resolve(context), null, null, null)
             text = headerText.resolve(context)
@@ -52,12 +54,12 @@ class WalkthroughIconHeader(val icon: DeferredDrawable, private val headerText: 
 }
 
 class WalkthroughIconLabel(val icon: DeferredDrawable, private val labelText: DeferredText) :
-    WalkthroughModel {
+        WalkthroughModel {
     override fun resolve(context: Context) =
         WalkthroughLabelWithIcon(
-            context
+                context
         ).apply {
-            setCompoundDrawablesRelative(icon.resolve(context), null, null, null)
+            setCompoundDrawablesRelativeWithIntrinsicBounds(icon.resolve(context), null, null, null)
             text = labelText.resolve(context)
         }
 }

@@ -1,4 +1,4 @@
-package com.backbase.android.flow.smeo.walkthrough
+package com.backbase.android.flow.smeo.walkthrough.ui
 
 import android.content.Context
 import android.os.Build

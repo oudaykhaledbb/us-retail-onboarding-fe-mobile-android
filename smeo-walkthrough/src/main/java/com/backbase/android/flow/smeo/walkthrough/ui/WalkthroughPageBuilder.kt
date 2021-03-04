@@ -1,5 +1,6 @@
-package com.backbase.android.flow.smeo.walkthrough
+package com.backbase.android.flow.smeo.walkthrough.ui
 
+import com.backbase.android.flow.smeo.walkthrough.models.*
 import com.backbase.deferredresources.DeferredDrawable
 import com.backbase.deferredresources.DeferredText
 import java.io.Serializable
@@ -16,56 +17,56 @@ class WalkthroughPageBuilder {
 
     fun addHeader(text: DeferredText): WalkthroughPageBuilder {
         walkthroughItems.add(
-            WalkthroughHeader(
-                text
-            )
+                WalkthroughHeader(
+                        text
+                )
         )
         return this
     }
 
     fun addContent(text: DeferredText): WalkthroughPageBuilder {
         walkthroughItems.add(
-            WalkthroughContent(
-                text
-            )
+                WalkthroughContent(
+                        text
+                )
         )
         return this
     }
 
     fun addSupport(text: DeferredText): WalkthroughPageBuilder {
         walkthroughItems.add(
-            WalkthroughSupport(
-                text
-            )
+                WalkthroughSupport(
+                        text
+                )
         )
         return this
     }
 
     fun addCaption(text: DeferredText): WalkthroughPageBuilder {
         walkthroughItems.add(
-            WalkthroughCaption(
-                text
-            )
+                WalkthroughCaption(
+                        text
+                )
         )
         return this
     }
 
     fun addHeaderWithIcon(icon: DeferredDrawable, text: DeferredText): WalkthroughPageBuilder {
         walkthroughItems.add(
-            WalkthroughIconHeader(
-                icon,
-                text
-            )
+                WalkthroughIconHeader(
+                        icon,
+                        text
+                )
         )
         return this
     }
 
     fun addLabelWithIcon(icon: DeferredDrawable, text: DeferredText): WalkthroughPageBuilder {
         walkthroughItems.add(
-            WalkthroughIconHeader(
-                icon,
-                text
-            )
+                WalkthroughIconLabel(
+                        icon,
+                        text
+                )
         )
         return this
     }
@@ -76,18 +77,18 @@ class WalkthroughPageBuilder {
         subtitle: DeferredText
     ): WalkthroughPageBuilder {
         walkthroughItems.add(
-            WalkthroughSection(
-                icon,
-                title,
-                subtitle
-            )
+                WalkthroughSection(
+                        icon,
+                        title,
+                        subtitle
+                )
         )
         return this
     }
 
     fun build() = PageContent(
-        headerImage,
-        walkthroughItems
+            headerImage,
+            walkthroughItems
     )
 
 }

@@ -1,5 +1,7 @@
 package com.backbase.android.flow.smeo.walkthrough
 
+import com.backbase.android.flow.smeo.walkthrough.ui.PageContent
+
 class WalkthroughConfiguration private constructor(
     val pages: List<PageContent>
 ) {

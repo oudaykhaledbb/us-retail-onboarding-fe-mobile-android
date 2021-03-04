@@ -1,8 +1,9 @@
-package com.backbase.android.flow.smeo.walkthrough
+package com.backbase.android.flow.smeo.walkthrough.ui
 
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import com.backbase.android.flow.smeo.walkthrough.R
 import kotlinx.android.synthetic.main.screen_single_walkthrough.*
 
 private const val BUNDLE_PAGE_CONTENT = "BUNDLE_PAGE_CONTENT"

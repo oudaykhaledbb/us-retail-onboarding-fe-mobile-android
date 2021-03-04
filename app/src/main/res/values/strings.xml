@@ -6,8 +6,21 @@
     <string name="walkthrough_label_welcome_proprietorship_description">A sole proprietor is someone who owns an unincorporated business by himself and has full control over it.</string>
     <string name="walkthrough_info_header">What you’ll need to get started:</string>
     <string name="walkthrough_label_info_few_documents">walkthrough_label_welcome_header</string>
-    <string name="walkthrough_label_info_business_liscence">\"Business License, DBA certificate*, A valid ID.\"</string>
+    <string name="walkthrough_label_info_business_liscence">Business License, DBA certificate*, A valid ID.</string>
     <string name="walkthrough_info_details_about_your_business">Details about your business</string>
     <string name="walkthrough_info_legal_name">walkthrough_label_legal_name</string>
-    <string name="walkthrough_info_dba_ccertificate">\"* A DBA certificate, also known as a trade name, fictitious name, or assumed name, allows you to conduct business under a name other than your legal business name (if applicable).\"</string>
+    <string name="walkthrough_info_dba_ccertificate">* A DBA certificate, also known as a trade name, fictitious name, or assumed name, allows you to conduct business under a name other than your legal business name (if applicable).</string>
+    <string name="walkthrough_requirements_header">We ❤ all of our customers</string>
+    <string name="walkthrough_label_requirements_content">Just like you, we love all of our customers, but for this type of account there are certain requirements you will need to match.</string>
+    <string name="walkthrough_label_your_business_located_in_us">Your business is located in the U.S.</string>
+    <string name="walkthrough_label_you_are_us_citizen">You are a US citizen or a resident.</string>
+    <string name="walkthrough_label_you_can_provide_ssn">You can provide your Social Security Number.</string>
+    <string name="walkthrough_business_not_allowed_header">One last thing. This is pretty important.</string>
+    <string name="walkthrough_label_business_not_allowed_content">If your business is involved in any of these activities, we may not be able to work with you.</string>
+    <string name="walkthrough_label_sale_and_distribution_of_marijuana">Sale and distribution of marijuana</string>
+    <string name="walkthrough_label_gambling">Gambling</string>
+    <string name="walkthrough_label_money_service_business">Money Service Business</string>
+    <string name="walkthrough_label_privately_owned_atms">Privately Owned ATMs</string>
+    <string name="walkthrough_terms_and_conditions_header">One last thing before we get started.</string>
+    <string name="walkthrough_label_terms_and_conditions_content">You’re just minutes away from opening your account.</string>
 </resources>

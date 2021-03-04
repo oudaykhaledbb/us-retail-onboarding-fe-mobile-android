@@ -1,4 +1,4 @@
-package com.backbase.android.flow.smeo.walkthrough
+package com.backbase.android.flow.smeo.walkthrough.ui
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -11,7 +11,7 @@ class WalkthroughPagerAdapter(
 
     override fun getItem(position: Int): Fragment {
         return WalkthroughSingleScreen.newInstance(
-            lstPages[position]
+                lstPages[position]
         )
     }
 

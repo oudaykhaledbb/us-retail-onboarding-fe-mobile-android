@@ -4,6 +4,6 @@
     app:startDestination="@id/walkthroughScreen2">
     <fragment
         android:id="@+id/walkthroughScreen2"
-        android:name="com.backbase.android.flow.smeo.walkthrough.WalkthroughScreen"
+        android:name="com.backbase.android.flow.smeo.walkthrough.ui.WalkthroughJourney"
         android:label="WalkthroughScreen" />
 </navigation>
