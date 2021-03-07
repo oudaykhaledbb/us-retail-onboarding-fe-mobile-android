@@ -1,9 +1,9 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <corners android:radius="16dp"
+    <corners android:radius="?radiusLarge"
         android:topLeftRadius="0dp"
         android:topRightRadius="0dp"
-        android:bottomLeftRadius="16dp"
-        android:bottomRightRadius="16dp"
+        android:bottomLeftRadius="?radiusLarge"
+        android:bottomRightRadius="?radiusLarge"
         />
 </shape>
