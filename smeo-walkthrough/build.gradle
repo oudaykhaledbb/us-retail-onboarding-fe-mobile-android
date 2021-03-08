@@ -23,6 +23,10 @@ android {
         }
     }
 
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
     viewBinding {
         enabled true
     }
@@ -74,6 +78,7 @@ dependencies {
     androidTestImplementation dependency.truth
     androidTestImplementation dependency.coroutinestest
 
-    api dependency.fragment
-    api dependency.fragmentTesting
+    debugImplementation('androidx.fragment:fragment-testing:1.2.5') {
+        exclude group: 'androidx.test', module: 'monitor'
+    }
 }
