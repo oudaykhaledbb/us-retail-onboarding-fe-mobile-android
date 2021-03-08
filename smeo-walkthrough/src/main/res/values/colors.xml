@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="onboarding_walkthrough_color_ripple_default">#83000000</color>
+    <color name="onboarding_walkthrough_color_selected">?colorPrimary</color>
+    <color name="onboarding_walkthrough_color_text_skip">?colorPrimary</color>
+</resources>
