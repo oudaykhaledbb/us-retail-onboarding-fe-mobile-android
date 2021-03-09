@@ -45,28 +45,39 @@ class WalkthroughJourney : Fragment(R.layout.journey_walkthrough), ViewPager.OnP
     }
 
     fun onPageChanged(position: Int) {
+        handleNextButtonWhenPageChanged(position)
+        handleSkipButtonWhenPageChanged(position)
+    }
+
+    private fun handleSkipButtonWhenPageChanged(position: Int) {
+        if (position > 0) {
+            btnSkip.setText(R.string.back)
+            btnSkip.setOnClickListener {
+                viewPager.setCurrentItem(position - 1, true)
+            }
+        } else {
+            btnSkip.setText(R.string.skip)
+            btnSkip.setOnClickListener {
+                viewPager.setCurrentItem(configuration.pages.size, true)
+            }
+        }
+    }
+
+    private fun handleNextButtonWhenPageChanged(position: Int) {
         if (position < configuration.pages.size - 1) {
             cbTermsAndConditions.visibility = View.GONE
-            btnSkip.setText(R.string.skip)
             lblNext.isEnabled = true
             lblNext.setText(R.string.next)
             lblNext.setOnClickListener {
                 viewPager.setCurrentItem(position + 1, true)
-            }
-            btnSkip.setOnClickListener {
-                router.onWalkthroughFinished()
             }
         } else {
             lblNext.setText(R.string.get_started)
             cbTermsAndConditions.isChecked = false
             lblNext.isEnabled = false
             cbTermsAndConditions.visibility = View.VISIBLE
-            btnSkip.setText(R.string.back)
             lblNext.setOnClickListener {
                 router.onWalkthroughFinished()
-            }
-            btnSkip.setOnClickListener {
-                viewPager.setCurrentItem(position - 1, true)
             }
         }
     }
