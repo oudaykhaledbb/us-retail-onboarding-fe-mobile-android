@@ -10,7 +10,7 @@ val applicationModule = module {
 
     factory {
         walkthroughConfiguration {
-            pages = arrayListOf(welcomePage(), informationPage(), requirementsPage(), businessNotAllowedPage(), termsAndConditionsPages())
+            pages = arrayListOf(welcomePage(), requirementsPage(), informationPage(), businessNotAllowedPage(), termsAndConditionsPages())
         }
     }
 }
