@@ -56,11 +56,11 @@ fun businessNotAllowedPage() = WalkthroughPageBuilder()
         .addContent(DeferredText.Resource(R.string.walkthrough_label_business_not_allowed_content))
         .addLabelWithIcon(
                 DeferredDrawable.Resource(R.drawable.ic_marijuana),
-                DeferredText.Resource(R.string.walkthrough_label_your_business_located_in_us)
+                DeferredText.Resource(R.string.walkthrough_label_sale_and_distribution_of_marijuana)
         )
         .addLabelWithIcon(
                 DeferredDrawable.Resource(R.drawable.ic_gambling),
-                DeferredText.Resource(R.string.walkthrough_label_sale_and_distribution_of_marijuana)
+                DeferredText.Resource(R.string.walkthrough_label_gambling)
         )
         .addLabelWithIcon(
                 DeferredDrawable.Resource(R.drawable.ic_money),

@@ -20,13 +20,14 @@
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/lblTitle"
-            style="?textAppearanceBody1Medium"
+            android:textAppearance="?textAppearanceBody1Medium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/lblSubTitle"
-            style="?textAppearanceBody2"
+            android:textAppearance="?textAppearanceBody2"
+            android:textColor="?android:textColorSecondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 

@@ -2,41 +2,46 @@
 <resources>
 
     <style name="walkthroughHeaderStyle" parent="">
-        <item name="android:textAppearance">?textAppearanceHeadline2</item>
+        <item name="android:textAppearance">?textAppearanceHeadline4</item>
         <item name="android:paddingTop">?spacerLarge</item>
     </style>
 
     <style name="walkthroughContentStyle" parent="">
         <item name="android:textAppearance">?textAppearanceBody1</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
         <item name="android:paddingTop">?spacerSmall</item>
     </style>
 
     <style name="walkthroughSupportStyle" parent="">
         <item name="android:textAppearance">?textAppearanceBody2</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
         <item name="android:paddingTop">?spacerLarge</item>
     </style>
 
     <style name="walkthroughCaptionStyle" parent="">
         <item name="android:textAppearance">?textAppearanceCaption</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
         <item name="android:paddingTop">?spacerLarge</item>
     </style>
 
     <style name="walkthroughHeaderWithIconStyle" parent="">
-        <item name="android:textAppearance">?textAppearanceBody1</item>
-        <item name="android:paddingTop">?spacerXLarge</item>
+        <item name="android:textAppearance">?textAppearanceBody1Medium</item>
+        <item name="android:paddingTop">?spacerMedium</item>
         <item name="android:drawablePadding">?spacerSmall</item>
         <item name="drawableTint">?colorPrimary</item>
     </style>
 
     <style name="walkthroughLabelWithIconStyle" parent="">
-        <item name="android:textAppearance">?textAppearanceBody1</item>
+        <item name="android:textAppearance">?textAppearanceBody1Medium</item>
         <item name="android:paddingTop">?spacerMedium</item>
         <item name="android:drawablePadding">?spacerSmall</item>
     </style>
 
     <style name="roundedCorners" parent="">
-        <item name="cornerFamily">rounded</item>
-        <item name="cornerSize">?radiusLarge</item>
+        <item name="cornerFamilyBottomLeft">rounded</item>
+        <item name="cornerFamilyBottomRight">rounded</item>
+        <item name="cornerSizeBottomLeft">?radiusLarge</item>
+        <item name="cornerSizeBottomRight">?radiusLarge</item>
     </style>
 
 </resources>

@@ -15,8 +15,8 @@
     <string name="walkthrough_label_your_business_located_in_us">Your business is located in the U.S.</string>
     <string name="walkthrough_label_you_are_us_citizen">You are a US citizen or a resident.</string>
     <string name="walkthrough_label_you_can_provide_ssn">You can provide your Social Security Number.</string>
-    <string name="walkthrough_business_not_allowed_header">One last thing. This is pretty important.</string>
-    <string name="walkthrough_label_business_not_allowed_content">If your business is involved in any of these activities, we may not be able to work with you.</string>
+    <string name="walkthrough_business_not_allowed_header">This is pretty important.</string>
+    <string name="walkthrough_label_business_not_allowed_content">If your business is involved in any of these activities, you might need to provide further information.</string>
     <string name="walkthrough_label_sale_and_distribution_of_marijuana">Sale and distribution of marijuana</string>
     <string name="walkthrough_label_gambling">Gambling</string>
     <string name="walkthrough_label_money_service_business">Money Service Business</string>
