@@ -1,4 +1,4 @@
-package com.backbase.android.flow.onboarding.app.common
+package com.backbase.android.flow.smeo.common
 
 import android.graphics.Color
 import android.os.Bundle

@@ -1,0 +1,101 @@
+[
+  {
+    "type": "fieldset",
+    "label": "Let's get to know you",
+    "children": [
+      {
+        "type": "input",
+        "label": "First name",
+        "debugValue": "Lisa",
+        "inputType": "text",
+        "name": "firstName",
+        "validations": [
+          {
+            "id": "required",
+            "type": "required",
+            "message": "First name is required",
+            "silent": true
+          },
+          {
+            "id": "maxlength",
+            "type": "maxlength",
+            "value": "50",
+            "message": "First name may not exceed 50 characters.",
+            "silent": false
+          }
+        ]
+      },
+      {
+        "type": "input",
+        "label": "Last name",
+        "inputType": "text",
+        "debugValue": "Simpson",
+        "name": "lastName",
+        "validations": [
+          {
+            "id": "required",
+            "type": "required",
+            "message": "Last name is required",
+            "silent": true
+          },
+          {
+            "id": "maxlength",
+            "type": "maxlength",
+            "value": "50",
+            "message": "Last name may not exceed 50 characters.",
+            "silent": false
+          }
+        ]
+      },
+      {
+        "type": "date",
+        "label": "Date of birth",
+        "inputType": "text",
+        "debugValue": "2000-05-05",
+        "name": "dateOfBirth",
+        "validations": [
+          {
+            "id": "required",
+            "type": "required",
+            "message": "Date of birth is required",
+            "silent": true
+          },
+          {
+            "id": "minyears",
+            "type": "minyears",
+            "value": "18",
+            "message": "Under 18 years old, you’re not eligible to open an account.",
+            "silent": false
+          }
+        ]
+      },
+      {
+        "type": "input",
+        "label": "Email address",
+        "debugValue": "test@backbase.com",
+        "inputType": "text",
+        "name": "email",
+        "validations": [
+          {
+            "id": "required",
+            "type": "required",
+            "message": "Email address is required",
+            "silent": true
+          },
+          {
+            "id": "regex",
+            "type": "regex",
+            "value": "^\\w+([-+.']\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*$",
+            "message": "Invalid email address",
+            "silent": false
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "submit",
+    "label": "Continue",
+    "inputType": "submit"
+  }
+]
