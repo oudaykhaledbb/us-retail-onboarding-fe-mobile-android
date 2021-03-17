@@ -1,0 +1,64 @@
+{
+  "interactionId": "eaf1ee87-59df-4d89-b077-d859a11f8696",
+  "step": {
+    "name": "otp-verification",
+    "status": null
+  },
+  "body": {
+    "registrar": {
+      "firstName": "abb",
+      "lastName": "ccc",
+      "emailAddress": "abb@backbase.com",
+      "dateOfBirth": "1970-01-01"
+    },
+    "business": {
+      "businessType": "SoleProp",
+      "phoneNumbers": []
+    },
+    "documentRequests": [],
+    "termsAndConditions": {
+      "accepted": true,
+      "acceptanceDate": "2021-03-15T10:49:32.082048Z"
+    },
+    "phoneNumberVerified": false,
+    "emailVerified": false
+  },
+  "actionErrors": [],
+  "steps": {
+    "sme-onboarding-business-identity": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "sme-onboarding-walkthrough": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "sme-onboarding-business-details": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "document-request-journey": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "otp-verification": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "done": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "sme-onboarding-anchor": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    }
+  }
+}

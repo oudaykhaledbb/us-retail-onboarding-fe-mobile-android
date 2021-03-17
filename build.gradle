@@ -94,8 +94,7 @@ buildscript {
             scuba                   : "net.sf.scuba:scuba-sc-android:0.0.18",
             zoomauthentication      : "com.facetec:zoom-authentication:8.12.1@aar",
             playservices            : "com.google.android.gms:play-services-vision:20.1.2",
-            productselection        : "com.backbase.android.flow.productselector:product-selection-journey:$versions.productselectionVersion",
-            plaid                   : "com.plaid.link:sdk-core:${versions.plaid}"
+            flowotp                 : "com.backbase.android.flow.otp:one-time-password-journey:2.0.0",
     ]
 
     repositories {

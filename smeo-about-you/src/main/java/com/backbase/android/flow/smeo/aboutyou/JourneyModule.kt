@@ -7,9 +7,9 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 /**
- * Created by Backbase R&D B.V. on 2010-06-09.
+ * Created by Backbase R&D B.V. on 2021-03-15.
  */
-internal const val SCOPE_ID = "journey_welcome"
+internal const val SCOPE_ID = "journey_about_you"
 
 val aboutYouJourneyModule = module {
     viewModel { AboutYouViewModel(get()) }

@@ -1,0 +1,46 @@
+{
+  "interactionId": "1bfa7449-6b04-4f91-ad98-f94161b3b229",
+  "step": {
+    "name": "sme-onboarding-business-identity",
+    "status": null
+  },
+  "body": null,
+  "actionErrors": [],
+  "steps": {
+    "sme-onboarding-business-identity": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "sme-onboarding-walkthrough": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "sme-onboarding-business-details": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "document-request-journey": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "otp-verification": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "done": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "sme-onboarding-anchor": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    }
+  }
+}
