@@ -16,21 +16,23 @@
             android:text="@string/label_common_info"
             android:textAppearance="?textAppearanceBody1" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?spacerMedium"
+            android:text="@string/label_business_structure"
+            android:textAppearance="?textAppearanceSubtitle1Medium" />
+
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-            android:layout_width="0dp"
+            android:layout_marginTop="?sizerXSmall"
+            android:layout_width="match_parent"
             android:enabled="false"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="?sizerMedium"
-            app:endIconMode="dropdown_menu"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/roundingMode">
+            app:endIconMode="dropdown_menu">
 
             <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/txtBusinessStructure"
-                android:enabled="false"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="none"
@@ -38,11 +40,9 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="?spacerMedium"
             android:text="@string/label_business_legal_name"
             android:textAppearance="?textAppearanceSubtitle1Medium" />
 
@@ -73,18 +73,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_if_applicable"
-                android:textAppearance="?textAppearanceSubtitle1Medium" />
+                android:textColor="?android:textColorSecondary"
+                android:textAppearance="?textAppearanceSubtitle1" />
 
         </LinearLayout>
 
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtInputKnownName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingVertical="0dp"
             android:layout_marginTop="?spacerXSmall">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/txtKnownName"
+                android:paddingVertical="0dp"
+                android:layout_marginVertical="0dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
@@ -93,13 +98,18 @@
         <Button
             android:id="@+id/btnMoreInfo"
             style="?buttonStyleLink"
+            android:layout_gravity="start"
+            android:gravity="start"
+            android:paddingVertical="0dp"
+            android:layout_marginTop="0dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="?sizerXLarge"
             android:text="@string/button_more_info" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="?sizerMedium"
             android:text="@string/label_date_established"
             android:textAppearance="?textAppearanceSubtitle1Medium" />
 
@@ -115,6 +125,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="?sizerMedium"
             android:orientation="horizontal">
 
             <TextView
@@ -127,13 +138,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/label_optional"
-                android:textAppearance="?textAppearanceSubtitle1Medium" />
+                android:textColor="?android:textColorSecondary"
+                android:textAppearance="?textAppearanceSubtitle1" />
 
         </LinearLayout>
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txtInputEin"
             style="@style/Widget.Backbase.TextInputLayout.Password"
-            android:layout_width="match_parent"
+            android:layout_marginTop="?spacerXSmall"
+            android:layout_width="230dp"
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -144,6 +158,22 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/label_ein_description"
+            android:textColor="?android:textColorSecondary"
+            android:textAppearance="?textAppearanceSubtitle1" />
+
+        <Button
+            android:id="@+id/btnWhenDoYouNeedEin"
+            style="?buttonStyleLink"
+            android:background="@null"
+            android:paddingVertical="0dp"
+            android:layout_marginTop="0dp"
+            android:layout_width="wrap_content"
+            android:layout_height="?sizerXLarge"
+            android:text="@string/button_when_do_you_need_ein" />
 
         <TextView
             android:layout_width="match_parent"
