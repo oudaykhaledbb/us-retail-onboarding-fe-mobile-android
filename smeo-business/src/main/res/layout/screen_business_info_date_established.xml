@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:showIn="@layout/screen_business_info">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?sizerMedium"
+        android:text="@string/label_date_established"
+        android:textAppearance="?textAppearanceSubtitle1Medium" />
+
+    <com.backbase.android.design.calendar.CalendarButton
+        android:id="@+id/calendarDateEstablished"
+        android:layout_width="230dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?spacerXSmall"
+        android:text="@string/set_date"
+        app:calendarDateFormat="dd MMM yyyy"
+        app:calendarTitle="@string/set_date" />
+
+</merge>

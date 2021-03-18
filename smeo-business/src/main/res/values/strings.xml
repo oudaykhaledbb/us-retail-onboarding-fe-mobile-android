@@ -15,4 +15,8 @@
     <string name="label_business_structure">Business structure</string>
     <string name="label_ein_description">The unique nine-digit number used to identify a business entity.</string>
     <string name="button_when_do_you_need_ein">When do you need an EIN number?</string>
+    <string name="label_state_operating_in">State operating in</string>
+    <string name="Legal_name_is_missing">Legal name is missing</string>
+    <string name="state_is_missing">State operating in is missing</string>
+    <string name="date_established_is_missing">Date established is missing</string>
 </resources>

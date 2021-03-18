@@ -10,8 +10,8 @@ import com.backbase.android.flow.otp.OtpConfiguration
 import com.backbase.android.flow.otp.otpJourneyModule
 import com.backbase.android.flow.otp.usecase.Channel
 import com.backbase.android.flow.otp.usecase.OtpUseCase
-import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_INTERACTION_NAME
-import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_SERVICE_NAME
+import com.backbase.android.flow.smeo.Constants.Companion.INTERACTION_NAME
+import com.backbase.android.flow.smeo.Constants.Companion.SERVICE_NAME
 import com.backbase.android.flow.smeo.Constants.Companion.DBS_PATH
 import com.backbase.android.flow.smeo.Constants.Companion.REQUEST_OTP_ACTIONNAME
 import com.backbase.android.flow.smeo.Constants.Companion.SUBMIT_BUSINESS_DETAILS_ACTION
@@ -51,10 +51,10 @@ val applicationModule = module {
         val dbsProvider: NetworkDBSDataProvider by inject()
         FlowClient(
                 get(),
-                URI("${Backbase.getInstance()?.configuration?.experienceConfiguration?.serverURL}/$DBS_PATH/$ABOUT_YOU_SERVICE_NAME"),
+                URI("${Backbase.getInstance()?.configuration?.experienceConfiguration?.serverURL}/$DBS_PATH/$SERVICE_NAME"),
                 dbsProvider,
                 null,
-                ABOUT_YOU_INTERACTION_NAME,
+                INTERACTION_NAME,
                 null
         )
     }
