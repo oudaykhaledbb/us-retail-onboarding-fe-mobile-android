@@ -19,4 +19,6 @@
     <string name="Legal_name_is_missing">Legal name is missing</string>
     <string name="state_is_missing">State operating in is missing</string>
     <string name="date_established_is_missing">Date established is missing</string>
+    <string name="your_business">Your business</string>
+    <string name="your_business_details">Your business details</string>
 </resources>

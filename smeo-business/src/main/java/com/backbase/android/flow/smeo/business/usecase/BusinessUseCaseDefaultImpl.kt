@@ -26,7 +26,7 @@ class BusinessUseCaseDefaultImpl(
     override suspend fun submitBusinessDetails(
         legalName: String,
         knownName: String,
-        ein: Integer,
+        ein: Int?,
         establishedDate: String,
         operationState: String
     ) = if (configuration.isOffline) submitBusinessDetailsOffline(
@@ -56,13 +56,13 @@ class BusinessUseCaseDefaultImpl(
     private suspend fun submitBusinessDetailsOnline(
         legalName: String,
         knownName: String,
-        ein: Integer,
+        ein: Int?,
         establishedDate: String,
         operationState: String
     ) =
         withContext(Dispatchers.Default) {
             suspendCoroutine<Any?> { continuation ->
-                val formData = HashMap<String, Serializable>()
+                val formData = HashMap<String, Serializable?>()
                 formData["legalName"] = legalName
                 formData["knownName"] = knownName
                 formData["ein"] = ein
@@ -85,7 +85,7 @@ class BusinessUseCaseDefaultImpl(
     private suspend fun submitBusinessDetailsOffline(
         legalName: String,
         knownName: String,
-        ein: Integer,
+        ein: Int?,
         establishedDate: String,
         operationState: String
     ) = Gson().fromJson(

@@ -12,7 +12,7 @@ class BusinessInfoViewModel(private val useCase: BusinessUseCase) : ViewModel() 
     fun submitBusinessDetails(
         legalName: String,
         knownName: String,
-        ein: Integer,
+        ein: Int?,
         establishedDate: String,
         operationState: String
     ) {

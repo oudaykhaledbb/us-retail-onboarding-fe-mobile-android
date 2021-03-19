@@ -21,36 +21,39 @@ fun checkValidity(input: String, validators: List<Validator>): ValidationResult 
 fun checkValidity(input: String, vararg validators: Validator) =
     checkValidity(input, validators.toList())
 
-fun EditText.applyValidations(textInputLayout: TextInputLayout, validators: Map<Validator, String>) {
+fun EditText.applyValidations(textInputLayout: TextInputLayout, validators: Map<Validator, String>): ValidatorResult {
     val compositeDisposable = CompositeDisposable()
+    val validatorResult = ValidatorResult()
     compositeDisposable.add(this.textChanges().subscribe {
         textInputLayout.error = null
+        validatorResult.notifyOnChange()
         checkValidity(this.text.toString(), validators.map { it.key }.toList()).validator?.let {
             textInputLayout.error = validators.toMap()[it]
+            validatorResult.notifyOnChange(it)
         }
     })
+    return validatorResult
 }
 
 fun EditText.applyValidations(
     textInputLayout: TextInputLayout,
     vararg validators: Pair<Validator, String>
-) {
-    this.applyValidations(textInputLayout, validators.toMap())
-}
+) = this.applyValidations(textInputLayout, validators.toMap())
 
-fun CalendarButton.applyValidations(validators: Map<Validator, String>) {
+fun CalendarButton.applyValidations(validators: Map<Validator, String>): ValidatorResult {
     val compositeDisposable = CompositeDisposable()
+    val validatorResult = ValidatorResult()
     compositeDisposable.add(this.textChanges().subscribe {
         this.error = null
+        validatorResult.notifyOnChange()
         checkValidity(this.text.toString(), validators.map { it.key }.toList()).validator?.let {
             this.error = validators.toMap()[it]
+            validatorResult.notifyOnChange(it)
         }
     })
+    return validatorResult
 }
 
 fun CalendarButton.applyValidations(
     vararg validators: Pair<Validator, String>
-) {
-    this.applyValidations(validators.toMap())
-}
-
+) = this.applyValidations(validators.toMap())

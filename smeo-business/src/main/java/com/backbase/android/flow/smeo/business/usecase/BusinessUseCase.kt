@@ -7,7 +7,7 @@ interface BusinessUseCase {
     suspend fun submitBusinessDetails(
         legalName: String,
         knownName: String,
-        ein: Integer,
+        ein: Int?,
         establishedDate: String,
         operationState: String
     ): Any?
