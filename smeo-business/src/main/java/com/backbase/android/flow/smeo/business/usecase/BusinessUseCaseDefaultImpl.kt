@@ -30,28 +30,50 @@ class BusinessUseCaseDefaultImpl(
         establishedDate: String,
         operationState: String
     ) = if (configuration.isOffline) submitBusinessDetailsOffline(
-        legalName,
-        knownName,
-        ein,
-        establishedDate,
-        operationState
+            legalName,
+            knownName,
+            ein,
+            establishedDate,
+            operationState
     ) else submitBusinessDetailsOnline(
-        legalName,
-        knownName,
-        ein,
-        establishedDate,
-        operationState
+            legalName,
+            knownName,
+            ein,
+            establishedDate,
+            operationState
     )
 
-    private suspend fun verifyCaseOnline() =
-        withContext(Dispatchers.Default) {
-            suspendCoroutine<Any?> { continuation ->
-                flowClient.performInteraction(
-                    Action("sme-onboarding-check-case-exist", null),
-                    InteractionResponseHandler(continuation, "sme-onboarding-check-case-exist")
-                )
+    override suspend fun submitBusinessIdentity(industry: String, businessDescription: String, companyWebsite: String?) =
+            if (configuration.isOffline) {
+                submitBusinessIdentityOffline(industry, businessDescription, companyWebsite)
+            } else {
+                submitBusinessIdentityOnline(industry, businessDescription, companyWebsite)
             }
-        }
+
+    suspend fun submitBusinessIdentityOnline(industry: String, businessDescription: String, companyWebsite: String?) =
+            withContext(Dispatchers.Default) {
+                suspendCoroutine<Any?> { continuation ->
+                    val formData = HashMap<String, Serializable?>()
+                    formData["industryKey"] = industry
+                    formData["nature"] = businessDescription
+                    formData["website"] = companyWebsite
+                    formData["industryValue"] = industry
+                    flowClient.performInteraction(
+                            Action("sme-onboarding-business-identity-data", formData),
+                            InteractionResponseHandler(continuation, "sme-onboarding-business-identity-data")
+                    )
+                }
+            }
+
+    private suspend fun verifyCaseOnline() =
+            withContext(Dispatchers.Default) {
+                suspendCoroutine<Any?> { continuation ->
+                    flowClient.performInteraction(
+                            Action("sme-onboarding-check-case-exist", null),
+                            InteractionResponseHandler(continuation, "sme-onboarding-check-case-exist")
+                    )
+                }
+            }
 
     private suspend fun submitBusinessDetailsOnline(
         legalName: String,
@@ -76,23 +98,25 @@ class BusinessUseCaseDefaultImpl(
         }
 
     private suspend fun verifyCaseOffline() = Gson().fromJson(
-        readAsset(
-            context.assets,
-            "backbase/smeo/check-case-exist.json"
-        ), InteractionResponse::class.java
+            readAsset(
+                    context.assets,
+                    "backbase/smeo/check-case-exist.json"
+            ), InteractionResponse::class.java
     )
 
+    suspend fun submitBusinessIdentityOffline(industry: String, businessDescription: String, companyWebsite: String?) = null
+
     private suspend fun submitBusinessDetailsOffline(
-        legalName: String,
-        knownName: String,
-        ein: Int?,
-        establishedDate: String,
-        operationState: String
+            legalName: String,
+            knownName: String,
+            ein: Int?,
+            establishedDate: String,
+            operationState: String
     ) = Gson().fromJson(
-        readAsset(
-            context.assets,
-            "backbase/smeo/business-details-data.json"
-        ), InteractionResponse::class.java
+            readAsset(
+                    context.assets,
+                    "backbase/smeo/business-details-data.json"
+            ), InteractionResponse::class.java
     )
 
 }

@@ -10,10 +10,10 @@ import com.backbase.android.flow.otp.OtpConfiguration
 import com.backbase.android.flow.otp.otpJourneyModule
 import com.backbase.android.flow.otp.usecase.Channel
 import com.backbase.android.flow.otp.usecase.OtpUseCase
-import com.backbase.android.flow.smeo.Constants.Companion.INTERACTION_NAME
-import com.backbase.android.flow.smeo.Constants.Companion.SERVICE_NAME
 import com.backbase.android.flow.smeo.Constants.Companion.DBS_PATH
+import com.backbase.android.flow.smeo.Constants.Companion.INTERACTION_NAME
 import com.backbase.android.flow.smeo.Constants.Companion.REQUEST_OTP_ACTIONNAME
+import com.backbase.android.flow.smeo.Constants.Companion.SERVICE_NAME
 import com.backbase.android.flow.smeo.Constants.Companion.SUBMIT_BUSINESS_DETAILS_ACTION
 import com.backbase.android.flow.smeo.Constants.Companion.VERIFYACTIONNAME
 import com.backbase.android.flow.smeo.Constants.Companion.VERIFY_CASE_ACTION
@@ -27,10 +27,20 @@ import com.backbase.android.flow.smeo.business.businessJourneyModule
 import com.backbase.android.flow.smeo.business.usecase.BusinessUseCase
 import com.backbase.android.flow.smeo.business.usecase.BusinessUseCaseDefaultImpl
 import com.backbase.android.flow.smeo.walkthrough.walkthroughConfiguration
+import com.backbase.android.flow.stepnavigation.HeaderLabels
+import com.backbase.deferredresources.DeferredText
 import com.google.gson.Gson
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 import java.net.URI
+
+
+val mapFragments = mapOf(
+        "AboutYouJourney" to HeaderLabels(1, DeferredText.Resource(R.string.personal_details), DeferredText.Resource(R.string.nice_to_meet_you)),
+        "OtpJourney" to HeaderLabels(2, DeferredText.Resource(R.string.mobile_phone_number), DeferredText.Resource(R.string.security_at_your_fingertips)),
+        "BusinessInfoScreen" to HeaderLabels(3, DeferredText.Resource(R.string.personal_details), DeferredText.Resource(R.string.your_business_details)),
+        "BusinessIdentityScreen" to HeaderLabels(4, DeferredText.Resource(R.string.your_business), DeferredText.Resource(R.string.where_is_your_business_located))
+)
 
 /**
  * Koin module defining the app-level Authentication Journey configurations.

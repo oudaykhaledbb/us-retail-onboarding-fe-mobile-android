@@ -13,5 +13,5 @@
     <fragment
         android:id="@+id/businessJourney"
         android:name="com.backbase.android.flow.smeo.business.ui.BusinessJourney"
-        android:label="OtpJourney" />
+        android:label="BusinessJourney" />
 </navigation>

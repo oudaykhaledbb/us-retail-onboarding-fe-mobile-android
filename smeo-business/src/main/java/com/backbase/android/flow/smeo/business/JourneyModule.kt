@@ -1,5 +1,6 @@
 package com.backbase.android.flow.smeo.business
 
+import com.backbase.android.flow.smeo.business.ui.BusinessIdentityViewModel
 import com.backbase.android.flow.smeo.business.ui.BusinessInfoViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.core.qualifier.named
@@ -12,5 +13,6 @@ internal const val SCOPE_ID = "journey_business"
 
 val businessJourneyModule = module {
     viewModel { BusinessInfoViewModel(get()) }
+    viewModel { BusinessIdentityViewModel(get()) }
     scope(named(SCOPE_ID)) { }
 }

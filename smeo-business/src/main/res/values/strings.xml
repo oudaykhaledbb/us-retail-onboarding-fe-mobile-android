@@ -1,6 +1,4 @@
 <resources>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_common_info">"Not all businesses are the same, but there are some things that they have in common. "</string>
     <string name="label_sole_propriotership">Sole Proprietorship</string>
     <string name="label_business_legal_name">Business legal name</string>
@@ -21,4 +19,12 @@
     <string name="date_established_is_missing">Date established is missing</string>
     <string name="your_business">Your business</string>
     <string name="your_business_details">Your business details</string>
+    <string name="label_industry">Industry</string>
+    <string name="label_business_description">Business description</string>
+    <string name="label_description">A short description of the company’s actual activities, services and/or products (Ex. Design and development of mobile apps).</string>
+    <string name="label_company_website">Company website</string>
+    <string name="where_is_your_business_located">Where is your business located</string>
+    <string name="label_dba_description">A DBA, also known as a trade name, fictitious name, or assumed name, is the name other than your legal business name, that you use to conduct business.</string>
+    <string name="industry_is_missing">Industry is missing</string>
+    <string name="business_description__is_missing">Business description is missing</string>
 </resources>

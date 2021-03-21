@@ -1,9 +1,8 @@
 package com.backbase.android.flow.smeo
 
-import androidx.navigation.NavController
-import com.backbase.android.flow.otp.OtpRouter
-import com.backbase.android.flow.smeo.business.BusinessRouter
+import android.content.Context
 import com.backbase.android.flow.smeo.common.AppActivity
+import com.backbase.android.flow.stepnavigation.HeaderDataProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.dsl.module
 
@@ -11,7 +10,8 @@ class MainActivity : AppActivity(R.layout.activity_main) {
 
     override fun onResume() {
         super.onResume()
-        header.setTotalNumberOfSteps(1)
+        header.setTotalNumberOfSteps(9)
+        findNavController().addOnDestinationChangedListener(HeaderDataProvider(mapFragments, this).setStepNavigationView(header))
     }
 
     override fun instantiateActivityModule() = module {
@@ -30,12 +30,18 @@ class MainActivity : AppActivity(R.layout.activity_main) {
         }
 
         factory {
-            businessRouter(navController){
+            businessRouter(navController) {
                 setTheme(R.style.AppTheme)
             }
         }
 
         factory { return@factory header }
+
+        factory {
+            val context: Context by inject()
+            return@factory HeaderDataProvider(mapFragments, context).setStepNavigationView(header)
+        }
+
     }
 
 }

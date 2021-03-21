@@ -12,4 +12,10 @@ interface BusinessUseCase {
         operationState: String
     ): Any?
 
+    suspend fun submitBusinessIdentity(
+        industry: String,
+        businessDescription: String,
+        companyWebsite: String?
+    ): Any?
+
 }

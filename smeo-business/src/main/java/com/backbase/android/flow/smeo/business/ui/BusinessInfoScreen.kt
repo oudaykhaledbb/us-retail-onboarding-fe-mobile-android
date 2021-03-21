@@ -4,15 +4,14 @@ import android.os.Bundle
 import android.os.Parcel
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.backbase.android.design.button.BackbaseButton
 import com.backbase.android.flow.common.state.State
 import com.backbase.android.flow.common.viewmodel.handleStates
-import com.backbase.android.flow.smeo.business.BusinessRouter
 import com.backbase.android.flow.smeo.business.R
 import com.backbase.android.flow.smeo.business.ui.validators.ValidatorCalendarNotEmpty
 import com.backbase.android.flow.smeo.business.ui.validators.ValidatorEmpty
 import com.backbase.android.flow.smeo.business.ui.validators.applyValidations
-import com.backbase.android.flow.stepnavigation.StepNavigationView
 import com.google.android.material.datepicker.CalendarConstraints
 import kotlinx.android.synthetic.main.screen_business_info.*
 import kotlinx.android.synthetic.main.screen_business_info_date_established.*
@@ -26,12 +25,9 @@ import org.koin.android.ext.android.inject
 class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
 
     private val viewModel: BusinessInfoViewModel by inject()
-    private val router: BusinessRouter by inject()
-    private val header: StepNavigationView by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews()
         initValidations()
         initContinueButton()
         initApis()
@@ -39,13 +35,7 @@ class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
 
     override fun onResume() {
         super.onResume()
-        header.setProgress(1)
-            .setProgressText(getString(R.string.your_business))
-            .setTitle(
-                getString(
-                    R.string.your_business_details
-                )
-            )
+        initViews()
     }
 
     private fun initApis() {
@@ -62,7 +52,7 @@ class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
         handleStates(
             apiState,
             {
-                router.onBusinessFinished()
+                findNavController().navigate(R.id.action_businessInfoScreen_to_businessIdentityScreen)
             },
             null,
             { tappedButton.loading = true },
@@ -99,11 +89,11 @@ class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
     private fun initViews() {
         txtInputKnownName.getChildAt(1).visibility = View.GONE
         txtInputEin.getChildAt(1).visibility = View.GONE
+        txtStateOperatingIn.setText(requireContext().resources.getStringArray(R.array.states)[0])
         txtStateOperatingIn.fill(
             requireContext(),
             requireContext().resources.getStringArray(R.array.states).toList()
         )
-        txtStateOperatingIn.setText(requireContext().resources.getStringArray(R.array.states)[0])
         calendarDateEstablished.setValidator(object: CalendarConstraints.DateValidator{
             override fun writeToParcel(dest: Parcel?, flags: Int) {
 
@@ -111,6 +101,11 @@ class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
             override fun isValid(date: Long) = System.currentTimeMillis() > date
             override fun describeContents() = 0
         })
+        btnMoreInfo.setOnClickListener { showBottomSheet() }
+    }
+
+    private fun showBottomSheet() {
+        InfoBottomSheet.newInstance().show(childFragmentManager, "InfoBottomSheet")
     }
 
 }

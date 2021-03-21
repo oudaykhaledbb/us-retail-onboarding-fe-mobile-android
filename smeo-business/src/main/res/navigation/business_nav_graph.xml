@@ -6,5 +6,15 @@
     <fragment
         android:id="@+id/businessInfoScreen"
         android:name="com.backbase.android.flow.smeo.business.ui.BusinessInfoScreen"
-        android:label="BusinessInfoScreen" />
+        android:label="BusinessInfoScreen" >
+        <action
+            android:id="@+id/action_businessInfoScreen_to_businessIdentityScreen"
+            app:destination="@id/businessIdentityScreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/businessIdentityScreen"
+        android:name="com.backbase.android.flow.smeo.business.ui.BusinessIdentityScreen"
+        android:label="BusinessIdentityScreen" />
+
 </navigation>
