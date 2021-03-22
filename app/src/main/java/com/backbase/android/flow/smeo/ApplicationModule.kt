@@ -10,6 +10,8 @@ import com.backbase.android.flow.otp.OtpConfiguration
 import com.backbase.android.flow.otp.otpJourneyModule
 import com.backbase.android.flow.otp.usecase.Channel
 import com.backbase.android.flow.otp.usecase.OtpUseCase
+import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_Action_INIT
+import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_Action_SUBMIT_ABOUT_YOU
 import com.backbase.android.flow.smeo.Constants.Companion.DBS_PATH
 import com.backbase.android.flow.smeo.Constants.Companion.INTERACTION_NAME
 import com.backbase.android.flow.smeo.Constants.Companion.REQUEST_OTP_ACTIONNAME
@@ -17,6 +19,8 @@ import com.backbase.android.flow.smeo.Constants.Companion.SERVICE_NAME
 import com.backbase.android.flow.smeo.Constants.Companion.SUBMIT_BUSINESS_DETAILS_ACTION
 import com.backbase.android.flow.smeo.Constants.Companion.VERIFYACTIONNAME
 import com.backbase.android.flow.smeo.Constants.Companion.VERIFY_CASE_ACTION
+import com.backbase.android.flow.smeo.Constants.Companion.INTERACTION_NAME
+import com.backbase.android.flow.smeo.Constants.Companion.SERVICE_NAME
 import com.backbase.android.flow.smeo.aboutyou.AboutYouConfiguration
 import com.backbase.android.flow.smeo.aboutyou.aboutYouJourneyModule
 import com.backbase.android.flow.smeo.aboutyou.readAsset
@@ -77,6 +81,8 @@ val applicationModule = module {
     factory {
         AboutYouConfiguration {
             isOffline = true
+            actionInit = ABOUT_YOU_Action_INIT
+            actionAboutYou = ABOUT_YOU_Action_SUBMIT_ABOUT_YOU
         }
     }
 

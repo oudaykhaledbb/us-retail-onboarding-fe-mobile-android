@@ -16,7 +16,7 @@
             <option value="$PROJECT_DIR$/smeo-about-you" />
             <option value="$PROJECT_DIR$/smeo-business" />
             <option value="$PROJECT_DIR$/smeo-walkthrough" />
-            <option value="$PROJECT_DIR$/stepnavigation" />
+            <option value="$PROJECT_DIR$/step-navigation" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

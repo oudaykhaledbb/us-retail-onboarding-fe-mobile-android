@@ -17,6 +17,8 @@ private val aboutYouConfigurationModule = module {
     factory {
         AboutYouConfiguration {
             isOffline = true
+            actionInit = "sme-onboarding-init"
+            actionAboutYou = "sme-onboarding-anchor-data"
         }
     }
 }
