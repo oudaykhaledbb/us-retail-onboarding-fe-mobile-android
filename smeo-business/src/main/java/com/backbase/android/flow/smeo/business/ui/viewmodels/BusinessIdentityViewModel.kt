@@ -1,4 +1,4 @@
-package com.backbase.android.flow.smeo.business.ui
+package com.backbase.android.flow.smeo.business.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

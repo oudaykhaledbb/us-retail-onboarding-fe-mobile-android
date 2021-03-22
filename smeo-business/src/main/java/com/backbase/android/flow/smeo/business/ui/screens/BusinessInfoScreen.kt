@@ -1,4 +1,4 @@
-package com.backbase.android.flow.smeo.business.ui
+package com.backbase.android.flow.smeo.business.ui.screens
 
 import android.os.Bundle
 import android.os.Parcel
@@ -9,9 +9,13 @@ import com.backbase.android.design.button.BackbaseButton
 import com.backbase.android.flow.common.state.State
 import com.backbase.android.flow.common.viewmodel.handleStates
 import com.backbase.android.flow.smeo.business.R
+import com.backbase.android.flow.smeo.business.ui.ButtonValidator
+import com.backbase.android.flow.smeo.business.ui.InfoBottomSheet
+import com.backbase.android.flow.smeo.business.ui.fill
 import com.backbase.android.flow.smeo.business.ui.validators.ValidatorCalendarNotEmpty
 import com.backbase.android.flow.smeo.business.ui.validators.ValidatorEmpty
 import com.backbase.android.flow.smeo.business.ui.validators.applyValidations
+import com.backbase.android.flow.smeo.business.ui.viewmodels.BusinessInfoViewModel
 import com.google.android.material.datepicker.CalendarConstraints
 import kotlinx.android.synthetic.main.screen_business_info.*
 import kotlinx.android.synthetic.main.screen_business_info_date_established.*
@@ -74,14 +78,14 @@ class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
 
     private fun initValidations() {
         ButtonValidator(
-            btnContinue,
-            txtLegalName.applyValidations(
-                txtInputLegalName,
-                ValidatorEmpty() to getString(R.string.Legal_name_is_missing)
-            ),
-            calendarDateEstablished.applyValidations(
-                ValidatorCalendarNotEmpty() to getString(R.string.date_established_is_missing),
-            )
+                btnContinue,
+                txtLegalName.applyValidations(
+                        txtInputLegalName,
+                        ValidatorEmpty() to getString(R.string.Legal_name_is_missing)
+                ),
+                calendarDateEstablished.applyValidations(
+                        ValidatorCalendarNotEmpty() to getString(R.string.date_established_is_missing),
+                )
         )
     }
 

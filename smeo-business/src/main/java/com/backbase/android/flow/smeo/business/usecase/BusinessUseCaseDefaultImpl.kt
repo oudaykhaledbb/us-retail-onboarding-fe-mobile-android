@@ -24,18 +24,13 @@ class BusinessUseCaseDefaultImpl(
         if (configuration.isOffline) verifyCaseOffline() else verifyCaseOnline()
 
     override suspend fun submitBusinessDetails(
-        legalName: String,
-        knownName: String,
-        ein: Int?,
-        establishedDate: String,
-        operationState: String
-    ) = if (configuration.isOffline) submitBusinessDetailsOffline(
-            legalName,
-            knownName,
-            ein,
-            establishedDate,
-            operationState
-    ) else submitBusinessDetailsOnline(
+            legalName: String,
+            knownName: String,
+            ein: Int?,
+            establishedDate: String,
+            operationState: String
+    ) = if (configuration.isOffline) submitBusinessDetailsOffline()
+    else submitBusinessDetailsOnline(
             legalName,
             knownName,
             ein,
@@ -45,9 +40,33 @@ class BusinessUseCaseDefaultImpl(
 
     override suspend fun submitBusinessIdentity(industry: String, businessDescription: String, companyWebsite: String?) =
             if (configuration.isOffline) {
-                submitBusinessIdentityOffline(industry, businessDescription, companyWebsite)
+                submitBusinessIdentityOffline()
             } else {
                 submitBusinessIdentityOnline(industry, businessDescription, companyWebsite)
+            }
+
+    override suspend fun submitBusinessAddress(numberAndStreet: String, apt: String, city: String, state: String, zipCode: String) =
+            if (configuration.isOffline) {
+                submitBusinessAddressOffline()
+            } else {
+                submitBusinessAddressOnline(numberAndStreet, apt, city, state, zipCode)
+            }
+
+
+    private suspend fun submitBusinessAddressOnline(numberAndStreet: String, apt: String, city: String, state: String, zipCode: String) =
+            withContext(Dispatchers.Default) {
+                suspendCoroutine<Any?> { continuation ->
+                    val formData = HashMap<String, Serializable?>()
+                    formData["numberAndStreet"] = numberAndStreet
+                    formData["apt"] = apt
+                    formData["city"] = city
+                    formData["state"] = state
+                    formData["zipCode"] = zipCode
+                    flowClient.performInteraction(
+                            Action("sme-onboarding-business-address", formData),
+                            InteractionResponseHandler(continuation, "sme-onboarding-business-address")
+                    )
+                }
             }
 
     suspend fun submitBusinessIdentityOnline(industry: String, businessDescription: String, companyWebsite: String?) =
@@ -97,22 +116,18 @@ class BusinessUseCaseDefaultImpl(
             }
         }
 
-    private suspend fun verifyCaseOffline() = Gson().fromJson(
+    private fun verifyCaseOffline() = Gson().fromJson(
             readAsset(
                     context.assets,
                     "backbase/smeo/check-case-exist.json"
             ), InteractionResponse::class.java
     )
 
-    suspend fun submitBusinessIdentityOffline(industry: String, businessDescription: String, companyWebsite: String?) = null
+    private fun submitBusinessIdentityOffline() = null
 
-    private suspend fun submitBusinessDetailsOffline(
-            legalName: String,
-            knownName: String,
-            ein: Int?,
-            establishedDate: String,
-            operationState: String
-    ) = Gson().fromJson(
+    private fun submitBusinessAddressOffline() = null
+
+    private fun submitBusinessDetailsOffline() = Gson().fromJson(
             readAsset(
                     context.assets,
                     "backbase/smeo/business-details-data.json"

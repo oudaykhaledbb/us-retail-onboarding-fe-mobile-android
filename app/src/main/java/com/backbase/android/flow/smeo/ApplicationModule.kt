@@ -39,7 +39,8 @@ val mapFragments = mapOf(
         "AboutYouJourney" to HeaderLabels(1, DeferredText.Resource(R.string.personal_details), DeferredText.Resource(R.string.nice_to_meet_you)),
         "OtpJourney" to HeaderLabels(2, DeferredText.Resource(R.string.mobile_phone_number), DeferredText.Resource(R.string.security_at_your_fingertips)),
         "BusinessInfoScreen" to HeaderLabels(3, DeferredText.Resource(R.string.personal_details), DeferredText.Resource(R.string.your_business_details)),
-        "BusinessIdentityScreen" to HeaderLabels(4, DeferredText.Resource(R.string.your_business), DeferredText.Resource(R.string.where_is_your_business_located))
+        "BusinessIdentityScreen" to HeaderLabels(4, DeferredText.Resource(R.string.your_business), DeferredText.Resource(R.string.what_does_your_company_do)),
+        "BusinessAddressScreen" to HeaderLabels(5, DeferredText.Resource(R.string.your_business), DeferredText.Resource(R.string.where_is_your_business_located))
 )
 
 /**

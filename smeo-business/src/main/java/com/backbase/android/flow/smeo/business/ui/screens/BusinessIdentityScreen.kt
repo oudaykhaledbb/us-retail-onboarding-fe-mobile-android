@@ -1,16 +1,18 @@
-package com.backbase.android.flow.smeo.business.ui
+package com.backbase.android.flow.smeo.business.ui.screens
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.backbase.android.design.button.BackbaseButton
 import com.backbase.android.flow.common.state.State
 import com.backbase.android.flow.common.viewmodel.handleStates
-import com.backbase.android.flow.smeo.business.BusinessRouter
 import com.backbase.android.flow.smeo.business.R
+import com.backbase.android.flow.smeo.business.ui.ButtonValidator
+import com.backbase.android.flow.smeo.business.ui.fill
 import com.backbase.android.flow.smeo.business.ui.validators.ValidatorEmpty
 import com.backbase.android.flow.smeo.business.ui.validators.applyValidations
+import com.backbase.android.flow.smeo.business.ui.viewmodels.BusinessIdentityViewModel
 import kotlinx.android.synthetic.main.screen_business_identity_business_description.*
 import kotlinx.android.synthetic.main.screen_business_identity_company_website.*
 import kotlinx.android.synthetic.main.screen_business_identity_industry.*
@@ -21,7 +23,6 @@ import org.koin.android.ext.android.inject
 class BusinessIdentityScreen : Fragment(R.layout.screen_business_identity) {
 
     private val viewModel: BusinessIdentityViewModel by inject()
-    private val router: BusinessRouter by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,8 +64,7 @@ class BusinessIdentityScreen : Fragment(R.layout.screen_business_identity) {
         handleStates(
                 apiState,
                 {
-                    Toast.makeText(requireContext(), "Done", Toast.LENGTH_SHORT).show()
-//                    findNavController().navigate(R.id.action_businessInfoScreen_to_businessIdentityScreen)
+                    findNavController().navigate(R.id.action_businessIdentityScreen_to_businessAddressScreen)
                 },
                 null,
                 { tappedButton.loading = true },
