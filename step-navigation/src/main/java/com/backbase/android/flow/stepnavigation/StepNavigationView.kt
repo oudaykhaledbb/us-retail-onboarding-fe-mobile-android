@@ -2,7 +2,6 @@ package com.backbase.android.flow.stepnavigation
 
 
 import android.content.Context
-import android.graphics.drawable.LayerDrawable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
@@ -24,15 +23,6 @@ class StepNavigationView @JvmOverloads constructor(
     init {
         val root = View.inflate(getContext(), R.layout.view_step_navigation, this)
         root.imgClose.setOnClickListener { onCloseJourney?.invoke() }
-        setSecondaryProgressDrawableAlpha()
-    }
-
-    private fun setSecondaryProgressDrawableAlpha() {
-        val progressDrawable = progressBar.progressDrawable as LayerDrawable
-        val drawableLayer = 1
-        val secondaryColor = progressDrawable.getDrawable(drawableLayer)
-        secondaryColor?.alpha = secondaryProgressAlpha
-        progressDrawable?.setDrawableByLayerId(drawableLayer, secondaryColor)
     }
 
     fun setOnCloseJourney(onCloseJourney: () -> Unit): StepNavigationView {

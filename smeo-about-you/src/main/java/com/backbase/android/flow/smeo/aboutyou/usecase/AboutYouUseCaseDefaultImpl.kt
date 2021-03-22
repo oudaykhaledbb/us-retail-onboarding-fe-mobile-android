@@ -4,9 +4,10 @@ import com.backbase.android.flow.common.handler.InteractionResponseHandler
 import com.backbase.android.flow.contracts.FlowClientContract
 import com.backbase.android.flow.models.Action
 import com.backbase.android.flow.smeo.aboutyou.AboutYouConfiguration
+import com.backbase.android.flow.smeo.aboutyou.models.AboutYouModel
+import com.backbase.android.flow.smeo.aboutyou.models.InitSmeModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.util.*
 import kotlin.coroutines.suspendCoroutine
 
 class AboutYouUseCaseDefaultImpl(
@@ -38,11 +39,9 @@ class AboutYouUseCaseDefaultImpl(
     private suspend fun initSmeOnBoardingOnline() =
         withContext(Dispatchers.Default) {
             suspendCoroutine<Any?> { continuation ->
-                val formData = HashMap<String, Boolean>()
-                formData["accepted"] = true
                 flowClient.performInteraction(
-                    Action("sme-onboarding-init", formData),
-                    InteractionResponseHandler(continuation, "sme-onboarding-init")
+                    Action(aboutYouConfiguration.actionInit, InitSmeModel(true)),
+                    InteractionResponseHandler(continuation, aboutYouConfiguration.actionInit)
                 )
             }
         }
@@ -55,14 +54,15 @@ class AboutYouUseCaseDefaultImpl(
     ) =
         withContext(Dispatchers.Default) {
             suspendCoroutine<Any?> { continuation ->
-                val formData = HashMap<String, String>()
-                formData["firstName"] = firstName
-                formData["lastName"] = lastName
-                formData["dateOfBirth"] = dateOfBirth
-                formData["emailAddress"] = email
+                val model = AboutYouModel(
+                    firstName,
+                    lastName,
+                    dateOfBirth,
+                    email
+                )
                 flowClient.performInteraction(
-                    Action("sme-onboarding-anchor-data", formData),
-                    InteractionResponseHandler(continuation, "sme-onboarding-anchor-data")
+                    Action(aboutYouConfiguration.actionAboutYou, model),
+                    InteractionResponseHandler(continuation, aboutYouConfiguration.actionAboutYou)
                 )
             }
         }

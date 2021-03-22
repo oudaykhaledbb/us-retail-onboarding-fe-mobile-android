@@ -7,7 +7,9 @@ package com.backbase.android.flow.smeo.aboutyou
  *
  */
 class AboutYouConfiguration private constructor(
-    val isOffline: Boolean
+    val isOffline: Boolean,
+    val actionInit: String,
+    val actionAboutYou: String
 ) {
 
     /**
@@ -20,8 +22,14 @@ class AboutYouConfiguration private constructor(
         @set:JvmSynthetic
         var isOffline: Boolean = false
 
+        @set:JvmSynthetic
+        lateinit var actionInit: String
+
+        @set:JvmSynthetic
+        lateinit var actionAboutYou: String
+
         fun build() =
-            AboutYouConfiguration(isOffline)
+            AboutYouConfiguration(isOffline, actionInit, actionAboutYou)
     }
 
 }
