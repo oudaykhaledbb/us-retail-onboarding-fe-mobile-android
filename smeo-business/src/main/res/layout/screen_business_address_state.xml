@@ -9,7 +9,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="?spacerMedium"
             android:text="@string/label_state"
-            android:textAppearance="?textAppearanceSubtitle1Medium" />
+            android:textAppearance="?textAppearanceFormLabel" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txtInputState"

@@ -14,14 +14,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_apt_suite"
-            android:textAppearance="?textAppearanceSubtitle1Medium" />
+            android:textAppearance="?textAppearanceFormLabel" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_optional"
             android:textAppearance="?textAppearanceSubtitle1"
-            android:textColor="?android:textColorSecondary" />
+            android:textColor="?colorSecondary" />
 
     </LinearLayout>
 

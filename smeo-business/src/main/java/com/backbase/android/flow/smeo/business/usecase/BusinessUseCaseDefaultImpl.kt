@@ -2,16 +2,17 @@ package com.backbase.android.flow.smeo.business.usecase
 
 import android.content.Context
 import com.backbase.android.flow.common.handler.InteractionResponseHandler
+import com.backbase.android.flow.common.utils.readAsset
 import com.backbase.android.flow.contracts.FlowClientContract
 import com.backbase.android.flow.models.Action
 import com.backbase.android.flow.models.InteractionResponse
 import com.backbase.android.flow.smeo.business.BusinessConfiguration
-import com.backbase.android.flow.smeo.business.readAsset
+import com.backbase.android.flow.smeo.business.models.AddressModel
+import com.backbase.android.flow.smeo.business.models.BusinessDetailsModel
+import com.backbase.android.flow.smeo.business.models.IdentityModel
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import java.io.Serializable
-import java.util.*
 import kotlin.coroutines.suspendCoroutine
 
 class BusinessUseCaseDefaultImpl(
@@ -56,15 +57,19 @@ class BusinessUseCaseDefaultImpl(
     private suspend fun submitBusinessAddressOnline(numberAndStreet: String, apt: String, city: String, state: String, zipCode: String) =
             withContext(Dispatchers.Default) {
                 suspendCoroutine<Any?> { continuation ->
-                    val formData = HashMap<String, Serializable?>()
-                    formData["numberAndStreet"] = numberAndStreet
-                    formData["apt"] = apt
-                    formData["city"] = city
-                    formData["state"] = state
-                    formData["zipCode"] = zipCode
+                    val formData = AddressModel(
+                        numberAndStreet,
+                        apt,
+                        city,
+                        state,
+                        zipCode
+                    )
                     flowClient.performInteraction(
-                            Action("sme-onboarding-business-address", formData),
-                            InteractionResponseHandler(continuation, "sme-onboarding-business-address")
+                        Action(configuration.submitBusinessAddressAction, formData),
+                        InteractionResponseHandler(
+                            continuation,
+                            configuration.submitBusinessAddressAction
+                        )
                     )
                 }
             }
@@ -72,14 +77,18 @@ class BusinessUseCaseDefaultImpl(
     suspend fun submitBusinessIdentityOnline(industry: String, businessDescription: String, companyWebsite: String?) =
             withContext(Dispatchers.Default) {
                 suspendCoroutine<Any?> { continuation ->
-                    val formData = HashMap<String, Serializable?>()
-                    formData["industryKey"] = industry
-                    formData["nature"] = businessDescription
-                    formData["website"] = companyWebsite
-                    formData["industryValue"] = industry
+                    val formData = IdentityModel(
+                        industry,
+                        businessDescription,
+                        companyWebsite,
+                        industry
+                    )
                     flowClient.performInteraction(
-                            Action("sme-onboarding-business-identity-data", formData),
-                            InteractionResponseHandler(continuation, "sme-onboarding-business-identity-data")
+                        Action(configuration.submitBusinessIdentityAction, formData),
+                        InteractionResponseHandler(
+                            continuation,
+                            configuration.submitBusinessIdentityAction
+                        )
                     )
                 }
             }
@@ -88,8 +97,8 @@ class BusinessUseCaseDefaultImpl(
             withContext(Dispatchers.Default) {
                 suspendCoroutine<Any?> { continuation ->
                     flowClient.performInteraction(
-                            Action("sme-onboarding-check-case-exist", null),
-                            InteractionResponseHandler(continuation, "sme-onboarding-check-case-exist")
+                        Action(configuration.verifyCaseAction, null),
+                        InteractionResponseHandler(continuation, configuration.verifyCaseAction)
                     )
                 }
             }
@@ -103,15 +112,19 @@ class BusinessUseCaseDefaultImpl(
     ) =
         withContext(Dispatchers.Default) {
             suspendCoroutine<Any?> { continuation ->
-                val formData = HashMap<String, Serializable?>()
-                formData["legalName"] = legalName
-                formData["knownName"] = knownName
-                formData["ein"] = ein
-                formData["establishedDate"] = establishedDate
-                formData["operationState"] = operationState
+                val formData = BusinessDetailsModel(
+                    legalName,
+                    knownName,
+                    ein,
+                    establishedDate,
+                    operationState
+                )
                 flowClient.performInteraction(
-                    Action("sme-onboarding-business-details-data", formData),
-                    InteractionResponseHandler(continuation, "sme-onboarding-business-details-data")
+                    Action(configuration.submitBusinessDetailsAction, formData),
+                    InteractionResponseHandler(
+                        continuation,
+                        configuration.submitBusinessDetailsAction
+                    )
                 )
             }
         }

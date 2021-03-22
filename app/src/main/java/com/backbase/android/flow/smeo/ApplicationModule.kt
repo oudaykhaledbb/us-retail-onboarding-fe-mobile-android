@@ -4,6 +4,7 @@ import android.content.Context
 import com.backbase.android.Backbase
 import com.backbase.android.dbs.dataproviders.NetworkDBSDataProvider
 import com.backbase.android.flow.FlowClient
+import com.backbase.android.flow.common.utils.readAsset
 import com.backbase.android.flow.contracts.FlowClientContract
 import com.backbase.android.flow.models.InteractionResponse
 import com.backbase.android.flow.otp.OtpConfiguration
@@ -19,11 +20,8 @@ import com.backbase.android.flow.smeo.Constants.Companion.SERVICE_NAME
 import com.backbase.android.flow.smeo.Constants.Companion.SUBMIT_BUSINESS_DETAILS_ACTION
 import com.backbase.android.flow.smeo.Constants.Companion.VERIFYACTIONNAME
 import com.backbase.android.flow.smeo.Constants.Companion.VERIFY_CASE_ACTION
-import com.backbase.android.flow.smeo.Constants.Companion.INTERACTION_NAME
-import com.backbase.android.flow.smeo.Constants.Companion.SERVICE_NAME
 import com.backbase.android.flow.smeo.aboutyou.AboutYouConfiguration
 import com.backbase.android.flow.smeo.aboutyou.aboutYouJourneyModule
-import com.backbase.android.flow.smeo.aboutyou.readAsset
 import com.backbase.android.flow.smeo.aboutyou.usecase.AboutYouUseCase
 import com.backbase.android.flow.smeo.aboutyou.usecase.AboutYouUseCaseDefaultImpl
 import com.backbase.android.flow.smeo.business.BusinessConfiguration
@@ -110,6 +108,8 @@ val applicationModule = module {
             isOffline = true
             verifyCaseAction = VERIFY_CASE_ACTION
             submitBusinessDetailsAction = SUBMIT_BUSINESS_DETAILS_ACTION
+            submitBusinessIdentityAction = "sme-onboarding-business-identity-data"
+            submitBusinessAddressAction = "sme-onboarding-business-address"
         }
     }
 

@@ -1,6 +1,5 @@
 package com.backbase.android.flow.stepnavigation
 
-
 import android.content.Context
 import android.util.AttributeSet
 import android.view.View
@@ -24,7 +23,6 @@ class StepNavigationView @JvmOverloads constructor(
         val root = View.inflate(getContext(), R.layout.view_step_navigation, this)
         root.imgClose.setOnClickListener { onCloseJourney?.invoke() }
     }
-
     fun setOnCloseJourney(onCloseJourney: () -> Unit): StepNavigationView {
         this.onCloseJourney = onCloseJourney
         return this

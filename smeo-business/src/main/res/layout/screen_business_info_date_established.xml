@@ -10,15 +10,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="?sizerMedium"
         android:text="@string/label_date_established"
-        android:textAppearance="?textAppearanceSubtitle1Medium" />
+        android:textAppearance="?textAppearanceFormLabel" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
     <com.backbase.android.design.calendar.CalendarButton
         android:id="@+id/calendarDateEstablished"
-        android:layout_width="230dp"
+        android:layout_width="0dp"
+        android:layout_weight="0.6"
         android:layout_height="wrap_content"
         android:layout_marginTop="?spacerXSmall"
         android:text="@string/set_date"
         app:calendarDateFormat="dd MMM yyyy"
         app:calendarTitle="@string/set_date" />
+
+    </LinearLayout>
 
 </merge>

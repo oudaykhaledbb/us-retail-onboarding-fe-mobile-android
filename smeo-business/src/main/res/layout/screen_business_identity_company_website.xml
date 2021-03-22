@@ -11,13 +11,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_company_website"
-            android:textAppearance="?textAppearanceSubtitle1Medium" />
+            android:textAppearance="?textAppearanceFormLabel" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/label_optional"
-            android:textColor="?android:textColorSecondary"
+            android:textColor="?colorSecondary"
             android:textAppearance="?textAppearanceSubtitle1" />
 
     </LinearLayout>

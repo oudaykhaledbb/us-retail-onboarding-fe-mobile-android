@@ -11,6 +11,8 @@ class BusinessConfiguration private constructor(
     val isOffline: Boolean,
     val verifyCaseAction: String,
     val submitBusinessDetailsAction: String,
+    val submitBusinessIdentityAction: String,
+    val submitBusinessAddressAction: String,
 ) {
 
     /**
@@ -29,8 +31,14 @@ class BusinessConfiguration private constructor(
         @set:JvmSynthetic
         lateinit var submitBusinessDetailsAction: String
 
+        @set:JvmSynthetic
+        lateinit var submitBusinessIdentityAction: String
+
+        @set:JvmSynthetic
+        lateinit var submitBusinessAddressAction: String
+
         fun build() =
-            BusinessConfiguration(isOffline, verifyCaseAction, submitBusinessDetailsAction)
+            BusinessConfiguration(isOffline, verifyCaseAction, submitBusinessDetailsAction, submitBusinessIdentityAction, submitBusinessAddressAction)
     }
 
 }
