@@ -79,8 +79,8 @@ val applicationModule = module {
     factory {
         AboutYouConfiguration {
             isOffline = true
-            actionInit = ABOUT_YOU_Action_INIT
-            actionAboutYou = ABOUT_YOU_Action_SUBMIT_ABOUT_YOU
+            actionInit = ABOUT_YOU_ACTION_INIT
+            actionAboutYouSubmit = ABOUT_YOU_Action_SUBMIT_ABOUT_YOU
         }
     }
 
