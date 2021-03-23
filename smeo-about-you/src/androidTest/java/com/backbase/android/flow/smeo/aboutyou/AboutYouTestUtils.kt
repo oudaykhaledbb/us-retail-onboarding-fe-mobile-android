@@ -18,7 +18,7 @@ private val aboutYouConfigurationModule = module {
         AboutYouConfiguration {
             isOffline = true
             actionInit = "sme-onboarding-init"
-            actionAboutYou = "sme-onboarding-anchor-data"
+            actionAboutYouSubmit = "sme-onboarding-anchor-data"
         }
     }
 }

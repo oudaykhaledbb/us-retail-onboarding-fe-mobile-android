@@ -4,7 +4,7 @@ import com.backbase.android.Backbase
 import com.backbase.android.dbs.dataproviders.NetworkDBSDataProvider
 import com.backbase.android.flow.FlowClient
 import com.backbase.android.flow.contracts.FlowClientContract
-import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_Action_INIT
+import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_ACTION_INIT
 import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_Action_SUBMIT_ABOUT_YOU
 import com.backbase.android.flow.smeo.Constants.Companion.DBS_PATH
 import com.backbase.android.flow.smeo.Constants.Companion.INTERACTION_NAME
@@ -52,8 +52,8 @@ val applicationModule = module {
     factory {
         AboutYouConfiguration {
             isOffline = true
-            actionInit = ABOUT_YOU_Action_INIT
-            actionAboutYou = ABOUT_YOU_Action_SUBMIT_ABOUT_YOU
+            actionInit = ABOUT_YOU_ACTION_INIT
+            actionAboutYouSubmit = ABOUT_YOU_Action_SUBMIT_ABOUT_YOU
         }
     }
 
