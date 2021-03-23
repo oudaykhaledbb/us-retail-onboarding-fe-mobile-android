@@ -6,4 +6,9 @@
         android:id="@+id/walkthroughScreen"
         android:name="com.backbase.android.flow.smeo.walkthrough.ui.WalkthroughJourney"
         android:label="WalkthroughScreen" />
+    <fragment
+        android:id="@+id/aboutYouJourney"
+        android:name="com.backbase.android.flow.smeo.aboutyou.ui.AboutYouJourney"
+        android:label="AboutYouJourney" />
+
 </navigation>

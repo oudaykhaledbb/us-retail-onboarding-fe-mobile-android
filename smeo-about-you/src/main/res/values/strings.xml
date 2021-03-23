@@ -1,0 +1,12 @@
+<resources>
+    <string name="label_get_your_account_set_up">"Let’s get your account set up. Just a couple quick questions and you’ll be ready to go. "</string>
+    <string name="label_first_name">First name</string>
+    <string name="label_last_name">Last name</string>
+    <string name="btn_continue">Continue</string>
+    <string name="label_date_of_birth">Date of birth</string>
+    <string name="label_email">Email address</string>
+    <string name="nice_to_meet_you">Nice to meet you</string>
+    <string name="personal_details">Personal details</string>
+    <string name="set_date">Set a date</string>
+    <string name="select_date">SELECT A DATE</string>
+</resources>
