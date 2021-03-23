@@ -59,7 +59,7 @@ class AboutYouJourney : Fragment(R.layout.journey_about_you) {
             txtEmail.applyValidations(
                 txtInputEmail,
                 ValidatorEmpty() to "Email is missing",
-                ValidatorEmail() to "Email is missing",
+                ValidatorEmail() to "Should be a valid email address.",
             )
         )
     }
