@@ -20,9 +20,15 @@
             android:id="@+id/action_businessIdentityScreen_to_businessAddressScreen"
             app:destination="@id/businessAddressScreen" />
     </fragment>
+
+<!--    <fragment-->
+<!--        android:id="@+id/businessAddressScreen"-->
+<!--        android:name="com.backbase.android.flow.smeo.business.ui.screens.BusinessAddressScreen"-->
+<!--        android:label="BusinessAddressScreen" />-->
+
     <fragment
         android:id="@+id/businessAddressScreen"
-        android:name="com.backbase.android.flow.smeo.business.ui.screens.BusinessAddressScreen"
+        android:name="com.backbase.android.flow.address.ui.AddressScreen"
         android:label="BusinessAddressScreen" />
 
 </navigation>

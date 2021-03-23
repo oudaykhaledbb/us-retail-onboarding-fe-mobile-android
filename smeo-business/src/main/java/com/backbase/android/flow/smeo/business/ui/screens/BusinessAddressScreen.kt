@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.backbase.android.design.button.BackbaseButton
+import com.backbase.android.flow.common.extensions.fill
 import com.backbase.android.flow.common.state.State
 import com.backbase.android.flow.common.viewmodel.handleStates
 import com.backbase.android.flow.smeo.business.BusinessRouter
 import com.backbase.android.flow.smeo.business.R
-import com.backbase.android.flow.smeo.business.ui.fill
 import com.backbase.android.flow.smeo.business.ui.viewmodels.BusinessAddressScreenViewModel
 import kotlinx.android.synthetic.main.screen_business_address_apt.*
 import kotlinx.android.synthetic.main.screen_business_address_city.*

@@ -12,6 +12,7 @@ import com.backbase.android.flow.smeo.business.models.BusinessDetailsModel
 import com.backbase.android.flow.smeo.business.models.IdentityModel
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.suspendCoroutine
 
@@ -129,22 +130,34 @@ class BusinessUseCaseDefaultImpl(
             }
         }
 
-    private fun verifyCaseOffline() = Gson().fromJson(
+    private suspend fun verifyCaseOffline(): Any? {
+        delay(30)
+        return Gson().fromJson(
             readAsset(
-                    context.assets,
-                    "backbase/smeo/check-case-exist.json"
+                context.assets,
+                "backbase/smeo/check-case-exist.json"
             ), InteractionResponse::class.java
-    )
+        )
+    }
 
-    private fun submitBusinessIdentityOffline() = null
+    private suspend fun submitBusinessIdentityOffline(): Any? {
+        delay(30)
+        return null
+    }
 
-    private fun submitBusinessAddressOffline() = null
+    private suspend fun submitBusinessAddressOffline() : Any? {
+        delay(30)
+        return null
+    }
 
-    private fun submitBusinessDetailsOffline() = Gson().fromJson(
+    private suspend fun submitBusinessDetailsOffline(): Any? {
+        delay(30)
+        return Gson().fromJson(
             readAsset(
-                    context.assets,
-                    "backbase/smeo/business-details-data.json"
+                context.assets,
+                "backbase/smeo/business-details-data.json"
             ), InteractionResponse::class.java
-    )
+        )
+    }
 
 }

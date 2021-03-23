@@ -4,12 +4,16 @@ import android.content.Context
 import com.backbase.android.Backbase
 import com.backbase.android.dbs.dataproviders.NetworkDBSDataProvider
 import com.backbase.android.flow.FlowClient
+import com.backbase.android.flow.address.AddressConfiguration
+import com.backbase.android.flow.address.addressJourneyModule
+import com.backbase.android.flow.address.models.FormItem
+import com.backbase.android.flow.address.usecase.AddressUseCase
 import com.backbase.android.flow.common.utils.readAsset
 import com.backbase.android.flow.contracts.FlowClientContract
 import com.backbase.android.flow.models.InteractionResponse
 import com.backbase.android.flow.otp.OtpConfiguration
+import com.backbase.android.flow.otp.models.OtpChannel
 import com.backbase.android.flow.otp.otpJourneyModule
-import com.backbase.android.flow.otp.usecase.Channel
 import com.backbase.android.flow.otp.usecase.OtpUseCase
 import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_ACTION_INIT
 import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_ACTION_SUBMIT
@@ -32,8 +36,11 @@ import com.backbase.android.flow.smeo.walkthrough.walkthroughConfiguration
 import com.backbase.android.flow.stepnavigation.HeaderLabels
 import com.backbase.deferredresources.DeferredText
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import kotlinx.coroutines.delay
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
+import java.lang.reflect.Type
 import java.net.URI
 
 
@@ -91,6 +98,9 @@ val applicationModule = module {
         OtpConfiguration {
             requestActionName = REQUEST_OTP_ACTIONNAME
             verifyActionName = VERIFYACTIONNAME
+            availableOtpChannelsActionName = ""
+            verificationCodeMaxLength = Integer(9)
+
         }
     }
 
@@ -120,25 +130,61 @@ val applicationModule = module {
     loadKoinModules(listOf(businessJourneyModule))
     //endregion OTP
 
+    //region Address Validation Journey
+    factory {
+        AddressConfiguration {
+            val context: Context by inject()
+            val formItemsType: Type = object :
+                TypeToken<ArrayList<FormItem>>() {}.type
+            formItems = Gson().fromJson(
+                readAsset(
+                    context.assets,
+                    "backbase/smeo/address.json"
+                ), formItemsType
+            )
+        }
+    }
+
+    factory<AddressUseCase> {
+        return@factory object : AddressUseCase {
+            override suspend fun submitAddress(formData: HashMap<String, String?>) = null
+        }
+    }
+
+    loadKoinModules(listOf(addressJourneyModule))
+    //endregion
+
 }
 
 class OtpUseCaseOffline(private val context: Context) : OtpUseCase {
-    override suspend fun requestVerificationCode(phoneNumber: String, channel: Channel) =
-        Gson().fromJson(
-            readAsset(
-                context.assets,
-                "backbase/otp/get-verification-code.json"
-            ), InteractionResponse::class.java
+    override suspend fun requestAvailableOtpChannels() : List<OtpChannel> {
+        delay(30)
+        return listOf(OtpChannel.SMS, OtpChannel.EMAIL)
+    }
+
+    override suspend fun requestVerificationCode(phoneNumber: String, channel: OtpChannel): Any? {
+        delay(30)
+        return Gson().fromJson(
+                readAsset(
+                        context.assets,
+                        "backbase/otp/get-verification-code.json"
+                ), InteractionResponse::class.java
         )
+    }
 
     override suspend fun submitVerificationCode(
         recipient: String,
-        channel: Channel,
+        channel: OtpChannel,
         otp: String
-    ) = Gson().fromJson(
-        readAsset(
-            context.assets,
-            "backbase/otp/submit-verification-code.json"
-        ), InteractionResponse::class.java
-    )
+    ): Any? {
+        delay(30)
+        return Gson().fromJson(
+                readAsset(
+                        context.assets,
+                        "backbase/otp/submit-verification-code.json"
+                ), InteractionResponse::class.java
+        )
+    }
 }
+
+

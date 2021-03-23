@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.backbase.android.flow.common.viewmodel.ApiPublisher
 import com.backbase.android.flow.smeo.aboutyou.usecase.AboutYouUseCase
-import java.lang.Exception
+import kotlinx.coroutines.delay
 
 class AboutYouViewModel(private val useCase: AboutYouUseCase)
     : ViewModel() {
@@ -12,9 +12,10 @@ class AboutYouViewModel(private val useCase: AboutYouUseCase)
     internal val apiSubmitAboutYou = ApiPublisher<Any?>(this.viewModelScope)
 
     fun submitAboutYou(firstName: String, lastName: String, dateOfBirth: String, email: String){
-        apiSubmitAboutYou.submit("updateOwner()"){
+        apiSubmitAboutYou.submit("submitAboutYou()"){
             try{
                 useCase.initSmeOnBoarding()
+                delay(30)
                 return@submit useCase.submitAboutYou(firstName, lastName, dateOfBirth, email)
             }catch (ex: Exception){
                 ex.printStackTrace()

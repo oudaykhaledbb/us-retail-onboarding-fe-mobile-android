@@ -1,7 +1,7 @@
 package com.backbase.android.flow.smeo.business.ui
 
 import com.backbase.android.design.button.BackbaseButton
-import com.backbase.android.flow.smeo.business.ui.validators.ValidatorResult
+import com.backbase.android.flow.common.validators.ValidatorResult
 
 class ButtonValidator(var button: BackbaseButton, vararg validatorResults: ValidatorResult) {
 

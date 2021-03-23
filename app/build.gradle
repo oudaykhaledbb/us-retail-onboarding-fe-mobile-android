@@ -61,6 +61,7 @@
      implementation dependency.flow
      implementation dependency.flowcommon
      implementation dependency.flowdesign
+     implementation dependency.flowaddressvalidation
      implementation dependency.deferredresources
      implementation dependency.designsystem
      implementation dependency.kotlinstdLib
@@ -85,6 +86,7 @@
      implementation project(path: ':smeo-about-you')
      implementation project(path: ':step-navigation')
      implementation project(path: ':smeo-business')
+
      testImplementation dependency.junit
 
      androidTestImplementation dependency.junitandroidx
