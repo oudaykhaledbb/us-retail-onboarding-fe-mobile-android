@@ -11,8 +11,8 @@ import com.backbase.android.flow.otp.OtpConfiguration
 import com.backbase.android.flow.otp.otpJourneyModule
 import com.backbase.android.flow.otp.usecase.Channel
 import com.backbase.android.flow.otp.usecase.OtpUseCase
-import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_Action_INIT
-import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_Action_SUBMIT_ABOUT_YOU
+import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_ACTION_INIT
+import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_ACTION_SUBMIT
 import com.backbase.android.flow.smeo.Constants.Companion.DBS_PATH
 import com.backbase.android.flow.smeo.Constants.Companion.INTERACTION_NAME
 import com.backbase.android.flow.smeo.Constants.Companion.REQUEST_OTP_ACTIONNAME
@@ -80,7 +80,7 @@ val applicationModule = module {
         AboutYouConfiguration {
             isOffline = true
             actionInit = ABOUT_YOU_ACTION_INIT
-            actionAboutYouSubmit = ABOUT_YOU_Action_SUBMIT_ABOUT_YOU
+            actionAboutYouSubmit = ABOUT_YOU_ACTION_SUBMIT
         }
     }
 
