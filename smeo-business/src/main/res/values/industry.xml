@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="industries">
+        <item>Industry 1</item>
+        <item>Industry 2</item>
+        <item>Industry 3</item>
+    </string-array>
+
+</resources>

@@ -3,6 +3,7 @@ package com.backbase.android.flow.smeo
 import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import com.backbase.android.flow.otp.OtpRouter
 import com.backbase.android.flow.smeo.common.AppActivity
 import org.koin.dsl.module
 

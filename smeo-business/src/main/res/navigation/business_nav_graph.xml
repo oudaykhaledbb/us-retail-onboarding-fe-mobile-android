@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/business_nav_graph.xml"
+    app:startDestination="@id/businessInfoScreen">
+
+    <fragment
+        android:id="@+id/businessInfoScreen"
+        android:name="com.backbase.android.flow.smeo.business.ui.screens.BusinessInfoScreen"
+        android:label="BusinessInfoScreen" >
+        <action
+            android:id="@+id/action_businessInfoScreen_to_businessIdentityScreen"
+            app:destination="@id/businessIdentityScreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/businessIdentityScreen"
+        android:name="com.backbase.android.flow.smeo.business.ui.screens.BusinessIdentityScreen"
+        android:label="BusinessIdentityScreen" >
+        <action
+            android:id="@+id/action_businessIdentityScreen_to_businessAddressScreen"
+            app:destination="@id/businessAddressScreen" />
+    </fragment>
+
+<!--    <fragment-->
+<!--        android:id="@+id/businessAddressScreen"-->
+<!--        android:name="com.backbase.android.flow.smeo.business.ui.screens.BusinessAddressScreen"-->
+<!--        android:label="BusinessAddressScreen" />-->
+
+    <fragment
+        android:id="@+id/businessAddressScreen"
+        android:name="com.backbase.android.flow.address.ui.AddressScreen"
+        android:label="BusinessAddressScreen" />
+
+</navigation>

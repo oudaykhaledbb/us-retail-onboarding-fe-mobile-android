@@ -23,4 +23,7 @@
     <string name="walkthrough_label_privately_owned_atms">Privately Owned ATMs</string>
     <string name="walkthrough_terms_and_conditions_header">One last thing before we get started.</string>
     <string name="walkthrough_label_terms_and_conditions_content">You’re just minutes away from opening your account.</string>
+    <string name="mobile_phone_number">Mobile phone number</string>
+    <string name="security_at_your_fingertips">Security at your fingertips</string>
+    <string name="what_does_your_company_do">What does your company do</string>
 </resources>

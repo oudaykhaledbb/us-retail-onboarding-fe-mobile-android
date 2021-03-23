@@ -1,0 +1,36 @@
+<resources>
+    <string name="label_common_info">"Not all businesses are the same, but there are some things that they have in common. "</string>
+    <string name="label_sole_propriotership">Sole Proprietorship</string>
+    <string name="label_business_legal_name">Business legal name</string>
+    <string name="label_last_known_Name">Doing business as (DBA)</string>
+    <string name="label_if_applicable">" (if applicable)"</string>
+    <string name="button_more_info">More info</string>
+    <string name="label_date_established">Date established</string>
+    <string name="set_date">Set a date</string>
+    <string name="btn_continue">Continue</string>
+    <string name="label_ein">Employer identification number (EIN)</string>
+    <string name="label_optional"> (optional)</string>
+    <string name="label_business_structure">Business structure</string>
+    <string name="label_ein_description">The unique nine-digit number used to identify a business entity.</string>
+    <string name="button_when_do_you_need_ein">When do you need an EIN number?</string>
+    <string name="label_state_operating_in">State operating in</string>
+    <string name="Legal_name_is_missing">Legal name is missing</string>
+    <string name="state_is_missing">State operating in is missing</string>
+    <string name="date_established_is_missing">Date established is missing</string>
+    <string name="your_business">Your business</string>
+    <string name="your_business_details">Your business details</string>
+    <string name="label_industry">Industry</string>
+    <string name="label_business_description">Business description</string>
+    <string name="label_description">A short description of the company’s actual activities, services and/or products (Ex. Design and development of mobile apps).</string>
+    <string name="label_company_website">Company website</string>
+    <string name="where_is_your_business_located">Where is your business located</string>
+    <string name="label_dba_description">A DBA, also known as a trade name, fictitious name, or assumed name, is the name other than your legal business name, that you use to conduct business.</string>
+    <string name="industry_is_missing">Industry is missing</string>
+    <string name="business_description__is_missing">Business description is missing</string>
+    <string name="label_city">City</string>
+    <string name="label_apt_suite">Apt / Suite</string>
+    <string name="label_street_number_and_name">Street number and name</string>
+    <string name="label_we_need_to_know_you">We need to know where can we send important documents and information, as well as basic account items, like checks and debit cards.</string>
+    <string name="label_state">State</string>
+    <string name="label_zip">ZIP code</string>
+</resources>

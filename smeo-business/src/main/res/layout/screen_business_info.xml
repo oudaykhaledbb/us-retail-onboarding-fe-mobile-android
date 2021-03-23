@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="?spacerMedium">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_common_info"
+            android:textAppearance="?textAppearanceBody1" />
+
+        <include layout="@layout/screen_business_info_business_structure" />
+        <include layout="@layout/screen_business_info_legal_name" />
+        <include layout="@layout/screen_business_info_dba" />
+        <include layout="@layout/screen_business_info_ein" />
+        <include layout="@layout/screen_business_info_date_established" />
+        <include layout="@layout/screen_business_info_state_operating_in" />
+
+        <com.backbase.android.design.button.BackbaseButton
+            android:id="@+id/btnContinue"
+            style="?attr/buttonStylePrimary"
+            android:layout_width="match_parent"
+            android:layout_marginTop="?spacerMedium"
+            android:layout_marginBottom="?spacerMedium"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="@string/btn_continue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -6,4 +6,12 @@
         android:id="@+id/aboutYouJourney"
         android:name="com.backbase.android.flow.smeo.aboutyou.ui.AboutYouJourney"
         android:label="AboutYouJourney" />
+    <fragment
+        android:id="@+id/otpJourney"
+        android:name="com.backbase.android.flow.otp.ui.OtpScreen"
+        android:label="OtpJourney" />
+    <fragment
+        android:id="@+id/businessJourney"
+        android:name="com.backbase.android.flow.smeo.business.ui.BusinessJourney"
+        android:label="BusinessJourney" />
 </navigation>
