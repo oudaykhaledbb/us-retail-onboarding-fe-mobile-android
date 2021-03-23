@@ -26,10 +26,10 @@ class AboutYouConfiguration private constructor(
         lateinit var actionInit: String
 
         @set:JvmSynthetic
-        lateinit var actionAboutYou: String
+        lateinit var actionAboutYouSubmit: String
 
         fun build() =
-            AboutYouConfiguration(isOffline, actionInit, actionAboutYou)
+            AboutYouConfiguration(isOffline, actionInit, actionAboutYouSubmit)
     }
 
 }
