@@ -7,7 +7,6 @@ import com.backbase.android.flow.contracts.FlowClientContract
 import com.backbase.android.flow.models.Action
 import com.backbase.android.flow.models.InteractionResponse
 import com.backbase.android.flow.smeo.business.BusinessConfiguration
-import com.backbase.android.flow.smeo.business.models.AddressModel
 import com.backbase.android.flow.smeo.business.models.BusinessDetailsModel
 import com.backbase.android.flow.smeo.business.models.IdentityModel
 import com.google.gson.Gson
@@ -45,34 +44,6 @@ class BusinessUseCaseDefaultImpl(
                 submitBusinessIdentityOffline()
             } else {
                 submitBusinessIdentityOnline(industry, businessDescription, companyWebsite)
-            }
-
-    override suspend fun submitBusinessAddress(numberAndStreet: String, apt: String, city: String, state: String, zipCode: String) =
-            if (configuration.isOffline) {
-                submitBusinessAddressOffline()
-            } else {
-                submitBusinessAddressOnline(numberAndStreet, apt, city, state, zipCode)
-            }
-
-
-    private suspend fun submitBusinessAddressOnline(numberAndStreet: String, apt: String, city: String, state: String, zipCode: String) =
-            withContext(Dispatchers.Default) {
-                suspendCoroutine<Any?> { continuation ->
-                    val formData = AddressModel(
-                        numberAndStreet,
-                        apt,
-                        city,
-                        state,
-                        zipCode
-                    )
-                    flowClient.performInteraction(
-                        Action(configuration.submitBusinessAddressAction, formData),
-                        InteractionResponseHandler(
-                            continuation,
-                            configuration.submitBusinessAddressAction
-                        )
-                    )
-                }
             }
 
     suspend fun submitBusinessIdentityOnline(industry: String, businessDescription: String, companyWebsite: String?) =
@@ -141,11 +112,6 @@ class BusinessUseCaseDefaultImpl(
     }
 
     private suspend fun submitBusinessIdentityOffline(): Any? {
-        delay(30)
-        return null
-    }
-
-    private suspend fun submitBusinessAddressOffline() : Any? {
         delay(30)
         return null
     }
