@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.backbase.android.design.button.BackbaseButton
 import com.backbase.android.flow.common.state.State
+import com.backbase.android.flow.common.validators.*
 import com.backbase.android.flow.common.viewmodel.handleStates
 import com.backbase.android.flow.smeo.aboutyou.AboutYouRouter
 import com.backbase.android.flow.smeo.aboutyou.R
@@ -33,6 +34,34 @@ class AboutYouJourney : Fragment(R.layout.journey_about_you) {
                 txtEmail.text.toString()
             )
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        initValidations()
+    }
+
+    private fun initValidations() {
+        ButtonValidator(
+            btnContinue,
+            txtFirstName.applyValidations(
+                txtInputFirstName,
+                ValidatorEmpty() to "First name is missing"
+            ),
+            txtLastName.applyValidations(
+                txtInputLastName,
+                ValidatorEmpty() to "Last name is missing",
+            ),
+            calendarDateOfBirth.applyValidations(
+                ValidatorCalendarNotEmpty() to "Date of birth is missing",
+                ValidatorDateOfBirthOver18() to "Over 18"
+            ),
+            txtEmail.applyValidations(
+                txtInputEmail,
+                ValidatorEmpty() to "Email is missing",
+                ValidatorEmail() to "Email is missing",
+            )
+        )
     }
 
     private fun initApis() {
