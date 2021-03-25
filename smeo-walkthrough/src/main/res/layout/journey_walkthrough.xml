@@ -24,7 +24,7 @@
         android:orientation="horizontal"
         app:layout_constraintBottom_toTopOf="@id/tabIndicator">
 
-        <CheckBox
+        <com.backbase.android.design.button.BackbaseCheckBox
             android:id="@+id/cbTermsAndConditions"
             android:layout_width="?sizerXLarge"
             android:layout_height="?sizerXLarge" />
