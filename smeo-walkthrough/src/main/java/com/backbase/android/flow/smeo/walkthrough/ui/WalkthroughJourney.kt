@@ -8,7 +8,6 @@ import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.backbase.android.flow.smeo.walkthrough.R
@@ -65,7 +64,7 @@ class WalkthroughJourney : Fragment(R.layout.journey_walkthrough), ViewPager.OnP
 
     private fun handleNextButtonWhenPageChanged(position: Int) {
         if (position < configuration.pages.size - 1) {
-            cbTermsAndConditions.visibility = View.GONE
+            termsAndConditions.visibility = View.GONE
             lblNext.isEnabled = true
             lblNext.setText(R.string.next)
             lblNext.setOnClickListener {
@@ -75,7 +74,7 @@ class WalkthroughJourney : Fragment(R.layout.journey_walkthrough), ViewPager.OnP
             lblNext.setText(R.string.get_started)
             cbTermsAndConditions.isChecked = false
             lblNext.isEnabled = false
-            cbTermsAndConditions.visibility = View.VISIBLE
+            termsAndConditions.visibility = View.VISIBLE
             lblNext.setOnClickListener {
                 router.onWalkthroughFinished()
             }
@@ -87,7 +86,6 @@ class WalkthroughJourney : Fragment(R.layout.journey_walkthrough), ViewPager.OnP
 
         val termsAndConditionsSpan: ClickableSpan = object : ClickableSpan() {
             override fun onClick(textView: View) {
-                cbTermsAndConditions.toggle()
                 router.openTermsAndConditions()
             }
 
@@ -98,7 +96,6 @@ class WalkthroughJourney : Fragment(R.layout.journey_walkthrough), ViewPager.OnP
         }
         val privacyPolicySpan: ClickableSpan = object : ClickableSpan() {
             override fun onClick(textView: View) {
-                cbTermsAndConditions.toggle()
                 router.openPrivacyPolicy()
             }
 
@@ -109,9 +106,9 @@ class WalkthroughJourney : Fragment(R.layout.journey_walkthrough), ViewPager.OnP
         }
         spannableString.setSpan(termsAndConditionsSpan, spannableString.indexOf("Terms"), spannableString.indexOf("Terms") + 21, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
         spannableString.setSpan(privacyPolicySpan, spannableString.indexOf("Privacy"), spannableString.indexOf("Privacy") + 17, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        cbTermsAndConditions.text = spannableString
-        cbTermsAndConditions.movementMethod = LinkMovementMethod.getInstance()
-        cbTermsAndConditions.highlightColor = Color.TRANSPARENT
+        txtTermsAndConditions.text = spannableString
+        txtTermsAndConditions.movementMethod = LinkMovementMethod.getInstance()
+        txtTermsAndConditions.highlightColor = Color.TRANSPARENT
     }
 
     override fun onPageScrollStateChanged(state: Int) {

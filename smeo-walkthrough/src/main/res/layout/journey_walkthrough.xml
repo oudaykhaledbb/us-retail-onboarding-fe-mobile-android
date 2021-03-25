@@ -14,19 +14,31 @@
         android:paddingBottom="?spacerMedium"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.backbase.android.design.button.BackbaseCheckBox
-        android:id="@+id/cbTermsAndConditions"
+    <LinearLayout
+        android:id="@+id/termsAndConditions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="?spacerMedium"
         android:layout_marginEnd="?spacerXLarge"
         android:layout_marginBottom="?spacerLarge"
-        android:lineSpacingExtra="?spacer2XS"
-        android:paddingTop="?spacerMedium"
-        android:text="@string/termsAndConditions"
-        android:textColorLink="?colorPrimary"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@id/tabIndicator" />
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@id/tabIndicator">
+
+        <com.backbase.android.design.button.BackbaseCheckBox
+            android:id="@+id/cbTermsAndConditions"
+            android:layout_width="?sizerXLarge"
+            android:layout_height="?sizerXLarge" />
+
+        <TextView
+            android:id="@+id/txtTermsAndConditions"
+            android:textAppearance="?textAppearanceSubtitle1"
+            android:lineSpacingExtra="?spacer2XS"
+            android:textColorLink="?colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/termsAndConditions" />
+
+    </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabIndicator"
