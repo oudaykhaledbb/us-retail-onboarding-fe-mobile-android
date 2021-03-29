@@ -9,4 +9,10 @@
     <string name="personal_details">Personal details</string>
     <string name="set_date">Set a date</string>
     <string name="select_date">SELECT A DATE</string>
+    <string name="validation_first_name_missing">First name is missing</string>
+    <string name="validation_last_name_missing">Last name is missing</string>
+    <string name="validation_dob_missing">Date of birth is missing</string>
+    <string name="validation_dob_between_18_99">You must be at least 18 and under 99 years old to open an account.</string>
+    <string name="validation_email_missing">Email is missing</string>
+    <string name="validation_email_format">Should be a valid email address.</string>
 </resources>

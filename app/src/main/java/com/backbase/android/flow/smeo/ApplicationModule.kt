@@ -48,9 +48,9 @@ import java.net.URI
 val mapFragments = mapOf(
         "AboutYouJourney" to HeaderLabels(1, DeferredText.Resource(R.string.personal_details), DeferredText.Resource(R.string.nice_to_meet_you)),
         "OtpJourney" to HeaderLabels(2, DeferredText.Resource(R.string.security_at_your_fingertips), DeferredText.Resource(R.string.mobile_phone_number)),
-        "BusinessInfoScreen" to HeaderLabels(3, DeferredText.Resource(R.string.personal_details), DeferredText.Resource(R.string.your_business_details)),
-        "BusinessIdentityScreen" to HeaderLabels(4, DeferredText.Resource(R.string.your_business), DeferredText.Resource(R.string.what_does_your_company_do)),
-        "BusinessAddressScreen" to HeaderLabels(5, DeferredText.Resource(R.string.your_business), DeferredText.Resource(R.string.where_is_your_business_located))
+        "BusinessInfoScreen" to HeaderLabels(3, DeferredText.Resource(R.string.your_business_details), DeferredText.Resource(R.string.personal_details)),
+        "BusinessAddressScreen" to HeaderLabels(4, DeferredText.Resource(R.string.where_is_your_business_located), DeferredText.Resource(R.string.your_business)),
+        "BusinessIdentityScreen" to HeaderLabels(5, DeferredText.Resource(R.string.what_does_your_company_do), DeferredText.Resource(R.string.your_business))
 )
 
 /**
@@ -139,7 +139,7 @@ val applicationModule = module {
             formItems = Gson().fromJson(
                 readAsset(
                     context.assets,
-                    "backbase/smeo/address.json"
+                    "backbase/conf/smeo/address.json"
                 ), formItemsType
             )
         }
@@ -147,7 +147,13 @@ val applicationModule = module {
 
     factory<AddressUseCase> {
         return@factory object : AddressUseCase {
-            override suspend fun submitAddress(formData: HashMap<String, String?>) = null
+            override suspend fun submitAddress(formData: HashMap<String, String?>): Any?{
+                val context: Context by inject()
+                return readAsset(
+                    context.assets,
+                    "backbase/smeo/address.json"
+                )
+            }
         }
     }
 

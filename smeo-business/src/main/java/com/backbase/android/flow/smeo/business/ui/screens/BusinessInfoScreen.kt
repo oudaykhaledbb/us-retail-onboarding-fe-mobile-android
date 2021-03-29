@@ -1,5 +1,7 @@
 package com.backbase.android.flow.smeo.business.ui.screens
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Parcel
 import android.view.View
@@ -9,6 +11,7 @@ import com.backbase.android.design.button.BackbaseButton
 import com.backbase.android.flow.common.extensions.fill
 import com.backbase.android.flow.common.state.State
 import com.backbase.android.flow.common.validators.ValidatorCalendarNotEmpty
+import com.backbase.android.flow.common.validators.ValidatorCharLength
 import com.backbase.android.flow.common.validators.ValidatorEmpty
 import com.backbase.android.flow.common.validators.applyValidations
 import com.backbase.android.flow.common.viewmodel.handleStates
@@ -25,6 +28,7 @@ import kotlinx.android.synthetic.main.screen_business_info_legal_name.*
 import kotlinx.android.synthetic.main.screen_business_info_state_operating_in.*
 import kotlinx.coroutines.channels.ReceiveChannel
 import org.koin.android.ext.android.inject
+
 
 class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
 
@@ -56,7 +60,7 @@ class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
         handleStates(
             apiState,
             {
-                findNavController().navigate(R.id.action_businessInfoScreen_to_businessIdentityScreen)
+                findNavController().navigate(R.id.action_to_businessAddressScreen)
             },
             null,
             { tappedButton.loading = true },
@@ -83,16 +87,20 @@ class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
                         txtInputLegalName,
                         ValidatorEmpty() to getString(R.string.Legal_name_is_missing)
                 ),
-                calendarDateEstablished.applyValidations(
+                calendarDateEstablished.applyValidations(txtCalendarHelperText,
                         ValidatorCalendarNotEmpty() to getString(R.string.date_established_is_missing),
-                )
+                ),
+            txtEin.applyValidations(
+                txtInputEin,
+                ValidatorCharLength(9) to getString(R.string.validation_ein_9_char)
+            )
         )
     }
 
 
     private fun initViews() {
         txtInputKnownName.getChildAt(1).visibility = View.GONE
-        txtInputEin.getChildAt(1).visibility = View.GONE
+        btnWhenDoYouNeedEin.setOnClickListener { openEinLink() }
         txtStateOperatingIn.setText(requireContext().resources.getStringArray(R.array.states)[0])
         txtStateOperatingIn.fill(
             requireContext(),
@@ -106,6 +114,11 @@ class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
             override fun describeContents() = 0
         })
         btnMoreInfo.setOnClickListener { showBottomSheet() }
+    }
+
+    private fun openEinLink() {
+        val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.ein_link)))
+        startActivity(browserIntent)
     }
 
     private fun showBottomSheet() {

@@ -46,6 +46,7 @@ dependencies {
     implementation dependency.designsystem
     implementation dependency.deferredresources
     implementation dependency.flowaddressvalidation
+    implementation dependency.flow
 
     implementation dependency.legacysupport
     implementation dependency.koin

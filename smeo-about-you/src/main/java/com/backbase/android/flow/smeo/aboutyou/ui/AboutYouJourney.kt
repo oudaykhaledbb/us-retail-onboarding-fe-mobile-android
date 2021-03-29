@@ -46,20 +46,21 @@ class AboutYouJourney : Fragment(R.layout.journey_about_you) {
             btnContinue,
             txtFirstName.applyValidations(
                 txtInputFirstName,
-                ValidatorEmpty() to "First name is missing"
+                ValidatorEmpty() to getString(R.string.validation_first_name_missing)
             ),
             txtLastName.applyValidations(
                 txtInputLastName,
-                ValidatorEmpty() to "Last name is missing",
+                ValidatorEmpty() to getString(R.string.validation_last_name_missing),
             ),
-            calendarDateOfBirth.applyValidations(
-                ValidatorCalendarNotEmpty() to "Date of birth is missing",
-                ValidatorDateOfBirthOver18() to "Over 18"
+            calendarDateOfBirth.applyValidations(txtCalendarHelperText,
+                ValidatorCalendarNotEmpty() to getString(R.string.validation_dob_missing),
+                ValidatorDateOfBirthOver18() to getString(R.string.validation_dob_between_18_99),
+                ValidatorDateOfBirthLess99() to getString(R.string.validation_dob_between_18_99)
             ),
             txtEmail.applyValidations(
                 txtInputEmail,
-                ValidatorEmpty() to "Email is missing",
-                ValidatorEmail() to "Should be a valid email address.",
+                ValidatorEmpty() to getString(R.string.validation_email_missing),
+                ValidatorEmail() to getString(R.string.validation_email_format),
             )
         )
     }
