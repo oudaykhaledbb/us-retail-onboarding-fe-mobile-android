@@ -14,7 +14,7 @@
 
     <style name="walkthroughSupportStyle" parent="">
         <item name="android:textAppearance">?textAppearanceBody2</item>
-        <item name="android:textColor">?android:textColorSecondary</item>
+        <item name="android:textColor">?colorTextSupport</item>
         <item name="android:paddingTop">?spacerLarge</item>
     </style>
 
