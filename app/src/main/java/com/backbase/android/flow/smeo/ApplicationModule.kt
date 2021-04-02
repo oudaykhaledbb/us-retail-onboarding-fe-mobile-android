@@ -46,7 +46,7 @@ import java.net.URI
 
 
 val mapFragments = mapOf(
-        "AboutYouJourney" to HeaderLabels(1, DeferredText.Resource(R.string.personal_details), DeferredText.Resource(R.string.nice_to_meet_you)),
+        "AboutYouJourney" to HeaderLabels(1, DeferredText.Resource(R.string.nice_to_meet_you), DeferredText.Resource(R.string.personal_details)),
         "OtpJourney" to HeaderLabels(2, DeferredText.Resource(R.string.security_at_your_fingertips), DeferredText.Resource(R.string.mobile_phone_number)),
         "BusinessInfoScreen" to HeaderLabels(3, DeferredText.Resource(R.string.your_business_details), DeferredText.Resource(R.string.personal_details)),
         "BusinessAddressScreen" to HeaderLabels(4, DeferredText.Resource(R.string.where_is_your_business_located), DeferredText.Resource(R.string.your_business)),
