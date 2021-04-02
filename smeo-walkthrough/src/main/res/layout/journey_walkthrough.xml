@@ -26,6 +26,7 @@
 
         <com.backbase.android.design.button.BackbaseCheckBox
             android:id="@+id/cbTermsAndConditions"
+            android:layout_marginTop="?spacer2XS"
             android:layout_width="?sizerXLarge"
             android:layout_height="?sizerXLarge" />
 
@@ -50,6 +51,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:tabBackground="@drawable/tab_selector"
+        app:tabMaxWidth="?sizerMedium"
         app:tabGravity="center"
         app:tabIndicatorHeight="0dp"
         app:tabRippleColor="@null" />
