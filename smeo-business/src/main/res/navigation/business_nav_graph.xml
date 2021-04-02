@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/businessAddressScreen"
-        android:name="com.backbase.android.flow.address.ui.AddressScreen"
+        android:name="com.backbase.android.flow.smeo.business.ui.screens.BusinessAddressScreen"
         android:label="BusinessAddressScreen"/>
 
     <fragment

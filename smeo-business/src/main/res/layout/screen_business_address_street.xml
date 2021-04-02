@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="?spacerMedium"
         android:text="@string/label_street_number_and_name"
-        android:textAppearance="?textAppearanceFormLabel" />
+        android:textAppearance="?textAppearanceSubtitle1Medium" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/txtInputStreetNumber"
