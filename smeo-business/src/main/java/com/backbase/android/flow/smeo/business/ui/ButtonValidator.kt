@@ -3,7 +3,7 @@ package com.backbase.android.flow.smeo.business.ui
 import com.backbase.android.design.button.BackbaseButton
 import com.backbase.android.flow.common.validators.ValidatorResult
 
-class ButtonValidator(var button: BackbaseButton, vararg validatorResults: ValidatorResult) {
+class ButtonValidator(val button: BackbaseButton, vararg validatorResults: ValidatorResult) {
 
     var validatorsMap = HashMap<ValidatorResult, Boolean>()
 
@@ -12,9 +12,11 @@ class ButtonValidator(var button: BackbaseButton, vararg validatorResults: Valid
             validatorsMap[it] = false
             it.observable = { error ->
                 validate(it, error == null)
+                checkValidity()
             }
         }
         checkValidity()
+        validatorResults.forEach { it.refresh() }
     }
 
     private fun validate(validatorResult: ValidatorResult, isValid: Boolean) {
@@ -23,7 +25,9 @@ class ButtonValidator(var button: BackbaseButton, vararg validatorResults: Valid
     }
 
     private fun checkValidity(){
-        button.isEnabled = validatorsMap.values.firstOrNull { !it } != false
+        button.isEnabled = isValid()
     }
+
+    fun isValid() = validatorsMap.values.firstOrNull { !it } != false
 
 }

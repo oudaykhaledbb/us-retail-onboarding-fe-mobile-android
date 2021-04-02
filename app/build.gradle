@@ -59,7 +59,8 @@
  dependencies {
      implementation dependency.backbase
      implementation dependency.flow
-     implementation dependency.flowcommon
+     //     implementation dependency.flowcommon
+     implementation project(path: ':common')
      implementation dependency.flowdesign
      implementation dependency.flowaddressvalidation
      implementation dependency.deferredresources

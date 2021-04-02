@@ -32,13 +32,20 @@ import org.koin.android.ext.android.inject
 
 class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
 
+    private var buttonValidator: ButtonValidator? = null
     private val viewModel: BusinessInfoViewModel by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initValidations()
-        initContinueButton()
         initApis()
+        btnContinue.setOnClickListener {
+            if (buttonValidator == null) {
+                this.buttonValidator = initValidators()
+            }
+            if (btnContinue.isEnabled) {
+                submit()
+            }
+        }
     }
 
     override fun onResume() {
@@ -68,35 +75,32 @@ class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
         )
     }
 
-    private fun initContinueButton() {
-        btnContinue.setOnClickListener {
-            viewModel.submitBusinessDetails(
-                legalName = txtLegalName.text.toString(),
-                knownName = txtKnownName.text.toString(),
-                ein = txtEin.text.toString().toIntOrNull(),
-                establishedDate = calendarDateEstablished.dateFormat.toString(),
-                operationState = txtStateOperatingIn.toString(),
-            )
-        }
+    private fun submit() {
+        viewModel.submitBusinessDetails(
+            legalName = txtLegalName.text.toString(),
+            knownName = txtKnownName.text.toString(),
+            ein = txtEin.text.toString().toIntOrNull(),
+            establishedDate = calendarDateEstablished.dateFormat.toString(),
+            operationState = txtStateOperatingIn.toString(),
+        )
     }
 
-    private fun initValidations() {
+    private fun initValidators() =
         ButtonValidator(
-                btnContinue,
-                txtLegalName.applyValidations(
-                        txtInputLegalName,
-                        ValidatorEmpty() to getString(R.string.Legal_name_is_missing)
-                ),
-                calendarDateEstablished.applyValidations(txtCalendarHelperText,
-                        ValidatorCalendarNotEmpty() to getString(R.string.date_established_is_missing),
-                ),
+            btnContinue,
+            txtLegalName.applyValidations(
+                txtInputLegalName,
+                ValidatorEmpty() to getString(R.string.Legal_name_is_missing)
+            ),
+            calendarDateEstablished.applyValidations(
+                txtCalendarHelperText,
+                ValidatorCalendarNotEmpty() to getString(R.string.date_established_is_missing),
+            ),
             txtEin.applyValidations(
                 txtInputEin,
                 ValidatorCharLength(9) to getString(R.string.validation_ein_9_char)
             )
         )
-    }
-
 
     private fun initViews() {
         txtInputKnownName.getChildAt(1).visibility = View.GONE

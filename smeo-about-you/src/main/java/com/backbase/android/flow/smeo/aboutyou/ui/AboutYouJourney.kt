@@ -17,6 +17,7 @@ import java.time.LocalDate
 class AboutYouJourney : Fragment(R.layout.journey_about_you) {
 
     private var dateOfBirth: LocalDate? = null
+    private var buttonValidator: ButtonValidator? = null
     private val viewModel: AboutYouViewModel by inject()
     private val router: AboutYouRouter by inject()
 
@@ -27,21 +28,25 @@ class AboutYouJourney : Fragment(R.layout.journey_about_you) {
             this.dateOfBirth = it
         }
         btnContinue.setOnClickListener {
-            viewModel.submitAboutYou(
-                txtFirstName.text.toString(),
-                txtLastName.text.toString(),
-                dateOfBirth.toString(),
-                txtEmail.text.toString()
-            )
+            if (buttonValidator == null) {
+                this.buttonValidator = initValidators()
+            }
+            if (btnContinue.isEnabled) {
+                submit()
+            }
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        initValidations()
+    private fun submit(){
+        viewModel.submitAboutYou(
+            txtFirstName.text.toString(),
+            txtLastName.text.toString(),
+            dateOfBirth.toString(),
+            txtEmail.text.toString()
+        )
     }
 
-    private fun initValidations() {
+    private fun initValidators() =
         ButtonValidator(
             btnContinue,
             txtFirstName.applyValidations(
@@ -63,7 +68,6 @@ class AboutYouJourney : Fragment(R.layout.journey_about_you) {
                 ValidatorEmail() to getString(R.string.validation_email_format),
             )
         )
-    }
 
     private fun initApis() {
         handleStateForSubmitApis(

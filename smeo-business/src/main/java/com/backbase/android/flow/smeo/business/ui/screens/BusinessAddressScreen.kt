@@ -26,53 +26,71 @@ import org.koin.android.ext.android.inject
 
 class BusinessAddressScreen : Fragment(R.layout.screen_business_address) {
 
+    private var buttonValidator: ButtonValidator? = null
     private val viewModel: BusinessAddressScreenViewModel by inject()
     private val router: BusinessRouter by inject()
 
     override fun onResume() {
         super.onResume()
         initViews()
-        initValidators()
+        btnContinue.setOnClickListener {
+            if (buttonValidator == null) {
+                this.buttonValidator = initValidators()
+            }
+            if (btnContinue.isEnabled) {
+                submit()
+            }
+            txtState.fill(
+                requireContext(),
+                requireContext().resources.getStringArray(R.array.states).toList()
+            )
+        }
     }
 
-    private fun initValidators() {
+    private fun initValidators() =
         ButtonValidator(
             btnContinue,
-            txtStreetNumber.applyValidations(txtInputStreetNumber,
+            txtStreetNumber.applyValidations(
+                txtInputStreetNumber,
                 ValidatorEmpty() to "Street number and name is required",
                 ValidatorMaxChar(200) to "Street number and name may not exceed 200 characters."
             ),
-            txtApt.applyValidations(txtInputApt,
-                    ValidatorMaxChar(100) to "Apt / Suite may not exceed 100 characters."
-                ),
-            txtCity.applyValidations(txtInputCity,
-                    ValidatorEmpty() to "City is required",
-                                ValidatorMaxChar(100) to "City may not exceed 100 characters."
-                ),
-            txtState.applyValidations(txtInputState,
-                    ValidatorEmpty() to "State is required"
-                ),
-            txtZip.applyValidations(txtInputZip,
+            txtApt.applyValidations(
+                txtInputApt,
+                ValidatorMaxChar(100) to "Apt / Suite may not exceed 100 characters."
+            ),
+            txtCity.applyValidations(
+                txtInputCity,
+                ValidatorEmpty() to "City is required",
+                ValidatorMaxChar(100) to "City may not exceed 100 characters."
+            ),
+            txtState.applyValidations(
+                txtInputState,
+                ValidatorEmpty() to "State is required"
+            ),
+            txtZip.applyValidations(
+                txtInputZip,
                 ValidatorEmpty() to "Zip code is required"
             )
+        )
+
+
+    private fun submit() {
+        viewModel.submitBusinessAddress(
+            txtStreetNumber.text.toString(),
+            txtApt.text.toString(),
+            txtCity.text.toString(),
+            txtState.text.toString(),
+            txtZip.text.toString()
         )
     }
 
     private fun initViews() {
         txtState.setText(requireContext().resources.getStringArray(R.array.states)[0])
         txtState.fill(
-                requireContext(),
-                requireContext().resources.getStringArray(R.array.states).toList()
+            requireContext(),
+            requireContext().resources.getStringArray(R.array.states).toList()
         )
-        btnContinue.setOnClickListener {
-            viewModel.submitBusinessAddress(
-                    txtStreetNumber.text.toString(),
-                    txtApt.text.toString(),
-                    txtCity.text.toString(),
-                    txtState.text.toString(),
-                    txtZip.text.toString()
-            )
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

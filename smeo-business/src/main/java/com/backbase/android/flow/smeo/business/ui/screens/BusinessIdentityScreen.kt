@@ -22,28 +22,41 @@ import org.koin.android.ext.android.inject
 
 class BusinessIdentityScreen : Fragment(R.layout.screen_business_identity) {
 
+    private var buttonValidator: ButtonValidator? = null
     private val viewModel: BusinessIdentityViewModel by inject()
     private val router: BusinessRouter by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initValidations()
         initApis()
+        btnContinue.setOnClickListener {
+            if (buttonValidator == null) {
+                this.buttonValidator = initValidators()
+            }
+            if (btnContinue.isEnabled) {
+                submit()
+            }
+            txtIndustry.fill(
+                requireContext(),
+                requireContext().resources.getStringArray(R.array.industries).toList()
+            )
+        }
     }
 
     private fun initViews() {
         txtIndustry.setText(requireContext().resources.getStringArray(R.array.industries)[0])
         txtIndustry.fill(
-                requireContext(),
-                requireContext().resources.getStringArray(R.array.industries).toList()
+            requireContext(),
+            requireContext().resources.getStringArray(R.array.industries).toList()
         )
-        btnContinue.setOnClickListener {
-            viewModel.submitBusinessIdentity(
-                    txtIndustry.text.toString(),
-                    txtBusinessDescription.text.toString(),
-                    txtCompanyWebsite.text.toString()
-            )
-        }
+    }
+
+    private fun submit() {
+        viewModel.submitBusinessIdentity(
+            txtIndustry.text.toString(),
+            txtBusinessDescription.text.toString(),
+            txtCompanyWebsite.text.toString()
+        )
     }
 
     override fun onResume() {
@@ -53,8 +66,8 @@ class BusinessIdentityScreen : Fragment(R.layout.screen_business_identity) {
 
     private fun initApis() {
         handleStateForSubmitApis(
-                tappedButton = btnContinue,
-                apiState = viewModel.apiSubmitBusinessIdentity.state
+            tappedButton = btnContinue,
+            apiState = viewModel.apiSubmitBusinessIdentity.state
         )
     }
 
@@ -74,17 +87,17 @@ class BusinessIdentityScreen : Fragment(R.layout.screen_business_identity) {
     }
 
 
-    private fun initValidations() {
+    private fun initValidators() =
         ButtonValidator(
-                btnContinue,
-                txtIndustry.applyValidations(
-                        txtInputIndustry,
-                        ValidatorEmpty() to getString(R.string.industry_is_missing)
-                ),
-                txtBusinessDescription.applyValidations(txtInputBusinessDescription,
-                        ValidatorEmpty() to getString(R.string.business_description__is_missing),
-                )
+            btnContinue,
+            txtIndustry.applyValidations(
+                txtInputIndustry,
+                ValidatorEmpty() to getString(R.string.industry_is_missing)
+            ),
+            txtBusinessDescription.applyValidations(
+                txtInputBusinessDescription,
+                ValidatorEmpty() to getString(R.string.business_description__is_missing),
+            )
         )
-    }
 
 }
