@@ -6,12 +6,12 @@ import androidx.fragment.app.Fragment
 import com.backbase.android.design.button.BackbaseButton
 import com.backbase.android.flow.common.extensions.fill
 import com.backbase.android.flow.common.state.State
+import com.backbase.android.flow.common.validators.ButtonValidator
 import com.backbase.android.flow.common.validators.ValidatorEmpty
 import com.backbase.android.flow.common.validators.applyValidations
 import com.backbase.android.flow.common.viewmodel.handleStates
 import com.backbase.android.flow.smeo.business.BusinessRouter
 import com.backbase.android.flow.smeo.business.R
-import com.backbase.android.flow.smeo.business.ui.ButtonValidator
 import com.backbase.android.flow.smeo.business.ui.viewmodels.BusinessIdentityViewModel
 import kotlinx.android.synthetic.main.screen_business_identity_business_description.*
 import kotlinx.android.synthetic.main.screen_business_identity_company_website.*

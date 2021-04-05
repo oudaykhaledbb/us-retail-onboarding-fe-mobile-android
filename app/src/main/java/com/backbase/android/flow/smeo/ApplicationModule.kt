@@ -6,7 +6,7 @@ import com.backbase.android.dbs.dataproviders.NetworkDBSDataProvider
 import com.backbase.android.flow.FlowClient
 import com.backbase.android.flow.address.AddressConfiguration
 import com.backbase.android.flow.address.addressJourneyModule
-import com.backbase.android.flow.address.models.FormItem
+import com.backbase.android.flow.address.models.AddressModel
 import com.backbase.android.flow.address.usecase.AddressUseCase
 import com.backbase.android.flow.common.utils.readAsset
 import com.backbase.android.flow.contracts.FlowClientContract
@@ -37,11 +37,9 @@ import com.backbase.android.flow.smeo.walkthrough.walkthroughConfiguration
 import com.backbase.android.flow.stepnavigation.HeaderLabels
 import com.backbase.deferredresources.DeferredText
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.delay
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
-import java.lang.reflect.Type
 import java.net.URI
 
 
@@ -134,20 +132,15 @@ val applicationModule = module {
     factory {
         AddressConfiguration {
             val context: Context by inject()
-            val formItemsType: Type = object :
-                TypeToken<ArrayList<FormItem>>() {}.type
-            formItems = Gson().fromJson(
-                readAsset(
-                    context.assets,
-                    "backbase/conf/smeo/address.json"
-                ), formItemsType
-            )
+            actionName = ""
+            description = DeferredText.Resource(R.string.label_we_need_to_know_you)
         }
     }
 
     factory<AddressUseCase> {
         return@factory object : AddressUseCase {
-            override suspend fun submitAddress(formData: HashMap<String, String?>): Any?{
+            override suspend fun submitAddress(addressModel: AddressModel): Any?{
+                delay(30)
                 val context: Context by inject()
                 return readAsset(
                     context.assets,

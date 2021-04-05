@@ -16,11 +16,11 @@
             android:text="@string/label_we_need_to_know_you"
             android:textAppearance="?textAppearanceBody1" />
 
-        <include layout="@layout/screen_business_address_street" />
+        <include layout="@layout/screen_address_street" />
 
-        <include layout="@layout/screen_business_address_apt" />
+        <include layout="@layout/screen_address_apt" />
 
-        <include layout="@layout/screen_business_address_city" />
+        <include layout="@layout/screen_address_city" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                 android:layout_weight=".5"
                 android:orientation="vertical">
 
-                <include layout="@layout/screen_business_address_state" />
+                <include layout="@layout/screen_address_state" />
             </LinearLayout>
 
             <LinearLayout
@@ -44,7 +44,7 @@
                 android:layout_weight=".5"
                 android:orientation="vertical">
 
-                <include layout="@layout/screen_business_address_zip" />
+                <include layout="@layout/screen_address_zip" />
             </LinearLayout>
 
         </LinearLayout>

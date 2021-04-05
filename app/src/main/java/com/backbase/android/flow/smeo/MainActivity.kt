@@ -1,6 +1,7 @@
 package com.backbase.android.flow.smeo
 
 import android.content.Context
+import androidx.navigation.fragment.findNavController
 import com.backbase.android.flow.smeo.common.AppActivity
 import com.backbase.android.flow.stepnavigation.HeaderDataProvider
 import kotlinx.android.synthetic.main.activity_main.*
@@ -24,7 +25,7 @@ class MainActivity : AppActivity(R.layout.activity_main) {
         }
 
         factory {
-            otpRouter(navController){
+            otpRouter(navController) {
                 setTheme(R.style.AppTheme)
             }
         }
@@ -33,6 +34,13 @@ class MainActivity : AppActivity(R.layout.activity_main) {
             businessRouter(navController) {
                 setTheme(R.style.AppTheme)
             }
+        }
+
+        factory {
+            addressRouter(supportFragmentManager.fragments[0]
+                .childFragmentManager.fragments[0]
+                .childFragmentManager.fragments[0]
+                .findNavController())
         }
 
         factory { return@factory header }
