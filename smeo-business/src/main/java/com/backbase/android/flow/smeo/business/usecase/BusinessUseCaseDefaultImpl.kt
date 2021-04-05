@@ -126,4 +126,29 @@ class BusinessUseCaseDefaultImpl(
         )
     }
 
+    override suspend fun submitBusinessAddress(numberAndStreet: String, apt: String, city: String, state: String, zipCode: String) =
+        if (configuration.isOffline) {
+            submitBusinessAddressOffline()
+        } else {
+            submitBusinessAddressOnline(numberAndStreet, apt, city, state, zipCode)
+        }
+
+
+    private suspend fun submitBusinessAddressOnline(numberAndStreet: String, apt: String, city: String, state: String, zipCode: String) =
+        withContext(Dispatchers.Default) {
+            suspendCoroutine<Any?> { continuation ->
+                val formData = HashMap<String, String?>()
+                formData["numberAndStreet"] = numberAndStreet
+                formData["apt"] = apt
+                formData["city"] = city
+                formData["state"] = state
+                formData["zipCode"] = zipCode
+                flowClient.performInteraction(
+                    Action("sme-onboarding-business-address", formData),
+                    InteractionResponseHandler(continuation, "sme-onboarding-business-address")
+                )
+            }
+        }
+
+    private fun submitBusinessAddressOffline() = null
 }

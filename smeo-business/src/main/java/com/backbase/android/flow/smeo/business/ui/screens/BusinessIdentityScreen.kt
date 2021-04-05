@@ -3,15 +3,15 @@ package com.backbase.android.flow.smeo.business.ui.screens
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import com.backbase.android.design.button.BackbaseButton
 import com.backbase.android.flow.common.extensions.fill
 import com.backbase.android.flow.common.state.State
+import com.backbase.android.flow.common.validators.ButtonValidator
 import com.backbase.android.flow.common.validators.ValidatorEmpty
 import com.backbase.android.flow.common.validators.applyValidations
 import com.backbase.android.flow.common.viewmodel.handleStates
+import com.backbase.android.flow.smeo.business.BusinessRouter
 import com.backbase.android.flow.smeo.business.R
-import com.backbase.android.flow.smeo.business.ui.ButtonValidator
 import com.backbase.android.flow.smeo.business.ui.viewmodels.BusinessIdentityViewModel
 import kotlinx.android.synthetic.main.screen_business_identity_business_description.*
 import kotlinx.android.synthetic.main.screen_business_identity_company_website.*
@@ -22,27 +22,41 @@ import org.koin.android.ext.android.inject
 
 class BusinessIdentityScreen : Fragment(R.layout.screen_business_identity) {
 
+    private var buttonValidator: ButtonValidator? = null
     private val viewModel: BusinessIdentityViewModel by inject()
+    private val router: BusinessRouter by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initValidations()
         initApis()
+        btnContinue.setOnClickListener {
+            if (buttonValidator == null) {
+                this.buttonValidator = initValidators()
+            }
+            if (btnContinue.isEnabled) {
+                submit()
+            }
+            txtIndustry.fill(
+                requireContext(),
+                requireContext().resources.getStringArray(R.array.industries).toList()
+            )
+        }
     }
 
     private fun initViews() {
         txtIndustry.setText(requireContext().resources.getStringArray(R.array.industries)[0])
         txtIndustry.fill(
-                requireContext(),
-                requireContext().resources.getStringArray(R.array.industries).toList()
+            requireContext(),
+            requireContext().resources.getStringArray(R.array.industries).toList()
         )
-        btnContinue.setOnClickListener {
-            viewModel.submitBusinessIdentity(
-                    txtIndustry.text.toString(),
-                    txtBusinessDescription.text.toString(),
-                    txtCompanyWebsite.text.toString()
-            )
-        }
+    }
+
+    private fun submit() {
+        viewModel.submitBusinessIdentity(
+            txtIndustry.text.toString(),
+            txtBusinessDescription.text.toString(),
+            txtCompanyWebsite.text.toString()
+        )
     }
 
     override fun onResume() {
@@ -52,8 +66,8 @@ class BusinessIdentityScreen : Fragment(R.layout.screen_business_identity) {
 
     private fun initApis() {
         handleStateForSubmitApis(
-                tappedButton = btnContinue,
-                apiState = viewModel.apiSubmitBusinessIdentity.state
+            tappedButton = btnContinue,
+            apiState = viewModel.apiSubmitBusinessIdentity.state
         )
     }
 
@@ -64,7 +78,7 @@ class BusinessIdentityScreen : Fragment(R.layout.screen_business_identity) {
         handleStates(
                 apiState,
                 {
-                    findNavController().navigate(R.id.action_businessIdentityScreen_to_businessAddressScreen)
+                    router.onBusinessFinished()
                 },
                 null,
                 { tappedButton.loading = true },
@@ -73,17 +87,17 @@ class BusinessIdentityScreen : Fragment(R.layout.screen_business_identity) {
     }
 
 
-    private fun initValidations() {
+    private fun initValidators() =
         ButtonValidator(
-                btnContinue,
-                txtIndustry.applyValidations(
-                        txtInputIndustry,
-                        ValidatorEmpty() to getString(R.string.industry_is_missing)
-                ),
-                txtBusinessDescription.applyValidations(txtInputBusinessDescription,
-                        ValidatorEmpty() to getString(R.string.business_description__is_missing),
-                )
+            btnContinue,
+            txtIndustry.applyValidations(
+                txtInputIndustry,
+                ValidatorEmpty() to getString(R.string.industry_is_missing)
+            ),
+            txtBusinessDescription.applyValidations(
+                txtInputBusinessDescription,
+                ValidatorEmpty() to getString(R.string.business_description__is_missing),
+            )
         )
-    }
 
 }

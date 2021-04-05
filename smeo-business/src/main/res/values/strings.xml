@@ -33,4 +33,6 @@
     <string name="label_we_need_to_know_you">We need to know where can we send important documents and information, as well as basic account items, like checks and debit cards.</string>
     <string name="label_state">State</string>
     <string name="label_zip">ZIP code</string>
+    <string name="ein_link">https://www.irs.gov/businesses/small-businesses-self-employed/do-you-need-an-ein</string>
+    <string name="validation_ein_9_char">EIN must be 9 charaters</string>
 </resources>

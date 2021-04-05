@@ -18,4 +18,12 @@ interface BusinessUseCase {
             companyWebsite: String?
     ): Any?
 
+    suspend fun submitBusinessAddress(
+            numberAndStreet: String,
+            apt: String,
+            city: String,
+            state: String,
+            zipCode: String
+    ): Any?
+
 }

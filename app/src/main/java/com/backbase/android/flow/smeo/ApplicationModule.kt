@@ -6,7 +6,7 @@ import com.backbase.android.dbs.dataproviders.NetworkDBSDataProvider
 import com.backbase.android.flow.FlowClient
 import com.backbase.android.flow.address.AddressConfiguration
 import com.backbase.android.flow.address.addressJourneyModule
-import com.backbase.android.flow.address.models.FormItem
+import com.backbase.android.flow.address.models.AddressModel
 import com.backbase.android.flow.address.usecase.AddressUseCase
 import com.backbase.android.flow.common.utils.readAsset
 import com.backbase.android.flow.contracts.FlowClientContract
@@ -37,20 +37,18 @@ import com.backbase.android.flow.smeo.walkthrough.walkthroughConfiguration
 import com.backbase.android.flow.stepnavigation.HeaderLabels
 import com.backbase.deferredresources.DeferredText
 import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.delay
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
-import java.lang.reflect.Type
 import java.net.URI
 
 
 val mapFragments = mapOf(
-        "AboutYouJourney" to HeaderLabels(1, DeferredText.Resource(R.string.personal_details), DeferredText.Resource(R.string.nice_to_meet_you)),
+        "AboutYouJourney" to HeaderLabels(1, DeferredText.Resource(R.string.nice_to_meet_you), DeferredText.Resource(R.string.personal_details)),
         "OtpJourney" to HeaderLabels(2, DeferredText.Resource(R.string.security_at_your_fingertips), DeferredText.Resource(R.string.mobile_phone_number)),
-        "BusinessInfoScreen" to HeaderLabels(3, DeferredText.Resource(R.string.personal_details), DeferredText.Resource(R.string.your_business_details)),
-        "BusinessIdentityScreen" to HeaderLabels(4, DeferredText.Resource(R.string.your_business), DeferredText.Resource(R.string.what_does_your_company_do)),
-        "BusinessAddressScreen" to HeaderLabels(5, DeferredText.Resource(R.string.your_business), DeferredText.Resource(R.string.where_is_your_business_located))
+        "BusinessInfoScreen" to HeaderLabels(3, DeferredText.Resource(R.string.your_business_details), DeferredText.Resource(R.string.personal_details)),
+        "BusinessAddressScreen" to HeaderLabels(4, DeferredText.Resource(R.string.where_is_your_business_located), DeferredText.Resource(R.string.your_business)),
+        "BusinessIdentityScreen" to HeaderLabels(5, DeferredText.Resource(R.string.what_does_your_company_do), DeferredText.Resource(R.string.your_business))
 )
 
 /**
@@ -134,20 +132,21 @@ val applicationModule = module {
     factory {
         AddressConfiguration {
             val context: Context by inject()
-            val formItemsType: Type = object :
-                TypeToken<ArrayList<FormItem>>() {}.type
-            formItems = Gson().fromJson(
-                readAsset(
-                    context.assets,
-                    "backbase/smeo/address.json"
-                ), formItemsType
-            )
+            actionName = ""
+            description = DeferredText.Resource(R.string.label_we_need_to_know_you)
         }
     }
 
     factory<AddressUseCase> {
         return@factory object : AddressUseCase {
-            override suspend fun submitAddress(formData: HashMap<String, String?>) = null
+            override suspend fun submitAddress(addressModel: AddressModel): Any?{
+                delay(30)
+                val context: Context by inject()
+                return readAsset(
+                    context.assets,
+                    "backbase/smeo/address.json"
+                )
+            }
         }
     }
 

@@ -1,168 +1,51 @@
-[
-  {
-    "type": "fieldset",
-    "label": "Your address",
-    "children": [
-      {
-        "type": "input",
-        "label": "Street number and name",
-        "inputType": "text",
-        "debugValue": "10 10th St NE",
-        "name": "numberAndStreet",
-        "validations": [
-          {
-            "id": "required",
-            "type": "required",
-            "message": "Street number and name is required",
-            "silent": true
-          },
-          {
-            "id": "maxlength",
-            "type": "maxlength",
-            "value": "200",
-            "message": "Street number and name may not exceed 200 characters.",
-            "silent": false
-          }
-        ]
-      },
-      {
-        "type": "input",
-        "label": "Apt / Suite (optional)",
-        "inputType": "text",
-        "debugValue": "3A",
-        "name": "apt",
-        "validations": [
-          {
-            "id": "maxlength",
-            "type": "maxlength",
-            "value": "100",
-            "message": "Apt / Suite may not exceed 100 characters.",
-            "silent": false
-          }
-        ]
-      },
-      {
-        "type": "input",
-        "label": "City",
-        "inputType": "text",
-        "debugValue": "San Francisco",
-        "name": "city",
-        "validations": [
-          {
-            "id": "required",
-            "type": "required",
-            "message": "City is required",
-            "silent": true
-          },
-          {
-            "id": "maxlength",
-            "type": "maxlength",
-            "value": "100",
-            "message": "City may not exceed 100 characters.",
-            "silent": false
-          }
-        ]
-      },
-      {
-        "type": "list",
-        "label": "State",
-        "inputType": "list",
-        "options": [
-          {
-            "label": "listValues",
-            "values": [
-              "AL",
-              "AK",
-              "AZ",
-              "AR",
-              "CA",
-              "CO",
-              "CT",
-              "DE",
-              "DC",
-              "FL",
-              "GA",
-              "HI",
-              "ID",
-              "IL",
-              "IN",
-              "IA",
-              "KS",
-              "KY",
-              "LA",
-              "ME",
-              "MD",
-              "MA",
-              "MI",
-              "MN",
-              "MS",
-              "MO",
-              "MT",
-              "NE",
-              "NV",
-              "NH",
-              "NJ",
-              "NM",
-              "NY",
-              "NC",
-              "ND",
-              "OH",
-              "OK",
-              "OR",
-              "PA",
-              "RI",
-              "SC",
-              "SD",
-              "TN",
-              "TX",
-              "UT",
-              "VT",
-              "VA",
-              "WA",
-              "WV",
-              "WI",
-              "WY"
-            ]
-          }
-        ],
-        "debugValue": "CA",
-        "name": "state",
-        "validations": [
-          {
-            "id": "required",
-            "type": "required",
-            "message": "State is required",
-            "silent": true
-          }
-        ]
-      },
-      {
-        "type": "input",
-        "label": "Zip code",
-        "inputType": "number",
-        "debugValue": "30309",
-        "name": "zipCode",
-        "validations": [
-          {
-            "id": "required",
-            "type": "required",
-            "message": "Zip code is required",
-            "silent": true
-          },
-          {
-            "id": "regex",
-            "type": "regex",
-            "value": "^(?!0{5})(\\d{5})(?!-?0{4})(|-\\d{4})?$",
-            "message": "Invalid zip code",
-            "silent": false
-          }
-        ]
-      }
-    ]
+{
+  "interactionId": "1bfa7449-6b04-4f91-ad98-f94161b3b229",
+  "step": {
+    "name": "sme-onboarding-business-details",
+    "status": null
   },
-  {
-    "type": "submit",
-    "label": "Continue",
-    "inputType": "button"
+  "body": {
+    "caseExist": false,
+    "identityCredentialExist": false,
+    "firstName": "abb",
+    "lastName": "ccc"
+  },
+  "actionErrors": [],
+  "steps": {
+    "sme-onboarding-business-identity": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "sme-onboarding-walkthrough": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "sme-onboarding-business-details": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "document-request-journey": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "otp-verification": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "done": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    },
+    "sme-onboarding-anchor": {
+      "enabled": true,
+      "forward": null,
+      "back": null
+    }
   }
-]
+}

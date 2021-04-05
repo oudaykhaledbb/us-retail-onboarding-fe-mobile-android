@@ -17,6 +17,7 @@ import java.time.LocalDate
 class AboutYouJourney : Fragment(R.layout.journey_about_you) {
 
     private var dateOfBirth: LocalDate? = null
+    private var buttonValidator: ButtonValidator? = null
     private val viewModel: AboutYouViewModel by inject()
     private val router: AboutYouRouter by inject()
 
@@ -27,42 +28,46 @@ class AboutYouJourney : Fragment(R.layout.journey_about_you) {
             this.dateOfBirth = it
         }
         btnContinue.setOnClickListener {
-            viewModel.submitAboutYou(
-                txtFirstName.text.toString(),
-                txtLastName.text.toString(),
-                dateOfBirth.toString(),
-                txtEmail.text.toString()
-            )
+            if (buttonValidator == null) {
+                this.buttonValidator = initValidators()
+            }
+            if (btnContinue.isEnabled) {
+                submit()
+            }
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        initValidations()
+    private fun submit(){
+        viewModel.submitAboutYou(
+            txtFirstName.text.toString(),
+            txtLastName.text.toString(),
+            dateOfBirth.toString(),
+            txtEmail.text.toString()
+        )
     }
 
-    private fun initValidations() {
+    private fun initValidators() =
         ButtonValidator(
             btnContinue,
             txtFirstName.applyValidations(
                 txtInputFirstName,
-                ValidatorEmpty() to "First name is missing"
+                ValidatorEmpty() to getString(R.string.validation_first_name_missing)
             ),
             txtLastName.applyValidations(
                 txtInputLastName,
-                ValidatorEmpty() to "Last name is missing",
+                ValidatorEmpty() to getString(R.string.validation_last_name_missing),
             ),
-            calendarDateOfBirth.applyValidations(
-                ValidatorCalendarNotEmpty() to "Date of birth is missing",
-                ValidatorDateOfBirthOver18() to "Over 18"
+            calendarDateOfBirth.applyValidations(txtCalendarHelperText,
+                ValidatorCalendarNotEmpty() to getString(R.string.validation_dob_missing),
+                ValidatorDateOfBirthOver18() to getString(R.string.validation_dob_between_18_99),
+                ValidatorDateOfBirthLess99() to getString(R.string.validation_dob_between_18_99)
             ),
             txtEmail.applyValidations(
                 txtInputEmail,
-                ValidatorEmpty() to "Email is missing",
-                ValidatorEmail() to "Should be a valid email address.",
+                ValidatorEmpty() to getString(R.string.validation_email_missing),
+                ValidatorEmail() to getString(R.string.validation_email_format),
             )
         )
-    }
 
     private fun initApis() {
         handleStateForSubmitApis(

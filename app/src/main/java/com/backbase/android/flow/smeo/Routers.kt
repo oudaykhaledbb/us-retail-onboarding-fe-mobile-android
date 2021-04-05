@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import androidx.navigation.NavController
+import com.backbase.android.flow.address.AddressRouter
 import com.backbase.android.flow.otp.OtpRouter
 import com.backbase.android.flow.smeo.aboutyou.AboutYouRouter
 import com.backbase.android.flow.smeo.business.BusinessRouter
@@ -77,4 +78,15 @@ fun showJourneyWithClearStack(navController: NavController, journeyScreenResId: 
     val graph = navController.graph
     graph.startDestination = journeyScreenResId
     navController.graph = graph
+}
+
+fun addressRouter(
+    navController: NavController,
+    completion: () -> Unit = {}
+) = object : AddressRouter {
+
+    override fun onAddressFinished(data: Any?) {
+        navController.navigate(com.backbase.android.flow.smeo.business.R.id.action_to_businessIdentityScreen)
+        completion()
+    }
 }
