@@ -44,7 +44,7 @@ buildscript {
             flowaddressvalidation   : 'com.backbase.android.flow.address:address-validation-journey:2.0.1-beta02',
             flowdesign              : 'com.backbase.android.flow.design:flow-design:1.0.0',
             flowcommon              : 'com.backbase.android.flow.common:flow-common:1.1.4-beta03',
-            deferredresources       : 'com.backbase.oss.deferredresources:deferred-resources:1.0.0',
+            deferredresources       : 'com.backbase.oss.deferredresources:deferred-resources:1.3.0',
             coroutinestest          : "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.3",
             espressoIntents         : "androidx.test.espresso:espresso-intents:$versions.espresso",
             espressoContrib         : "androidx.test.espresso:espresso-contrib:$versions.espresso",
