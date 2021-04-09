@@ -34,6 +34,7 @@
             android:id="@+id/txtTermsAndConditions"
             android:textAppearance="?textAppearanceSubtitle1"
             android:lineSpacingExtra="?spacer2XS"
+            android:layout_marginBottom="?spacerMedium"
             android:textColorLink="?colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
