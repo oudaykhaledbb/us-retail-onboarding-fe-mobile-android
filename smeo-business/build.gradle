@@ -41,12 +41,14 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     implementation dependency.backbase
-    implementation dependency.flow
+    implementation project(path: ':flow-interaction-sdk')
+//     implementation dependency.flow
     implementation dependency.flowcommon
     implementation dependency.designsystem
     implementation dependency.deferredresources
     implementation dependency.flowaddressvalidation
-    implementation dependency.flow
+
+    implementation("com.squareup.moshi:moshi:1.11.0")
 
     implementation dependency.legacysupport
     implementation dependency.koin

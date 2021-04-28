@@ -13,10 +13,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/flow-interaction-sdk" />
             <option value="$PROJECT_DIR$/smeo-about-you" />
             <option value="$PROJECT_DIR$/smeo-business" />
             <option value="$PROJECT_DIR$/smeo-walkthrough" />
             <option value="$PROJECT_DIR$/step-navigation" />
+            <option value="$PROJECT_DIR$/uploadfiles" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

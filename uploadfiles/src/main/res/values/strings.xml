@@ -1,0 +1,8 @@
+<resources>
+    <string name="label_upload_files">Upload file(s)</string>
+    <string name="label_supported_files">Only PDF, PNG, JPG supported. Max 3MB per file.</string>
+    <string name="label_document">Document</string>
+    <string name="label_upload_documents_later">Upload documents later</string>
+    <string name="label_upload_documents_later_description">These documents are still required to secure your account, but can be delivered later. You’ll be asked after your application is complete to provide this information before your account can be created.</string>
+    <string name="btn_continue">Continue</string>
+</resources>

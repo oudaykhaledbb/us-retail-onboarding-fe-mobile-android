@@ -14,4 +14,8 @@
         android:id="@+id/businessJourney"
         android:name="com.backbase.android.flow.smeo.business.ui.BusinessJourney"
         android:label="BusinessJourney" />
+    <fragment
+        android:id="@+id/uploadDocumentsJourney"
+        android:name="com.backbase.android.flow.uploadfiles.ui.UploadFilesJourney"
+        android:label="UploadFilesJourney" />
 </navigation>

@@ -55,7 +55,11 @@ fun businessRouter(
 ) = object : BusinessRouter {
 
     override fun onBusinessFinished() {
-        print("Business relations finished")
+        showJourneyWithClearStack(
+            navController,
+            R.id.uploadDocumentsJourney
+        )
+        completion()
     }
 }
 

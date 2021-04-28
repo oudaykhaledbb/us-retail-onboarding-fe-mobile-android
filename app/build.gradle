@@ -58,7 +58,8 @@
 
  dependencies {
      implementation dependency.backbase
-     implementation dependency.flow
+//     implementation dependency.flow
+     implementation project(path: ':flow-interaction-sdk')
      implementation dependency.flowcommon
      implementation dependency.flowdesign
      implementation dependency.flowaddressvalidation
@@ -86,6 +87,7 @@
      implementation project(path: ':smeo-about-you')
      implementation project(path: ':step-navigation')
      implementation project(path: ':smeo-business')
+     implementation project(path: ':uploadfiles')
 
      testImplementation dependency.junit
 

@@ -16,7 +16,6 @@ class BusinessIdentityViewModel(private val useCase: BusinessUseCase) : ViewMode
     ) {
         apiSubmitBusinessIdentity.submit("submitBusinessDetails()") {
             try {
-                useCase.verifyCase()
                 return@submit useCase.submitBusinessIdentity(
                         legalName,
                         knownName,
