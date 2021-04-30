@@ -58,8 +58,7 @@
 
  dependencies {
      implementation dependency.backbase
-//     implementation dependency.flow
-     implementation project(path: ':flow-interaction-sdk')
+     implementation dependency.flow
      implementation dependency.flowcommon
      implementation dependency.flowdesign
      implementation dependency.flowaddressvalidation

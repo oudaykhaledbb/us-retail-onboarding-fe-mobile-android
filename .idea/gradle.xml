@@ -13,7 +13,6 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
-            <option value="$PROJECT_DIR$/flow-interaction-sdk" />
             <option value="$PROJECT_DIR$/smeo-about-you" />
             <option value="$PROJECT_DIR$/smeo-business" />
             <option value="$PROJECT_DIR$/smeo-walkthrough" />

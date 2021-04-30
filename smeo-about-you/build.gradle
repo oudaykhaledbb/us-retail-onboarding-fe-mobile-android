@@ -41,8 +41,7 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     implementation dependency.backbase
-    implementation project(path: ':flow-interaction-sdk')
-//     implementation dependency.flow
+    implementation dependency.flow
     implementation dependency.flowcommon
     implementation dependency.designsystem
     implementation dependency.deferredresources

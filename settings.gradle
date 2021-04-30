@@ -4,5 +4,4 @@ include ':smeo-about-you'
 include ':smeo-walkthrough'
 include ':step-navigation'
 include ':app'
-include ':flow-interaction-sdk'
 rootProject.name = "smeo-android-reference"
