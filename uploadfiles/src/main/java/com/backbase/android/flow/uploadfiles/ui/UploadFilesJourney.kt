@@ -32,8 +32,6 @@ class UploadFilesJourney : Fragment(R.layout.journey_upload_files) {
 
     private lateinit var file: File
 
-
-
     private var adapter: UploadFilesRecyclerViewAdapter? = null
     private val viewModel: UploadFilesViewModel by inject()
     private lateinit var requestWritePermissionLauncher: ActivityResultLauncher<String>

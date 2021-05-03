@@ -80,6 +80,13 @@ class UploadFilesUseCaseImpl(
         )
     }
 
+    override suspend fun submitDocumentRequests(): Any? {
+        return performInteraction<Any, Any?>(
+            object : TypeToken<Any?>() {}.type,
+            configuration.submitDocumentAction
+        )
+    }
+
     private suspend fun <Request, Response> performInteraction(
         type: Type,
         action: String,

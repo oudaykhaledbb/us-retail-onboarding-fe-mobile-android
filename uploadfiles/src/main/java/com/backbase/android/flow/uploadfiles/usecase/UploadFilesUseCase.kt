@@ -12,5 +12,6 @@ interface UploadFilesUseCase {
     suspend fun deleteTempDocument(tempGroupId: String, internalId: String, fileId: String): Any?
     suspend fun uploadDocument(tempGroupId: String, internalId: String, file: File): UploadDocumentResponse?
     suspend fun completeTask(): Any?
+    suspend fun submitDocumentRequests(): Any?
 
 }

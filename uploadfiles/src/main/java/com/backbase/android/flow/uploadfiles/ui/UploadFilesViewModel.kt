@@ -49,6 +49,7 @@ class UploadFilesViewModel(private val useCase: UploadFilesUseCase) : ViewModel(
 
     fun completeTask() {
         apiCompleteTask.submit("completeTask()") {
+            useCase.submitDocumentRequests()
             return@submit useCase.completeTask()
         }
     }
