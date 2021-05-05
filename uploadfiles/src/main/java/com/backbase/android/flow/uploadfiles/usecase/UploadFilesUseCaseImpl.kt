@@ -7,10 +7,7 @@ import com.backbase.android.flow.common.utils.readAsset
 import com.backbase.android.flow.contracts.FlowClientContract
 import com.backbase.android.flow.models.Action
 import com.backbase.android.flow.uploadfiles.UploadFilesConfiguration
-import com.backbase.android.flow.uploadfiles.models.DocumentsDataModel
-import com.backbase.android.flow.uploadfiles.models.RequestedDocumentsModel
-import com.backbase.android.flow.uploadfiles.models.UploadDocumentRequest
-import com.backbase.android.flow.uploadfiles.models.UploadDocumentResponse
+import com.backbase.android.flow.uploadfiles.models.*
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.Dispatchers
@@ -35,10 +32,11 @@ class UploadFilesUseCaseImpl(
         )
     }
 
-    override suspend fun requestDocumentData(): DocumentsDataModel? {
-        return performInteraction<Any, DocumentsDataModel>(
+    override suspend fun requestDocumentData(groupId: String, internalId: String): DocumentsDataModel? {
+        return performInteraction<LoadDocumentModel, DocumentsDataModel>(
             object : TypeToken<DocumentsDataModel>() {}.type,
-            configuration.requestDataAction
+            configuration.requestDataAction,
+            LoadDocumentModel(internalId, groupId)
         )
     }
 

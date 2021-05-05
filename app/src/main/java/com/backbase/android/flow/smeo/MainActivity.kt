@@ -43,6 +43,17 @@ class MainActivity : AppActivity(R.layout.activity_main) {
                 .findNavController())
         }
 
+        factory {
+            ssnRouter(supportFragmentManager.fragments[0]
+                .childFragmentManager.fragments[0]
+                .childFragmentManager.fragments[0]
+                .findNavController())
+        }
+
+        factory {
+            uploadFilesRouter(navController)
+        }
+
         factory { return@factory header }
 
         factory {

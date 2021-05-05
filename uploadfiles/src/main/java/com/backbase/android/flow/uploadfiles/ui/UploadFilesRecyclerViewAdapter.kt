@@ -121,7 +121,7 @@ class UploadFilesRecyclerViewAdapter(private val filesToUpload: List<FileAttachm
                     it
                 )
             }
-            itemView.btnUpload.isEnabled = !isUploadDocumentLaterEnabled && fileAttachments.files?.isNotEmpty() != false
+            itemView.btnUpload.isEnabled = !isUploadDocumentLaterEnabled //&& fileAttachments.files?.isNotEmpty() != false
 
         }
 

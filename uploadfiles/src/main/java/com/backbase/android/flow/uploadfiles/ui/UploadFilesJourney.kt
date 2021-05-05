@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.backbase.android.flow.common.state.State
 import com.backbase.android.flow.common.viewmodel.handleStates
 import com.backbase.android.flow.uploadfiles.R
+import com.backbase.android.flow.uploadfiles.UploadFilesRouter
 import com.backbase.android.flow.uploadfiles.models.FileAttachments
 import com.backbase.android.flow.uploadfiles.models.UploadDocumentResponse
 import com.backbase.android.flow.uploadfiles.showPermissionRequestExplanation
@@ -25,12 +26,10 @@ import org.koin.android.ext.android.inject
 import java.io.File
 
 
-private const val REQUEST_CODE_CHOOSE = 1
-private const val PERMISSION_REQUEST_CODE = 200
-
 class UploadFilesJourney : Fragment(R.layout.journey_upload_files) {
 
     private lateinit var file: File
+    private val router: UploadFilesRouter by inject()
 
     private var adapter: UploadFilesRecyclerViewAdapter? = null
     private val viewModel: UploadFilesViewModel by inject()
@@ -48,6 +47,7 @@ class UploadFilesJourney : Fragment(R.layout.journey_upload_files) {
         handleStateForRequestDocumentListApi(viewModel.apiRequestDocumentList.state)
         handleStateForDeleteDocumentListApi(viewModel.apiDeleteDocument.state)
         handleStateForUploadDocumentListApi(viewModel.apiUploadDocument.state)
+        handleStateForSubmitDocuments(viewModel.apiCompleteTask.state)
         viewModel.requestDocumentList()
         requestWritePermissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
@@ -70,6 +70,20 @@ class UploadFilesJourney : Fragment(R.layout.journey_upload_files) {
             apiState,
             { fileKey ->
                 adapter?.removeFile(FileKey(this.fileID, groupID))
+            },
+            null,
+            { adapter?.setLoading(true) },
+            { adapter?.setLoading(false) }
+        )
+    }
+
+
+    private fun handleStateForSubmitDocuments(
+        apiState: ReceiveChannel<State<Any?>>
+    ) {
+        handleStates(
+            apiState,
+            { router.onUploadFilesFinished()
             },
             null,
             { adapter?.setLoading(true) },

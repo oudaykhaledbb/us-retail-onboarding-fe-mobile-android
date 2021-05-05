@@ -11,7 +11,7 @@ data class Fileset(
     @SerializedName("createdBy")
     val createdBy: String,
     @SerializedName("files")
-    val files: List<File>,
+    val files: ArrayList<File>?,
     @SerializedName("id")
     val id: String,
     @SerializedName("lastModifiedAt")
