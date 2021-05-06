@@ -84,7 +84,7 @@ dependencies {
     androidTestImplementation dependency.coroutinestest
 
     androidTestImplementation dependency.flowdesign
-    androidTestImplementation dependency.flow
+
 
     api dependency.fragment
     api dependency.fragmentTesting
