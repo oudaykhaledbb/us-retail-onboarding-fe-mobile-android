@@ -36,8 +36,6 @@ class UploadFilesJourney : Fragment(R.layout.journey_upload_files) {
     private lateinit var requestWritePermissionLauncher: ActivityResultLauncher<String>
     private lateinit var requestReadPermissionLauncher: ActivityResultLauncher<String>
 
-    //TODO to be removed once interaction SDK fixed
-    private var uploadResponse: UploadDocumentResponse? = null
     private lateinit var internalId: String
     private lateinit var groupID: String
     private lateinit var fileID: String
@@ -97,20 +95,20 @@ class UploadFilesJourney : Fragment(R.layout.journey_upload_files) {
         handleStates(
             apiState,
             { uploadDocumentResponse ->
-                if (uploadResponse == null){
-                    uploadResponse = UploadDocumentResponse(
-                        files = arrayListOf(),
-                        id = groupID,
-                        name  = ""
-                    )
-                }
-                uploadResponse?.files?.add(com.backbase.android.flow.uploadfiles.models.File(
-                    id = System.currentTimeMillis().toString(),
-                    mediaType = "Image",
-                    name = file.name,
-                    tempGroupId = groupID
-                ))
-                adapter?.addFile(uploadResponse)
+//                if (uploadResponse == null){
+//                    uploadResponse = UploadDocumentResponse(
+//                        files = arrayListOf(),
+//                        id = groupID,
+//                        name  = ""
+//                    )
+//                }
+//                uploadResponse?.files?.add(com.backbase.android.flow.uploadfiles.models.File(
+//                    id = System.currentTimeMillis().toString(),
+//                    mediaType = "Image",
+//                    name = file.name,
+//                    tempGroupId = groupID
+//                ))
+                adapter?.addFile(uploadDocumentResponse)
             },
             null,
             { adapter?.setLoading(true) },
@@ -141,7 +139,7 @@ class UploadFilesJourney : Fragment(R.layout.journey_upload_files) {
         }
         adapter?.onDeleteFileListener = { groupID, id, internalId ->
             this.fileID = id
-            viewModel.deleteDocument(groupID, id, internalId)
+            viewModel.deleteDocument(groupID, internalId, id)
         }
         adapter?.onUploadButtonClickListener = {
             groupID = it.documentRequest.groupId
@@ -210,9 +208,8 @@ class UploadFilesJourney : Fragment(R.layout.journey_upload_files) {
         if (requestCode == 9999 && resultCode == RESULT_OK) {
             val files = data!!.getStringArrayListExtra("filePaths")
             for (file in files!!) {
-                val file1 = "/storage/emulated/0/DCIM/Camera/SAMPLE_pdf.pdf"
-                this.file = File(file1)
-                viewModel.uploadDocument(groupID, internalId, File(file1))
+                this.file = File(file)
+                viewModel.uploadDocument(groupID, internalId, File(file))
             }
         }
         super.onActivityResult(requestCode, resultCode, data)

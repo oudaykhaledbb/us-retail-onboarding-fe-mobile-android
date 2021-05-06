@@ -44,10 +44,7 @@ class MainActivity : AppActivity(R.layout.activity_main) {
         }
 
         factory {
-            ssnRouter(supportFragmentManager.fragments[0]
-                .childFragmentManager.fragments[0]
-                .childFragmentManager.fragments[0]
-                .findNavController())
+            ssnRouter(navController)
         }
 
         factory {

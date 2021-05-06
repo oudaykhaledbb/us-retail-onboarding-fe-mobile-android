@@ -16,7 +16,7 @@ buildscript {
 
     ext.versions = [
             backbase                : '7.10.0',
-            flow                    : '2.0.0',
+            flow                    : '2.1.0-rc01',
             journeys                : '2.0.0',
             designsystem            : '1.2.0',
             kotlin                  : '1.4.21',

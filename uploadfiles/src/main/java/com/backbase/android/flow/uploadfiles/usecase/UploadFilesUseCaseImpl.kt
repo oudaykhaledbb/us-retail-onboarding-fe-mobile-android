@@ -47,7 +47,12 @@ class UploadFilesUseCaseImpl(
     ): Any? {
         return performInteraction<Any, Any?>(
             object : TypeToken<Any?>() {}.type,
-            configuration.deleteTempDocumentAction
+            configuration.deleteTempDocumentAction,
+            FileToDeleteModel(
+                tempGroupId = tempGroupId,
+                internalId = internalId,
+                fileId = fileId
+            )
         )
     }
 
