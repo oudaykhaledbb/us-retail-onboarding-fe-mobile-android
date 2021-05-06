@@ -18,6 +18,11 @@
         android:name="com.backbase.android.flow.smeo.business.ui.screens.BusinessIdentityScreen"
         android:label="BusinessIdentityScreen"/>
 
+    <fragment
+        android:id="@+id/SsnScreen"
+        android:name="com.backbase.android.flow.smeo.business.ui.screens.BusinessInfoScreen"
+        android:label="SsnScreen"/>
+
     <action
         android:id="@+id/action_to_businessAddressScreen"
         app:destination="@id/businessAddressScreen" />
@@ -25,5 +30,9 @@
     <action
         android:id="@+id/action_to_businessIdentityScreen"
         app:destination="@id/businessIdentityScreen" />
+
+    <action
+        android:id="@+id/action_to_ssnScreen"
+        app:destination="@id/SsnScreen" />
 
 </navigation>
