@@ -90,7 +90,7 @@ class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
         var formatter = SimpleDateFormat(currentDateFormat, Locale.ENGLISH)
         var date = formatter.parse(originalDate)
         val newSdf = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
-        return "${newSdf.format(date)}T18:25:43.511Z"
+        return "${newSdf.format(date)}T00:00:00.000Z"
     }
 
     private fun initValidators() =
