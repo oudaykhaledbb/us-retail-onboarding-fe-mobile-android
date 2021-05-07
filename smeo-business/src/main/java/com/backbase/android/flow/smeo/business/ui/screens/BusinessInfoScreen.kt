@@ -75,8 +75,8 @@ class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
 
     private fun submit() {
         viewModel.submitBusinessDetails(
-            knownName = txtLegalName.text.toString(),
             legalName = txtKnownName.text.toString(),
+            knownName = txtLegalName.text.toString(),
             ein = txtEin.text.toString().toIntOrNull(),
             establishedDate = manipulateEstablishedDate(
                 calendarDateEstablished.text.toString(),
