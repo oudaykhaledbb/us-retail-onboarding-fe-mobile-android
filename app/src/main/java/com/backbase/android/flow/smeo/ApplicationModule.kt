@@ -140,7 +140,6 @@ val applicationModule = module {
     //region Address Validation Journey
     factory {
         AddressConfiguration {
-            val context: Context by inject()
             actionName = "submit-address"
             description = DeferredText.Resource(R.string.label_we_need_to_know_you)
         }
