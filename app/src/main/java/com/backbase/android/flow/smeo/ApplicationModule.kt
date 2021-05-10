@@ -34,6 +34,10 @@ import com.backbase.android.flow.smeo.business.businessJourneyModule
 import com.backbase.android.flow.smeo.business.usecase.BusinessUseCase
 import com.backbase.android.flow.smeo.business.usecase.BusinessUseCaseDefaultImpl
 import com.backbase.android.flow.smeo.walkthrough.walkthroughConfiguration
+import com.backbase.android.flow.ssn.ssnConfiguration
+import com.backbase.android.flow.ssn.ssnJourneyModule
+import com.backbase.android.flow.ssn.usecase.SsnUsecase
+import com.backbase.android.flow.ssn.usecase.SsnUsecaseDefaultImpl
 import com.backbase.android.flow.stepnavigation.HeaderLabels
 import com.backbase.android.flow.uploadfiles.uploadFilesConfiguration
 import com.backbase.android.flow.uploadfiles.uploadJourneyModule
@@ -52,7 +56,8 @@ val mapFragments = mapOf(
         "BusinessInfoScreen" to HeaderLabels(3, DeferredText.Resource(R.string.your_business_details), DeferredText.Resource(R.string.your_business)),
         "BusinessAddressScreen" to HeaderLabels(4, DeferredText.Resource(R.string.where_is_your_business_located), DeferredText.Resource(R.string.your_business)),
         "BusinessIdentityScreen" to HeaderLabels(5, DeferredText.Resource(R.string.what_does_your_company_do), DeferredText.Resource(R.string.your_business)),
-        "UploadFilesJourney" to HeaderLabels(6, DeferredText.Resource(R.string.verify_your_business), DeferredText.Resource(R.string.upload_documents))
+        "UploadFilesJourney" to HeaderLabels(6, DeferredText.Resource(R.string.verify_your_business), DeferredText.Resource(R.string.upload_documents)),
+        "SsnJourney" to HeaderLabels(7, DeferredText.Resource(R.string.verify_your_identity), DeferredText.Resource(R.string.your_ssn))
 )
 
 /**
@@ -171,6 +176,20 @@ val applicationModule = module {
 
     //endregion upload documents
 
+    //region SSN
+    factory {
+        ssnConfiguration{
+            isOffline = false
+            submitSsnAction = "submit-address"
+        }
+    }
+
+    factory<SsnUsecase> {
+        return@factory SsnUsecaseDefaultImpl(get(), get(), get())
+    }
+
+    loadKoinModules(listOf(ssnJourneyModule))
+    //endregion SSN
 
 }
 

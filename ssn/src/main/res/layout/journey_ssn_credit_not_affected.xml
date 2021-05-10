@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    tools:showIn="@layout/journey_ssn">
+
+    <ImageView
+        android:layout_width="?sizerLarge"
+        android:layout_height="?sizerLarge"
+        android:src="@drawable/ic_smile" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?spacerSmall"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_credit_not_affected"
+            android:textAppearance="?textAppearanceSubtitle2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_credit_not_affected_description"
+            android:textColor="?colorTextSupport"
+            android:textAppearance="?textAppearanceCaption" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+    

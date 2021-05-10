@@ -87,6 +87,7 @@
      implementation project(path: ':step-navigation')
      implementation project(path: ':smeo-business')
      implementation project(path: ':uploadfiles')
+     implementation project(path: ':ssn')
 
      testImplementation dependency.junit
 
