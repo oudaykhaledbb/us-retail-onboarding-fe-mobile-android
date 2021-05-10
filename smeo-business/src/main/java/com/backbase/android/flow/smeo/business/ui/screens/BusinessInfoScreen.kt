@@ -24,6 +24,8 @@ import kotlinx.android.synthetic.main.screen_business_info_legal_name.*
 import kotlinx.android.synthetic.main.screen_business_info_state_operating_in.*
 import kotlinx.coroutines.channels.ReceiveChannel
 import org.koin.android.ext.android.inject
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
@@ -73,12 +75,22 @@ class BusinessInfoScreen : Fragment(R.layout.screen_business_info) {
 
     private fun submit() {
         viewModel.submitBusinessDetails(
-            legalName = txtLegalName.text.toString(),
-            knownName = txtKnownName.text.toString(),
+            legalName = txtKnownName.text.toString(),
+            knownName = txtLegalName.text.toString(),
             ein = txtEin.text.toString().toIntOrNull(),
-            establishedDate = calendarDateEstablished.dateFormat.toString(),
-            operationState = txtStateOperatingIn.toString(),
+            establishedDate = manipulateEstablishedDate(
+                calendarDateEstablished.text.toString(),
+                calendarDateEstablished.dateFormat.toString()
+            ),
+            operationState = txtStateOperatingIn.text.toString(),
         )
+    }
+
+    fun manipulateEstablishedDate(originalDate: String, currentDateFormat: String): String {
+        var formatter = SimpleDateFormat(currentDateFormat, Locale.ENGLISH)
+        var date = formatter.parse(originalDate)
+        val newSdf = SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH)
+        return "${newSdf.format(date)}T00:00:00.000Z"
     }
 
     private fun initValidators() =

@@ -6,19 +6,19 @@ import com.backbase.android.dbs.dataproviders.NetworkDBSDataProvider
 import com.backbase.android.flow.FlowClient
 import com.backbase.android.flow.address.AddressConfiguration
 import com.backbase.android.flow.address.addressJourneyModule
-import com.backbase.android.flow.address.models.AddressModel
 import com.backbase.android.flow.address.usecase.AddressUseCase
-import com.backbase.android.flow.common.utils.readAsset
+import com.backbase.android.flow.address.usecase.AddressUseCaseDefaultImpl
 import com.backbase.android.flow.contracts.FlowClientContract
-import com.backbase.android.flow.models.InteractionResponse
 import com.backbase.android.flow.otp.OtpConfiguration
 import com.backbase.android.flow.otp.models.OtpChannel
 import com.backbase.android.flow.otp.otpJourneyModule
 import com.backbase.android.flow.otp.usecase.OtpUseCase
+import com.backbase.android.flow.otp.usecase.OtpUseCaseDefaultImpl
 import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_ACTION_INIT
 import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_ACTION_SUBMIT
 import com.backbase.android.flow.smeo.Constants.Companion.DBS_PATH
 import com.backbase.android.flow.smeo.Constants.Companion.INTERACTION_NAME
+import com.backbase.android.flow.smeo.Constants.Companion.REQUEST_AVAILABLE_OTP_CHANNELS
 import com.backbase.android.flow.smeo.Constants.Companion.REQUEST_OTP_ACTIONNAME
 import com.backbase.android.flow.smeo.Constants.Companion.SERVICE_NAME
 import com.backbase.android.flow.smeo.Constants.Companion.SUBMIT_BUSINESS_DETAILS_ACTION
@@ -36,7 +36,6 @@ import com.backbase.android.flow.smeo.business.usecase.BusinessUseCaseDefaultImp
 import com.backbase.android.flow.smeo.walkthrough.walkthroughConfiguration
 import com.backbase.android.flow.stepnavigation.HeaderLabels
 import com.backbase.deferredresources.DeferredText
-import com.google.gson.Gson
 import kotlinx.coroutines.delay
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
@@ -84,7 +83,7 @@ val applicationModule = module {
 
     factory {
         AboutYouConfiguration {
-            isOffline = true
+            isOffline = false
             actionInit = ABOUT_YOU_ACTION_INIT
             actionAboutYouSubmit = ABOUT_YOU_ACTION_SUBMIT
         }
@@ -97,14 +96,14 @@ val applicationModule = module {
         OtpConfiguration {
             requestActionName = REQUEST_OTP_ACTIONNAME
             verifyActionName = VERIFYACTIONNAME
-            availableOtpChannelsActionName = ""
-            verificationCodeMaxLength = Integer(9)
+            availableOtpChannelsActionName = REQUEST_AVAILABLE_OTP_CHANNELS
+            verificationCodeMaxLength = Integer(6)
 
         }
     }
 
     factory<OtpUseCase> {
-        OtpUseCaseOffline(get())
+        OtpUseCaseOffline(get(), OtpUseCaseDefaultImpl(get(), get())) // BE is not upgraded to the latest OTP version
 //        OtpUseCaseDefaultImpl(get(), get())
     }
 
@@ -114,7 +113,7 @@ val applicationModule = module {
     //region OTP
     factory {
         BusinessConfiguration {
-            isOffline = true
+            isOffline = false
             verifyCaseAction = VERIFY_CASE_ACTION
             submitBusinessDetailsAction = SUBMIT_BUSINESS_DETAILS_ACTION
             submitBusinessIdentityAction = SUBMIT_BUSINESS_IDENTITY_ACTION
@@ -132,22 +131,13 @@ val applicationModule = module {
     factory {
         AddressConfiguration {
             val context: Context by inject()
-            actionName = ""
+            actionName = "submit-address"
             description = DeferredText.Resource(R.string.label_we_need_to_know_you)
         }
     }
 
     factory<AddressUseCase> {
-        return@factory object : AddressUseCase {
-            override suspend fun submitAddress(addressModel: AddressModel): Any?{
-                delay(30)
-                val context: Context by inject()
-                return readAsset(
-                    context.assets,
-                    "backbase/smeo/address.json"
-                )
-            }
-        }
+        return@factory AddressUseCaseDefaultImpl(get(), get())
     }
 
     loadKoinModules(listOf(addressJourneyModule))
@@ -155,35 +145,20 @@ val applicationModule = module {
 
 }
 
-class OtpUseCaseOffline(private val context: Context) : OtpUseCase {
+//TODO This class should be removed once the BE switch to the new OTP version
+class OtpUseCaseOffline(private val context: Context, private val otpUseCaseDefaultImpl: OtpUseCase) : OtpUseCase {
     override suspend fun requestAvailableOtpChannels() : List<OtpChannel> {
         delay(30)
         return listOf(OtpChannel.SMS, OtpChannel.EMAIL)
     }
 
-    override suspend fun requestVerificationCode(phoneNumber: String, channel: OtpChannel): Any? {
-        delay(30)
-        return Gson().fromJson(
-                readAsset(
-                        context.assets,
-                        "backbase/otp/get-verification-code.json"
-                ), InteractionResponse::class.java
-        )
-    }
+    override suspend fun requestVerificationCode(phoneNumber: String, channel: OtpChannel) = otpUseCaseDefaultImpl.requestVerificationCode(phoneNumber, channel)
 
     override suspend fun submitVerificationCode(
         recipient: String,
         channel: OtpChannel,
         otp: String
-    ): Any? {
-        delay(30)
-        return Gson().fromJson(
-                readAsset(
-                        context.assets,
-                        "backbase/otp/submit-verification-code.json"
-                ), InteractionResponse::class.java
-        )
-    }
+    ) = otpUseCaseDefaultImpl.submitVerificationCode(recipient, channel, otp)
 }
 
 
