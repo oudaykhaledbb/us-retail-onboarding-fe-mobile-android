@@ -1,6 +1,4 @@
 <resources>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_required_by_law">"We are required by law to ask for your Social Security Number. "</string>
     <string name="label_your_social_security_number">Your Social Security Number (SSN)</string>
     <string name="label_safe_secure">Safe and secure</string>
