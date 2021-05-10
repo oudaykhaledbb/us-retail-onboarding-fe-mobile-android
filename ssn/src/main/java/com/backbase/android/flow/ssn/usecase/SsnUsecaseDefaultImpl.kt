@@ -87,7 +87,7 @@ class SsnUsecaseDefaultImpl(
             context.assets,
             "backbase/conf/$JOURNEY_NAME/$action.json"
         )
-        return gson.fromJson<com.backbase.android.flow.ssn.usecase.InteractionResponse<Response?>>(
+        return gson.fromJson<com.backbase.android.flow.common.interaction.InteractionResponse<Response?>>(
             rowResponse,
             type
         )?.body
