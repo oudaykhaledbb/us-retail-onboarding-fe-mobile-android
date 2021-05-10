@@ -23,19 +23,6 @@ class UploadFilesViewModel(private val useCase: UploadFilesUseCase) : ViewModel(
             }
             return@submit listFileAdvancements
 
-//            val documentData = useCase.requestDocumentData(it.groupId, it.internalId)
-//            val searchableDocumentData = HashMap<String, ArrayList<File>>()
-//            documentData?.fileset?.files?.forEach {
-//                val filesList = searchableDocumentData[generateCommonKey(it.tempGroupId, it.id)]
-//                    ?: arrayListOf()
-//                filesList.add(it)
-//                searchableDocumentData[generateCommonKey(it.tempGroupId, it.id)] = filesList
-//            }
-//            return@submit documentsList?.documentRequests?.map {
-//                FileAttachments(
-//                    it, searchableDocumentData?.get(generateCommonKey(it.groupId, it.internalId))
-//                )
-//            }?.toList()
         }
     }
 

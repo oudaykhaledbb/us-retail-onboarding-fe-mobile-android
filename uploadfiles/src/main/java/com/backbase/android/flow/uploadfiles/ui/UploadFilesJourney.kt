@@ -95,19 +95,6 @@ class UploadFilesJourney : Fragment(R.layout.journey_upload_files) {
         handleStates(
             apiState,
             { uploadDocumentResponse ->
-//                if (uploadResponse == null){
-//                    uploadResponse = UploadDocumentResponse(
-//                        files = arrayListOf(),
-//                        id = groupID,
-//                        name  = ""
-//                    )
-//                }
-//                uploadResponse?.files?.add(com.backbase.android.flow.uploadfiles.models.File(
-//                    id = System.currentTimeMillis().toString(),
-//                    mediaType = "Image",
-//                    name = file.name,
-//                    tempGroupId = groupID
-//                ))
                 adapter?.addFile(uploadDocumentResponse)
             },
             null,

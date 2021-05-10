@@ -102,7 +102,7 @@ fun uploadFilesRouter(
 ) = object : UploadFilesRouter{
 
     override fun onUploadFilesFinished() {
-        print("Files uploaded Finished successfully")
+        print("Files uploaded successfully")
         completion()
     }
 }
