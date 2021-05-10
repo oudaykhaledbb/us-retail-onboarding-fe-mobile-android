@@ -34,10 +34,6 @@ import com.backbase.android.flow.smeo.business.businessJourneyModule
 import com.backbase.android.flow.smeo.business.usecase.BusinessUseCase
 import com.backbase.android.flow.smeo.business.usecase.BusinessUseCaseDefaultImpl
 import com.backbase.android.flow.smeo.walkthrough.walkthroughConfiguration
-import com.backbase.android.flow.ssn.ssnConfiguration
-import com.backbase.android.flow.ssn.ssnJourneyModule
-import com.backbase.android.flow.ssn.usecase.SsnUsecase
-import com.backbase.android.flow.ssn.usecase.SsnUsecaseDefaultImpl
 import com.backbase.android.flow.stepnavigation.HeaderLabels
 import com.backbase.android.flow.uploadfiles.uploadFilesConfiguration
 import com.backbase.android.flow.uploadfiles.uploadJourneyModule
@@ -187,20 +183,6 @@ val applicationModule = module {
 
     //endregion upload documents
 
-    //region SSN
-    factory {
-        ssnConfiguration{
-            isOffline = false
-            submitSsnAction = "submit-address"
-        }
-    }
-
-    factory<SsnUsecase> {
-        return@factory SsnUsecaseDefaultImpl(get(), get(), get())
-    }
-
-    loadKoinModules(listOf(ssnJourneyModule))
-    //endregion SSN
 
 }
 

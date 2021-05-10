@@ -18,8 +18,4 @@
         android:id="@+id/uploadDocumentsJourney"
         android:name="com.backbase.android.flow.uploadfiles.ui.UploadFilesJourney"
         android:label="UploadFilesJourney" />
-    <fragment
-        android:id="@+id/SsnJourney"
-        android:name="com.backbase.android.flow.ssn.ui.SsnJourney"
-        android:label="SsnJourney" />
 </navigation>
