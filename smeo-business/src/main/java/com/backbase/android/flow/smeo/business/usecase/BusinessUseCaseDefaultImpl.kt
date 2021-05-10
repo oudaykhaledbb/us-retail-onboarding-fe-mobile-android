@@ -28,19 +28,19 @@ class BusinessUseCaseDefaultImpl(
     }
 
     override suspend fun submitBusinessDetails(
-            legalName: String,
-            knownName: String,
-            ein: Int?,
-            establishedDate: String,
-            operationState: String
-    ) = if (configuration.isOffline) submitBusinessDetailsOffline()
-    else submitBusinessDetailsOnline(
+        legalName: String,
+        knownName: String,
+        ein: Int?,
+        establishedDate: String,
+        operationState: String
+    ) : Any?{
+        val formData = BusinessDetailsModel(
             legalName,
             knownName,
             ein,
             establishedDate,
             operationState
-    )
+        )
 
         return performInteraction<Any, BusinessDetailsModel>(
             configuration.isOffline,
