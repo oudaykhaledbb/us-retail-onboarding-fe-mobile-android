@@ -1,4 +1,3 @@
-include ':ssn'
 include ':uploadfiles'
 include ':smeo-business'
 include ':smeo-about-you'

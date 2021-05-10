@@ -7,7 +7,7 @@ import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 /**
- * Created by Backbase R&D B.V. on 2021-03-16.
+ * Created by Backbase R&D B.V. on 2021-04-10.
  */
 internal const val SCOPE_ID = "journey_business"
 
