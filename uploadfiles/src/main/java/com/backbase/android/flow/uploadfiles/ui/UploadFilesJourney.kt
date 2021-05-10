@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.backbase.android.flow.common.state.State
 import com.backbase.android.flow.common.viewmodel.handleStates
 import com.backbase.android.flow.uploadfiles.R
+import com.backbase.android.flow.uploadfiles.UploadFilesConfiguration
 import com.backbase.android.flow.uploadfiles.UploadFilesRouter
 import com.backbase.android.flow.uploadfiles.models.FileAttachments
 import com.backbase.android.flow.uploadfiles.models.UploadDocumentResponse
@@ -30,6 +31,7 @@ class UploadFilesJourney : Fragment(R.layout.journey_upload_files) {
 
     private lateinit var file: File
     private val router: UploadFilesRouter by inject()
+    private val configuration: UploadFilesConfiguration by inject()
 
     private var adapter: UploadFilesRecyclerViewAdapter? = null
     private val viewModel: UploadFilesViewModel by inject()
@@ -47,6 +49,10 @@ class UploadFilesJourney : Fragment(R.layout.journey_upload_files) {
         handleStateForUploadDocumentListApi(viewModel.apiUploadDocument.state)
         handleStateForSubmitDocuments(viewModel.apiCompleteTask.state)
         viewModel.requestDocumentList()
+        setupPermissionsRequestHandler()
+    }
+
+    private fun setupPermissionsRequestHandler() {
         requestWritePermissionLauncher =
             registerForActivityResult(ActivityResultContracts.RequestPermission()) { granted ->
                 if (granted) {
@@ -150,53 +156,54 @@ class UploadFilesJourney : Fragment(R.layout.journey_upload_files) {
     }
 
 
-    private fun requestReadPermission() {
+    private fun requestPermission(
+        permission: String,
+        permissionTitle: String,
+        permissionMessage: String
+    ) {
         when {
             ContextCompat.checkSelfPermission(
                 requireContext(),
-                android.Manifest.permission.READ_EXTERNAL_STORAGE
+                permission
             ) == PackageManager.PERMISSION_GRANTED -> {
             }
-            shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE)-> {
+            shouldShowRequestPermissionRationale(permission) -> {
                 requireContext().showPermissionRequestExplanation(
-                    "Permission needed",
-                    "Read External storage is required"
+                    permissionTitle,
+                    permissionMessage
                 ) { requestWritePermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE) }
             }
             else -> {
-                // Everything is fine you can simply request the permission
-                requestWritePermissionLauncher.launch(android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                requestWritePermissionLauncher.launch(permission)
             }
         }
     }
 
+    private fun requestReadPermission() {
+        requestPermission(
+            android.Manifest.permission.READ_EXTERNAL_STORAGE,
+            getString(R.string.permission_needed),
+            getString(R.string.persission_needed_read_external_storage)
+        )
+    }
+
     private fun requestWritePermission() {
-        when {
-            ContextCompat.checkSelfPermission(
-                requireContext(),
-                android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-            ) == PackageManager.PERMISSION_GRANTED -> {
-            }
-            shouldShowRequestPermissionRationale(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) -> {
-                requireContext().showPermissionRequestExplanation(
-                    "Permission needed",
-                    "Read External storage is required"
-                ) { requestWritePermissionLauncher.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) }
-            }
-            else -> {
-                // Everything is fine you can simply request the permission
-                requestWritePermissionLauncher.launch(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            }
-        }
+        requestPermission(
+            android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            getString(R.string.permission_needed),
+            getString(R.string.persission_needed_write_external_storage)
+        )
     }
 
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == 9999 && resultCode == RESULT_OK) {
-            val files = data!!.getStringArrayListExtra("filePaths")
-            for (file in files!!) {
-                this.file = File(file)
-                viewModel.uploadDocument(groupID, internalId, File(file))
+            val files = data?.getStringArrayListExtra("filePaths")
+            files?.let {
+                for (file in files) {
+                    this.file = File(file)
+                    viewModel.uploadDocument(groupID, internalId, File(file))
+                }
             }
         }
         super.onActivityResult(requestCode, resultCode, data)
@@ -213,7 +220,7 @@ class UploadFilesJourney : Fragment(R.layout.journey_upload_files) {
                 Environment.getExternalStorageDirectory().absolutePath
             )
             .showHiddenFiles(true)
-            .setFilters(arrayOf("pdf", "png", "jpg", "jpeg"))
+            .setFilters(configuration.supportedFiles.toTypedArray())
             .addItemDivider(true)
             .theme(R.style.UnicornFilePicker_Dracula)
             .build()

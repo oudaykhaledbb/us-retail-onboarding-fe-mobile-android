@@ -153,6 +153,7 @@ val applicationModule = module {
     factory {
         uploadFilesConfiguration{
             isOffline = false
+            supportedFiles = arrayListOf("pdf", "png", "jpg", "jpeg")
             requestDocumentAction = "load-document-requests"
             requestDataAction = "load-document-request"
             uploadDocumentAction = "upload-document"

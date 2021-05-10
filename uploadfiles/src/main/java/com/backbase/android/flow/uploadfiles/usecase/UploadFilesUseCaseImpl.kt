@@ -3,6 +3,7 @@ package com.backbase.android.flow.uploadfiles.usecase
 import android.content.Context
 import android.webkit.MimeTypeMap
 import com.backbase.android.flow.common.handler.InteractionResponseHandler
+import com.backbase.android.flow.common.interaction.InteractionResponse
 import com.backbase.android.flow.common.utils.readAsset
 import com.backbase.android.flow.contracts.FlowClientContract
 import com.backbase.android.flow.models.Action
@@ -17,7 +18,7 @@ import java.lang.reflect.Type
 import kotlin.coroutines.suspendCoroutine
 
 
-private const val JOURNEY_NAME = "sme-onboarding"
+private const val JOURNEY_NAME = "sme-onboarding-upload-files"
 
 class UploadFilesUseCaseImpl(
     private val context: Context,

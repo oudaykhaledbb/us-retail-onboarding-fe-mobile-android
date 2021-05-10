@@ -2,6 +2,7 @@ package com.backbase.android.flow.uploadfiles
 
 class UploadFilesConfiguration private constructor(
     val isOffline: Boolean,
+    val supportedFiles: List<String>,
     val requestDocumentAction: String,
     val requestDataAction: String,
     val uploadDocumentAction: String,
@@ -13,6 +14,9 @@ class UploadFilesConfiguration private constructor(
 
         @set: JvmSynthetic
         var isOffline: Boolean = false
+
+        @set:JvmSynthetic
+        lateinit var supportedFiles: List<String>
 
         @set:JvmSynthetic
         lateinit var submitDocumentAction: String
@@ -35,6 +39,7 @@ class UploadFilesConfiguration private constructor(
 
         fun build() = UploadFilesConfiguration(
             isOffline,
+            supportedFiles,
             requestDocumentAction,
             requestDataAction,
             uploadDocumentAction,
