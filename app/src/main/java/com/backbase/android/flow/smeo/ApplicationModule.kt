@@ -35,6 +35,10 @@ import com.backbase.android.flow.smeo.business.usecase.BusinessUseCase
 import com.backbase.android.flow.smeo.business.usecase.BusinessUseCaseDefaultImpl
 import com.backbase.android.flow.smeo.walkthrough.walkthroughConfiguration
 import com.backbase.android.flow.stepnavigation.HeaderLabels
+import com.backbase.android.flow.uploadfiles.uploadFilesConfiguration
+import com.backbase.android.flow.uploadfiles.uploadJourneyModule
+import com.backbase.android.flow.uploadfiles.usecase.UploadFilesUseCase
+import com.backbase.android.flow.uploadfiles.usecase.UploadFilesUseCaseImpl
 import com.backbase.deferredresources.DeferredText
 import kotlinx.coroutines.delay
 import org.koin.core.context.loadKoinModules
@@ -47,7 +51,8 @@ val mapFragments = mapOf(
         "OtpJourney" to HeaderLabels(2, DeferredText.Resource(R.string.security_at_your_fingertips), DeferredText.Resource(R.string.mobile_phone_number)),
         "BusinessInfoScreen" to HeaderLabels(3, DeferredText.Resource(R.string.your_business_details), DeferredText.Resource(R.string.your_business)),
         "BusinessAddressScreen" to HeaderLabels(4, DeferredText.Resource(R.string.where_is_your_business_located), DeferredText.Resource(R.string.your_business)),
-        "BusinessIdentityScreen" to HeaderLabels(5, DeferredText.Resource(R.string.what_does_your_company_do), DeferredText.Resource(R.string.your_business))
+        "BusinessIdentityScreen" to HeaderLabels(5, DeferredText.Resource(R.string.what_does_your_company_do), DeferredText.Resource(R.string.your_business)),
+        "UploadFilesJourney" to HeaderLabels(6, DeferredText.Resource(R.string.verify_your_business), DeferredText.Resource(R.string.upload_documents))
 )
 
 /**
@@ -103,7 +108,7 @@ val applicationModule = module {
     }
 
     factory<OtpUseCase> {
-        OtpUseCaseOffline(get(), OtpUseCaseDefaultImpl(get(), get())) // BE is not upgraded to the latest OTP version
+        OtpUseCaseOffline(get(), OtpUseCaseDefaultImpl(get(), get()))
 //        OtpUseCaseDefaultImpl(get(), get())
     }
 
@@ -130,7 +135,6 @@ val applicationModule = module {
     //region Address Validation Journey
     factory {
         AddressConfiguration {
-            val context: Context by inject()
             actionName = "submit-address"
             description = DeferredText.Resource(R.string.label_we_need_to_know_you)
         }
@@ -140,13 +144,40 @@ val applicationModule = module {
         return@factory AddressUseCaseDefaultImpl(get(), get())
     }
 
+
     loadKoinModules(listOf(addressJourneyModule))
     //endregion
 
+    //region upload documents
+
+    factory {
+        uploadFilesConfiguration{
+            isOffline = false
+            supportedFiles = arrayListOf("pdf", "png", "jpg", "jpeg")
+            requestDocumentAction = "load-document-requests"
+            requestDataAction = "load-document-request"
+            uploadDocumentAction = "upload-document"
+            deleteTempDocumentAction = "delete-temp-document"
+            submitDocumentAction = "submit-document-requests"
+            completeTaskAction = "complete-task"
+        }
+    }
+
+    factory<UploadFilesUseCase> {
+        return@factory UploadFilesUseCaseImpl(get(), get(), get())
+    }
+
+    loadKoinModules(listOf(uploadJourneyModule))
+
+    //endregion upload documents
+
+
 }
 
-//TODO This class should be removed once the BE switch to the new OTP version
-class OtpUseCaseOffline(private val context: Context, private val otpUseCaseDefaultImpl: OtpUseCase) : OtpUseCase {
+class OtpUseCaseOffline(
+    private val context: Context,
+    private val otpUseCaseDefaultImpl: OtpUseCaseDefaultImpl
+) : OtpUseCase {
     override suspend fun requestAvailableOtpChannels() : List<OtpChannel> {
         delay(30)
         return listOf(OtpChannel.SMS, OtpChannel.EMAIL)

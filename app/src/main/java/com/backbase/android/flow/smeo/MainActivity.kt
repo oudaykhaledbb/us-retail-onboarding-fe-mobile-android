@@ -43,6 +43,11 @@ class MainActivity : AppActivity(R.layout.activity_main) {
                 .findNavController())
         }
 
+
+        factory {
+            uploadFilesRouter(navController)
+        }
+
         factory { return@factory header }
 
         factory {

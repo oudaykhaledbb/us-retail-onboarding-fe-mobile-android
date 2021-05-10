@@ -10,6 +10,7 @@ import com.backbase.android.flow.otp.OtpRouter
 import com.backbase.android.flow.smeo.aboutyou.AboutYouRouter
 import com.backbase.android.flow.smeo.business.BusinessRouter
 import com.backbase.android.flow.smeo.walkthrough.WalkthroughRouter
+import com.backbase.android.flow.uploadfiles.UploadFilesRouter
 
 fun walkthroughRouter(
         context: Context,
@@ -55,7 +56,11 @@ fun businessRouter(
 ) = object : BusinessRouter {
 
     override fun onBusinessFinished() {
-        print("Business relations finished")
+        showJourneyWithClearStack(
+            navController,
+            R.id.uploadDocumentsJourney
+        )
+        completion()
     }
 }
 
@@ -87,6 +92,17 @@ fun addressRouter(
 
     override fun onAddressFinished(data: Any?) {
         navController.navigate(com.backbase.android.flow.smeo.business.R.id.action_to_businessIdentityScreen)
+        completion()
+    }
+}
+
+fun uploadFilesRouter(
+    navController: NavController,
+    completion: () -> Unit = {}
+) = object : UploadFilesRouter{
+
+    override fun onUploadFilesFinished() {
+        print("Files uploaded successfully")
         completion()
     }
 }
