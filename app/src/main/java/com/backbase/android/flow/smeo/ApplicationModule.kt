@@ -29,10 +29,14 @@ import com.backbase.android.flow.smeo.aboutyou.AboutYouConfiguration
 import com.backbase.android.flow.smeo.aboutyou.aboutYouJourneyModule
 import com.backbase.android.flow.smeo.aboutyou.usecase.AboutYouUseCase
 import com.backbase.android.flow.smeo.aboutyou.usecase.AboutYouUseCaseDefaultImpl
-import com.backbase.android.flow.smeo.business.BusinessConfiguration
-import com.backbase.android.flow.smeo.business.businessJourneyModule
-import com.backbase.android.flow.smeo.business.usecase.BusinessUseCase
-import com.backbase.android.flow.smeo.business.usecase.BusinessUseCaseDefaultImpl
+import com.backbase.android.flow.smeo.business.businessIdentityConfiguration
+import com.backbase.android.flow.smeo.business.businessIdentityJourneyModule
+import com.backbase.android.flow.smeo.business.info.businessInfoConfiguration
+import com.backbase.android.flow.smeo.business.info.businessInfoJourneyModule
+import com.backbase.android.flow.smeo.business.info.usecase.BusinessInfoUseCase
+import com.backbase.android.flow.smeo.business.info.usecase.BusinessInfoUseCaseDefaultImpl
+import com.backbase.android.flow.smeo.business.usecase.BusinessIdentityUseCase
+import com.backbase.android.flow.smeo.business.usecase.BusinessIdentityUseCaseDefaultImpl
 import com.backbase.android.flow.smeo.walkthrough.walkthroughConfiguration
 import com.backbase.android.flow.ssn.ssnConfiguration
 import com.backbase.android.flow.ssn.ssnJourneyModule
@@ -120,22 +124,36 @@ val applicationModule = module {
     loadKoinModules(listOf(otpJourneyModule))
     //endregion OTP
 
-    //region OTP
+    //region Business Identity
     factory {
-        BusinessConfiguration {
+        businessIdentityConfiguration {
             isOffline = false
-            verifyCaseAction = VERIFY_CASE_ACTION
-            submitBusinessDetailsAction = SUBMIT_BUSINESS_DETAILS_ACTION
             submitBusinessIdentityAction = SUBMIT_BUSINESS_IDENTITY_ACTION
         }
     }
 
-    factory<BusinessUseCase> {
-        BusinessUseCaseDefaultImpl(get(), get(), get())
+    factory<BusinessIdentityUseCase> {
+        BusinessIdentityUseCaseDefaultImpl(get(), get(), get())
     }
 
-    loadKoinModules(listOf(businessJourneyModule))
-    //endregion OTP
+    loadKoinModules(listOf(businessIdentityJourneyModule))
+    //endregion business Identity
+
+    //region Business Info
+    factory {
+        businessInfoConfiguration {
+            isOffline = false
+            verifyCaseAction = VERIFY_CASE_ACTION
+            submitBusinessDetailsAction = SUBMIT_BUSINESS_DETAILS_ACTION
+        }
+    }
+
+    factory<BusinessInfoUseCase> {
+        BusinessInfoUseCaseDefaultImpl(get(), get(), get())
+    }
+
+    loadKoinModules(listOf(businessInfoJourneyModule))
+    //endregion Business Info
 
     //region Address Validation Journey
     factory {
