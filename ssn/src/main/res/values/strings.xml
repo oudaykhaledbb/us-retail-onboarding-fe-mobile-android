@@ -1,0 +1,10 @@
+<resources>
+    <string name="label_required_by_law">"We are required by law to ask for your Social Security Number. "</string>
+    <string name="label_your_social_security_number">Your Social Security Number (SSN)</string>
+    <string name="label_safe_secure">Safe and secure</string>
+    <string name="label_safe_secure_description">"Your information is never shared and uses 100% secure encryption for sending and receiving. "</string>
+    <string name="label_credit_not_affected">Your credit score will not be affected</string>
+    <string name="label_credit_not_affected_description">This will not be used for a credit check and will not impact your credit score.</string>
+    <string name="field_required">This field is required</string>
+    <string name="ssn_must_be_9_chars">SSN must be 9 charaters</string>
+</resources>
