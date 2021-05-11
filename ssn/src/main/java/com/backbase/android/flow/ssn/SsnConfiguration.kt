@@ -3,7 +3,7 @@ package com.backbase.android.flow.ssn
 import com.backbase.android.flow.ssn.SsnConfiguration.Builder
 
 /**
- * Created by Backbase R&D B.V. on 2021-03-03.
+ * Created by Backbase R&D B.V. on 2021-05-11.
  *
  * Configuration options for the SSN Journey. Can be created via a DSL in Kotlin or via a [Builder] in Java.
  *

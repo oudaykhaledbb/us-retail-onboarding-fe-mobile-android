@@ -13,11 +13,7 @@ class SsnViewModel(private val usecase: SsnUsecase) : ViewModel() {
         ssn: String
     ) {
         apiSubmitSsn.submit("submitSsn()") {
-            try {
                 return@submit usecase.submitSsn(ssn)
-            } catch (ex: Exception) {
-                ex.printStackTrace()
-            }
         }
     }
 
