@@ -8,7 +8,8 @@ import androidx.navigation.NavController
 import com.backbase.android.flow.address.AddressRouter
 import com.backbase.android.flow.otp.OtpRouter
 import com.backbase.android.flow.smeo.aboutyou.AboutYouRouter
-import com.backbase.android.flow.smeo.business.BusinessRouter
+import com.backbase.android.flow.smeo.business.BusinessIdentityRouter
+import com.backbase.android.flow.smeo.business.info.BusinessInfoRouter
 import com.backbase.android.flow.smeo.walkthrough.WalkthroughRouter
 import com.backbase.android.flow.ssn.SsnRouter
 import com.backbase.android.flow.uploadfiles.UploadFilesRouter
@@ -51,12 +52,26 @@ fun aboutYouRouter(
     }
 }
 
-fun businessRouter(
+fun businessInfoRouter(
     navController: NavController,
     completion: () -> Unit = {}
-) = object : BusinessRouter {
+) = object : BusinessInfoRouter {
 
-    override fun onBusinessFinished() {
+    override fun onBusinessInfoFinished() {
+        showJourneyWithClearStack(
+            navController,
+            R.id.businessAddressJourney
+        )
+        completion()
+    }
+}
+
+fun businessIdentityRouter(
+    navController: NavController,
+    completion: () -> Unit = {}
+) = object : BusinessIdentityRouter {
+
+    override fun onBusinessIdentityFinished() {
         showJourneyWithClearStack(
             navController,
             R.id.uploadDocumentsJourney
@@ -73,7 +88,7 @@ fun otpRouter(
     override fun onOtpValidated(data: Any?) {
         showJourneyWithClearStack(
             navController,
-            R.id.businessJourney
+            R.id.businessInfoJourney
         )
         completion()
     }
@@ -92,7 +107,10 @@ fun addressRouter(
 ) = object : AddressRouter {
 
     override fun onAddressFinished(data: Any?) {
-        navController.navigate(com.backbase.android.flow.smeo.business.R.id.action_to_businessIdentityScreen)
+        showJourneyWithClearStack(
+            navController,
+            R.id.businessIdentityJourney
+        )
         completion()
     }
 }

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="industries">
+        <item>Agriculture, Forestry, Fishing and Hunting</item>
+        <item>Mining, Quarrying, and Oil and Gas Extraction</item>
+        <item>Utilities</item>
+        <item>Construction</item>
+        <item>Manufacturing food and apparel</item>
+        <item>Manufacturing wood, paper, coal, petrol and chemical products</item>
+        <item>Manufacturing computer and electrical products</item>
+        <item>Wholesale Trade</item>
+        <item>Retail Trade food, electronics, furniture, home</item>
+        <item>Retail Trade nonstore and miscellaneous</item>
+        <item>Transportation and Warehousing general</item>
+        <item>Transportation and Warehousing postal service and couriers</item>
+        <item>Information</item>
+        <item>Finance and Insurance</item>
+        <item>Real Estate and Rental and Leasing</item>
+        <item>Professional, Scientific, and Technical Services</item>
+        <item>Management of Companies and Enterprises</item>
+        <item>Administrative and Support and Waste Management</item>
+        <item>Educational Services</item>
+        <item>Health Care and Social Assistance</item>
+        <item>Accommodation and Food Services</item>
+        <item>Other Services (except Public Administration)</item>
+        <item>Public Administration</item>
+    </string-array>
+
+</resources>

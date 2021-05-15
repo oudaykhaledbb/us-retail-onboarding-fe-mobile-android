@@ -11,9 +11,17 @@
         android:name="com.backbase.android.flow.otp.ui.OtpScreen"
         android:label="OtpJourney" />
     <fragment
-        android:id="@+id/businessJourney"
-        android:name="com.backbase.android.flow.smeo.business.ui.BusinessJourney"
-        android:label="BusinessJourney" />
+        android:id="@+id/businessInfoJourney"
+        android:name="com.backbase.android.flow.smeo.business.info.ui.screens.BusinessInfoJourney"
+        android:label="BusinessInfoJourney" />
+    <fragment
+        android:id="@+id/businessAddressJourney"
+        android:name="com.backbase.android.flow.address.ui.AddressScreen"
+        android:label="PersonalAddressJourney" />
+    <fragment
+        android:id="@+id/businessIdentityJourney"
+        android:name="com.backbase.android.flow.smeo.business.ui.screens.BusinessIdentityJourney"
+        android:label="BusinessInfoJourney" />
     <fragment
         android:id="@+id/uploadDocumentsJourney"
         android:name="com.backbase.android.flow.uploadfiles.ui.UploadFilesJourney"
