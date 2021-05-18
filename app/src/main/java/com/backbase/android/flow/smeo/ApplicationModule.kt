@@ -199,6 +199,7 @@ val applicationModule = module {
         ssnConfiguration{
             isOffline = false
             submitSsnAction = "submit-address"
+            landingAction = "sme-onboarding-landing-data"
         }
     }
 
