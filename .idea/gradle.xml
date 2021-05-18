@@ -19,7 +19,6 @@
             <option value="$PROJECT_DIR$/smeo-walkthrough" />
             <option value="$PROJECT_DIR$/ssn" />
             <option value="$PROJECT_DIR$/step-navigation" />
-            <option value="$PROJECT_DIR$/uploadfiles" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
