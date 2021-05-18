@@ -36,7 +36,7 @@ class SsnUsecaseDefaultImpl(
             JOURNEY_NAME,
             flowClient,
             object : TypeToken<Any?>() {}.type,
-            "sme-onboarding-landing-data"
+            configuration.landingAction
         )
     }
 
