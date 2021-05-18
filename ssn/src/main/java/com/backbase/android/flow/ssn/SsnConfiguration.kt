@@ -11,6 +11,7 @@ import com.backbase.android.flow.ssn.SsnConfiguration.Builder
 class SsnConfiguration private constructor(
     val isOffline: Boolean,
     val submitSsnAction: String,
+    val landingAction: String
 ) {
 
     /**
@@ -26,8 +27,11 @@ class SsnConfiguration private constructor(
         @set:JvmSynthetic
         lateinit var submitSsnAction: String
 
+        @set:JvmSynthetic
+        lateinit var landingAction: String
+
         fun build() =
-            SsnConfiguration(isOffline, submitSsnAction)
+            SsnConfiguration(isOffline, submitSsnAction, landingAction)
     }
 
 }
