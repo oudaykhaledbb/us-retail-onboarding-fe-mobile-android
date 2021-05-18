@@ -57,12 +57,13 @@ import java.net.URI
 val mapFragments = mapOf(
         "AboutYouJourney" to HeaderLabels(1, DeferredText.Resource(R.string.nice_to_meet_you), DeferredText.Resource(R.string.personal_details)),
         "OtpJourney" to HeaderLabels(2, DeferredText.Resource(R.string.security_at_your_fingertips), DeferredText.Resource(R.string.mobile_phone_number)),
-        "BusinessInfoScreen" to HeaderLabels(3, DeferredText.Resource(R.string.your_business_details), DeferredText.Resource(R.string.your_business)),
+        "BusinessInfoJourney" to HeaderLabels(3, DeferredText.Resource(R.string.your_business_details), DeferredText.Resource(R.string.your_business)),
         "BusinessAddressScreen" to HeaderLabels(4, DeferredText.Resource(R.string.where_is_your_business_located), DeferredText.Resource(R.string.your_business)),
         "BusinessIdentityScreen" to HeaderLabels(5, DeferredText.Resource(R.string.what_does_your_company_do), DeferredText.Resource(R.string.your_business)),
         "UploadFilesJourney" to HeaderLabels(6, DeferredText.Resource(R.string.verify_your_business), DeferredText.Resource(R.string.upload_documents)),
         "SsnJourney" to HeaderLabels(7, DeferredText.Resource(R.string.verify_your_identity), DeferredText.Resource(R.string.your_ssn))
 )
+
 
 /**
  * Koin module defining the app-level Authentication Journey configurations.
