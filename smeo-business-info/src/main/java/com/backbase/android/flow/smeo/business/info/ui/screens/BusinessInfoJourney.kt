@@ -11,8 +11,8 @@ import com.backbase.android.flow.common.extensions.fill
 import com.backbase.android.flow.common.state.State
 import com.backbase.android.flow.common.validators.*
 import com.backbase.android.flow.common.viewmodel.handleStates
+import com.backbase.android.flow.smeo.business.R
 import com.backbase.android.flow.smeo.business.info.BusinessInfoRouter
-import com.backbase.android.flow.smeo.business.info.R
 import com.backbase.android.flow.smeo.business.info.ui.InfoBottomSheet
 import com.backbase.android.flow.smeo.business.info.ui.viewmodels.BusinessInfoViewModel
 import com.google.android.material.datepicker.CalendarConstraints
