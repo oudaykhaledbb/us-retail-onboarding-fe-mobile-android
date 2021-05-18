@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.backbase.android.flow.smeo.business.info.R
+import com.backbase.android.flow.smeo.business.R
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class InfoBottomSheet : BottomSheetDialogFragment() {

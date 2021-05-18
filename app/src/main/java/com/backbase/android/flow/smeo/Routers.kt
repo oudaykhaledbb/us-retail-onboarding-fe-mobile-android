@@ -6,7 +6,10 @@ import android.content.Intent
 import android.util.Log
 import androidx.navigation.NavController
 import com.backbase.android.flow.address.AddressRouter
+import com.backbase.android.flow.businessrelations.BusinessRelationsRouter
+import com.backbase.android.flow.businessrelations.ui.screen.BusinessRelationsJourneyScreen
 import com.backbase.android.flow.otp.OtpRouter
+import com.backbase.android.flow.productselector.ProductSelectorRouter
 import com.backbase.android.flow.smeo.aboutyou.AboutYouRouter
 import com.backbase.android.flow.smeo.business.BusinessIdentityRouter
 import com.backbase.android.flow.smeo.business.info.BusinessInfoRouter
@@ -88,11 +91,45 @@ fun otpRouter(
     override fun onOtpValidated(data: Any?) {
         showJourneyWithClearStack(
             navController,
-            R.id.businessInfoJourney
+            R.id.productSelectionScreen
         )
         completion()
     }
 
+}
+
+fun productSelection(
+    navController: NavController,
+    completion: () -> Unit = {}
+) = object : ProductSelectorRouter {
+
+    override fun onProductSelectorFinished() {
+        showJourneyWithClearStack(
+            navController,
+            R.id.businessRelationsJourneyScreen
+        )
+        completion()
+    }
+
+    override fun showHelpWhichProductToUse() {
+
+    }
+
+
+}
+
+fun businessRelations(
+    navController: NavController,
+    completion: () -> Unit = {}
+) = object : BusinessRelationsRouter {
+
+    override fun onBusinessRelationsFinished() {
+        showJourneyWithClearStack(
+            navController,
+            R.id.businessInfoJourney
+        )
+        completion()
+    }
 }
 
 fun showJourneyWithClearStack(navController: NavController, journeyScreenResId: Int) {

@@ -8,12 +8,22 @@ import com.backbase.android.flow.address.AddressConfiguration
 import com.backbase.android.flow.address.addressJourneyModule
 import com.backbase.android.flow.address.usecase.AddressUseCase
 import com.backbase.android.flow.address.usecase.AddressUseCaseDefaultImpl
+import com.backbase.android.flow.businessrelations.BusinessRelationsConfiguration
+import com.backbase.android.flow.businessrelations.BusinessRelationsJourneyModule
+import com.backbase.android.flow.businessrelations.UserInfoProvider
+import com.backbase.android.flow.businessrelations.model.UserInfo
+import com.backbase.android.flow.businessrelations.usecase.BusinessRelationsUseCase
+import com.backbase.android.flow.businessrelations.usecase.BusinessRelationsUseCaseDefaultImpl
 import com.backbase.android.flow.contracts.FlowClientContract
 import com.backbase.android.flow.otp.OtpConfiguration
 import com.backbase.android.flow.otp.models.OtpChannel
 import com.backbase.android.flow.otp.otpJourneyModule
 import com.backbase.android.flow.otp.usecase.OtpUseCase
 import com.backbase.android.flow.otp.usecase.OtpUseCaseDefaultImpl
+import com.backbase.android.flow.productselector.ProductSelectorConfiguration
+import com.backbase.android.flow.productselector.ProductSelectorJourneyModule
+import com.backbase.android.flow.productselector.ProductSelectorUseCase
+import com.backbase.android.flow.productselector.ProductSelectorUseCaseDefaultImpl
 import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_ACTION_INIT
 import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_ACTION_SUBMIT
 import com.backbase.android.flow.smeo.Constants.Companion.DBS_PATH
@@ -54,20 +64,26 @@ import org.koin.dsl.module
 import java.net.URI
 
 
+var screenCounter = 0
 val mapFragments = mapOf(
-        "AboutYouJourney" to HeaderLabels(1, DeferredText.Resource(R.string.nice_to_meet_you), DeferredText.Resource(R.string.personal_details)),
-        "OtpJourney" to HeaderLabels(2, DeferredText.Resource(R.string.security_at_your_fingertips), DeferredText.Resource(R.string.mobile_phone_number)),
-        "BusinessInfoScreen" to HeaderLabels(3, DeferredText.Resource(R.string.your_business_details), DeferredText.Resource(R.string.your_business)),
-        "BusinessAddressScreen" to HeaderLabels(4, DeferredText.Resource(R.string.where_is_your_business_located), DeferredText.Resource(R.string.your_business)),
-        "BusinessIdentityScreen" to HeaderLabels(5, DeferredText.Resource(R.string.what_does_your_company_do), DeferredText.Resource(R.string.your_business)),
-        "UploadFilesJourney" to HeaderLabels(6, DeferredText.Resource(R.string.verify_your_business), DeferredText.Resource(R.string.upload_documents)),
-        "SsnJourney" to HeaderLabels(7, DeferredText.Resource(R.string.verify_your_identity), DeferredText.Resource(R.string.your_ssn))
+        "AboutYouJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.nice_to_meet_you), DeferredText.Resource(R.string.personal_details)),
+        "OtpJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.security_at_your_fingertips), DeferredText.Resource(R.string.mobile_phone_number)),
+        "BusinessRelationsJourneyScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.the_business_owners), DeferredText.Resource(R.string.business_relations)),
+        "ProductSelectionScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.select_your_account_type), DeferredText.Resource(R.string.choose_product)),
+        "BusinessInfoScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.your_business_details), DeferredText.Resource(R.string.your_business)),
+        "BusinessAddressScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.where_is_your_business_located), DeferredText.Resource(R.string.your_business)),
+        "BusinessIdentityScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.what_does_your_company_do), DeferredText.Resource(R.string.your_business)),
+        "UploadFilesJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.verify_your_business), DeferredText.Resource(R.string.upload_documents)),
+        "SsnJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.verify_your_identity), DeferredText.Resource(R.string.your_ssn)),
 )
 
 /**
  * Koin module defining the app-level Authentication Journey configurations.
  */
 val applicationModule = module {
+
+    val baseUrl = "${Backbase.getInstance()?.configuration?.experienceConfiguration?.serverURL}"
+
 
     factory {
         walkthroughConfiguration {
@@ -83,7 +99,7 @@ val applicationModule = module {
         val dbsProvider: NetworkDBSDataProvider by inject()
         FlowClient(
                 get(),
-                URI("${Backbase.getInstance()?.configuration?.experienceConfiguration?.serverURL}/$DBS_PATH/$SERVICE_NAME"),
+                URI("$baseUrl/$DBS_PATH/$SERVICE_NAME"),
                 dbsProvider,
                 null,
                 INTERACTION_NAME,
@@ -208,6 +224,63 @@ val applicationModule = module {
 
     loadKoinModules(listOf(ssnJourneyModule))
     //endregion SSN
+
+
+    //region business relations
+    loadKoinModules(listOf(BusinessRelationsJourneyModule))
+    factory {
+
+        BusinessRelationsConfiguration {
+            isOffline = false
+            createCase = "create-case"
+            submitRelationTypeAction = "select-relation-type"
+            updateOwnerAction = "update-owner"
+            deleteOwnerAction = "delete-business-person"
+            updateControlPersonAction = "update-control-person"
+            deleteControlPersonAction = "delete-control-person"
+            requestBusinessPersonsAction = "get-business-persons"
+            submitControlPersonAction = "select-control-person"
+            requestBusinessRolesAction = "get-business-roles"
+            completeOwnersStepActionName = "complete-business-owners-step"
+            completeControlPersonStepActionName = ""
+            completeSummaryStepActionName = "complete-summary-step"
+            userInfoProvider = object : UserInfoProvider {
+                override fun getUserInfo() = UserInfo(
+                    firstName = "Jack",
+                    lastName = "Sparrow",
+                    email = "jack.sparrow@gmail.com",
+                    phoneNumber = "+12345678768"
+                )
+            }
+        }
+    }
+
+    factory <BusinessRelationsUseCase>{
+        return@factory BusinessRelationsUseCaseDefaultImpl(
+            get(),
+            get(),
+            get()
+        )
+    }
+    //endregion business relations
+
+
+    //region Product Selector
+    loadKoinModules(listOf(ProductSelectorJourneyModule))
+    factory {
+        ProductSelectorConfiguration{
+            imageBaseUrl = baseUrl
+            createCaseAction = "sme-onboarding-check-case-exist"
+            requestProductsAction = "get-product-list"
+            submitProductAction = "select-products"
+        }
+    }
+
+    factory<ProductSelectorUseCase>{
+        return@factory ProductSelectorUseCaseDefaultImpl(get(), get())
+    }
+    //endregion Product Selector
+
 
 }
 
