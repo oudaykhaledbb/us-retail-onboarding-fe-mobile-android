@@ -77,6 +77,7 @@ val mapFragments = mapOf(
         "SsnJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.verify_your_identity), DeferredText.Resource(R.string.your_ssn)),
 )
 
+
 /**
  * Koin module defining the app-level Authentication Journey configurations.
  */

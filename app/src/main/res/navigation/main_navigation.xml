@@ -25,11 +25,11 @@
     <fragment
         android:id="@+id/businessAddressJourney"
         android:name="com.backbase.android.flow.address.ui.AddressScreen"
-        android:label="PersonalAddressJourney" />
+        android:label="BusinessAddressScreen" />
     <fragment
         android:id="@+id/businessIdentityJourney"
         android:name="com.backbase.android.flow.smeo.business.ui.screens.BusinessIdentityJourney"
-        android:label="BusinessInfoJourney" />
+        android:label="BusinessIdentityScreen" />
     <fragment
         android:id="@+id/uploadDocumentsJourney"
         android:name="com.backbase.android.flow.uploadfiles.ui.UploadFilesJourney"
