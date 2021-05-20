@@ -34,6 +34,7 @@ buildscript {
             jUnit5Version           : '5.6.2',
             assertJVersion          : '3.16.1',
             productselectionVersion : '0.1.1-rc04',
+            documentrequestVersion  : '1.0.0-beta01',
             plaid                   : "3.2.0"
     ]
 
@@ -95,7 +96,8 @@ buildscript {
             scuba                   : "net.sf.scuba:scuba-sc-android:0.0.18",
             zoomauthentication      : "com.facetec:zoom-authentication:8.12.1@aar",
             playservices            : "com.google.android.gms:play-services-vision:20.1.2",
-            flowotp                 : 'com.backbase.android.flow.otp:one-time-password-journey:2.1.2-beta01'
+            documentrequest         : "com.backbase.android.flow.uploadfiles:document-request-journey:$versions.documentrequestVersion",
+            flowotp                 : 'com.backbase.android.flow.otp:one-time-password-journey:2.1.2-beta01',
     ]
 
     repositories {
