@@ -34,6 +34,7 @@ buildscript {
             jUnit5Version           : '5.6.2',
             assertJVersion          : '3.16.1',
             productselectionVersion : '0.1.1-rc04',
+            documentrequestVersion  : '1.0.0-beta01',
             plaid                   : "3.2.0",
             businessrelationsVersion: "1.0.0-beta01",
             productselectionVersion : '0.1.2-beta01',
@@ -100,6 +101,8 @@ buildscript {
             flowotp                 : 'com.backbase.android.flow.otp:one-time-password-journey:2.1.2-beta01',
             businessrelations       : "com.backbase.android.flow.businessrelations:business-relations-journey:1.0.0-beta01",
             productselection        : "com.backbase.android.flow.productselector:product-selection-journey:$versions.productselectionVersion",
+            documentrequest         : "com.backbase.android.flow.uploadfiles:document-request-journey:$versions.documentrequestVersion",
+            flowotp                 : 'com.backbase.android.flow.otp:one-time-password-journey:2.1.2-beta01',
     ]
 
     repositories {

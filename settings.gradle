@@ -1,7 +1,6 @@
 include ':smeo-business-info'
 include ':smeo-business-identity'
 include ':ssn'
-include ':uploadfiles'
 include ':smeo-about-you'
 include ':smeo-walkthrough'
 include ':step-navigation'
