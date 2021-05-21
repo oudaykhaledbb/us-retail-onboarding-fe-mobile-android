@@ -1,20 +1,9 @@
 package com.backbase.android.flow.smeo
 
 import android.content.Context
-import com.backbase.android.flow.businessrelations.BusinessRelationsConfiguration
-import com.backbase.android.flow.businessrelations.BusinessRelationsJourneyModule
-import com.backbase.android.flow.businessrelations.UserInfoProvider
-import com.backbase.android.flow.businessrelations.model.UserInfo
-import com.backbase.android.flow.businessrelations.usecase.BusinessRelationsUseCase
-import com.backbase.android.flow.businessrelations.usecase.BusinessRelationsUseCaseDefaultImpl
-import com.backbase.android.flow.productselector.ProductSelectorConfiguration
-import com.backbase.android.flow.productselector.ProductSelectorJourneyModule
-import com.backbase.android.flow.productselector.ProductSelectorUseCase
-import com.backbase.android.flow.productselector.ProductSelectorUseCaseDefaultImpl
 import com.backbase.android.flow.smeo.common.AppActivity
 import com.backbase.android.flow.stepnavigation.HeaderDataProvider
 import kotlinx.android.synthetic.main.activity_main.*
-import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 
 class MainActivity : AppActivity(R.layout.activity_main) {

@@ -10,8 +10,6 @@ import com.backbase.android.flow.address.usecase.AddressUseCase
 import com.backbase.android.flow.address.usecase.AddressUseCaseDefaultImpl
 import com.backbase.android.flow.businessrelations.BusinessRelationsConfiguration
 import com.backbase.android.flow.businessrelations.BusinessRelationsJourneyModule
-import com.backbase.android.flow.businessrelations.UserInfoProvider
-import com.backbase.android.flow.businessrelations.model.UserInfo
 import com.backbase.android.flow.businessrelations.usecase.BusinessRelationsUseCase
 import com.backbase.android.flow.businessrelations.usecase.BusinessRelationsUseCaseDefaultImpl
 import com.backbase.android.flow.contracts.FlowClientContract
@@ -62,7 +60,6 @@ import kotlinx.coroutines.delay
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
 import java.net.URI
-
 
 var screenCounter = 0
 val mapFragments = mapOf(
@@ -234,7 +231,6 @@ val applicationModule = module {
 
         BusinessRelationsConfiguration {
             isOffline = false
-            createCase = "create-case"
             submitRelationTypeAction = "select-relation-type"
             updateOwnerAction = "update-owner"
             deleteOwnerAction = "delete-business-person"
@@ -246,14 +242,6 @@ val applicationModule = module {
             completeOwnersStepActionName = "complete-business-owners-step"
             completeControlPersonStepActionName = ""
             completeSummaryStepActionName = "complete-summary-step"
-            userInfoProvider = object : UserInfoProvider {
-                override fun getUserInfo() = UserInfo(
-                    firstName = "Jack",
-                    lastName = "Sparrow",
-                    email = "jack.sparrow@gmail.com",
-                    phoneNumber = "+12345678768"
-                )
-            }
         }
     }
 
