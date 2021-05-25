@@ -11,6 +11,14 @@
         android:name="com.backbase.android.flow.otp.ui.OtpScreen"
         android:label="OtpJourney" />
     <fragment
+        android:id="@+id/productSelectionScreen"
+        android:name="com.backbase.android.flow.productselector.screen.ProductSelectionScreen"
+        android:label="ProductSelectionScreen"/>
+    <fragment
+        android:id="@+id/businessRelationsJourneyScreen"
+        android:name="com.backbase.android.flow.businessrelations.ui.screen.BusinessRelationsJourneyScreen"
+        android:label="BusinessRelationsJourneyScreen" />
+    <fragment
         android:id="@+id/businessInfoJourney"
         android:name="com.backbase.android.flow.smeo.business.info.ui.screens.BusinessInfoJourney"
         android:label="BusinessInfoJourney" />

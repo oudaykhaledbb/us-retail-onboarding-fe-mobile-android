@@ -29,6 +29,20 @@ class MainActivity : AppActivity(R.layout.activity_main) {
             }
         }
 
+
+        factory {
+            productSelection(navController) {
+                setTheme(R.style.AppTheme)
+            }
+        }
+
+
+        factory {
+            businessRelations(navController) {
+                setTheme(R.style.AppTheme)
+            }
+        }
+
         factory {
             businessIdentityRouter(navController) {
                 setTheme(R.style.AppTheme)

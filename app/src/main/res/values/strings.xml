@@ -32,4 +32,8 @@
     <string name="verify_your_identity">Let’s verify your identity</string>
     <string name="verify_your_business">Let’s verify your business</string>
     <string name="upload_documents">Upload documents</string>
+    <string name="select_your_account_type">Select your account type</string>
+    <string name="choose_product">Choose product</string>
+    <string name="the_business_owners">The business owners</string>
+    <string name="business_relations">Business relations</string>
 </resources>
