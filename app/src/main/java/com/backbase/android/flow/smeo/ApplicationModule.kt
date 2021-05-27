@@ -157,7 +157,6 @@ val applicationModule = module {
     factory {
         businessInfoConfiguration {
             isOffline = false
-            verifyCaseAction = VERIFY_CASE_ACTION
             submitBusinessDetailsAction = SUBMIT_BUSINESS_DETAILS_ACTION
         }
     }

@@ -9,7 +9,6 @@ package com.backbase.android.flow.smeo.business.info
  */
 class BusinessInfoConfiguration private constructor(
     val isOffline: Boolean,
-    val verifyCaseAction: String,
     val submitBusinessDetailsAction: String
 ) {
 
@@ -24,13 +23,10 @@ class BusinessInfoConfiguration private constructor(
         var isOffline: Boolean = false
 
         @set:JvmSynthetic
-        lateinit var verifyCaseAction: String
-
-        @set:JvmSynthetic
         lateinit var submitBusinessDetailsAction: String
 
         fun build() =
-            BusinessInfoConfiguration(isOffline, verifyCaseAction, submitBusinessDetailsAction)
+            BusinessInfoConfiguration(isOffline, submitBusinessDetailsAction)
     }
 
 }
