@@ -15,17 +15,6 @@ class BusinessInfoUseCaseDefaultImpl(
     private val configuration: BusinessInfoConfiguration
 ) : BusinessInfoUseCase {
 
-    override suspend fun verifyCase(): Any?{
-        return performInteraction<Any, BusinessDetailsModel>(
-            configuration.isOffline,
-            context,
-            JOURNEY_NAME,
-            flowClient,
-            object : TypeToken<BusinessDetailsModel>() {}.type,
-            configuration.verifyCaseAction
-        )
-    }
-
     override suspend fun submitBusinessDetails(
         legalName: String,
         knownName: String,

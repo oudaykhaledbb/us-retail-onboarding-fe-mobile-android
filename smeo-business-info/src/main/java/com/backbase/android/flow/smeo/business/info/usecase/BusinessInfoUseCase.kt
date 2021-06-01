@@ -2,8 +2,6 @@ package com.backbase.android.flow.smeo.business.info.usecase
 
 interface BusinessInfoUseCase {
 
-    suspend fun verifyCase(): Any?
-
     suspend fun submitBusinessDetails(
             legalName: String,
             knownName: String,
