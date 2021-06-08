@@ -1,5 +1,7 @@
 package com.backbase.android.flow.ssn
 
+import com.backbase.android.flow.ssn.models.LandingModel
+
 /**
  * Created by Backbase R&D B.V. on 2020-05-29.
  *
@@ -10,5 +12,5 @@ interface SsnRouter {
     /**
      * Close SSN Journey
      */
-    fun onSsnFinished()
+    fun onSsnFinished(it: LandingModel?)
 }

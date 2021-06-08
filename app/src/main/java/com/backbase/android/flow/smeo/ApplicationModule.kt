@@ -45,6 +45,7 @@ import com.backbase.android.flow.smeo.business.info.usecase.BusinessInfoUseCase
 import com.backbase.android.flow.smeo.business.info.usecase.BusinessInfoUseCaseDefaultImpl
 import com.backbase.android.flow.smeo.business.usecase.BusinessIdentityUseCase
 import com.backbase.android.flow.smeo.business.usecase.BusinessIdentityUseCaseDefaultImpl
+import com.backbase.android.flow.smeo.landing.landingConfiguration
 import com.backbase.android.flow.smeo.walkthrough.walkthroughConfiguration
 import com.backbase.android.flow.ssn.ssnConfiguration
 import com.backbase.android.flow.ssn.ssnJourneyModule
@@ -211,7 +212,7 @@ val applicationModule = module {
     factory {
         ssnConfiguration{
             isOffline = false
-            submitSsnAction = "submit-address"
+            submitSsnAction = "submit-ssn"
             landingAction = "sme-onboarding-landing-data"
         }
     }
@@ -271,6 +272,11 @@ val applicationModule = module {
     }
     //endregion Product Selector
 
+    factory {
+        landingConfiguration{
+            applicationCenterUrl = "$baseUrl/sme-onboarding-application-center#/application-center-init"
+        }
+    }
 
 }
 

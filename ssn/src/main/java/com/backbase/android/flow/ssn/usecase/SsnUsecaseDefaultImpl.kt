@@ -4,6 +4,7 @@ import android.content.Context
 import com.backbase.android.flow.common.interaction.performInteraction
 import com.backbase.android.flow.contracts.FlowClientContract
 import com.backbase.android.flow.ssn.SsnConfiguration
+import com.backbase.android.flow.ssn.models.LandingModel
 import com.backbase.android.flow.ssn.models.SsnModel
 import com.google.gson.reflect.TypeToken
 
@@ -15,27 +16,26 @@ class SsnUsecaseDefaultImpl(
     private val configuration: SsnConfiguration
 ) : SsnUsecase {
 
-    override suspend fun submitSsn(ssn: String): Any? {
-        val result = performInteraction<SsnModel, Any?>(
+    override suspend fun submitSsn(ssn: String): LandingModel? {
+        performInteraction<SsnModel, Any?>(
             configuration.isOffline,
             context,
             JOURNEY_NAME,
             flowClient,
             object : TypeToken<Any?>() {}.type,
             configuration.submitSsnAction,
-            SsnModel(ssn)// TODO to be discussed with BE team (Sina)
+            SsnModel(ssn)
         )
-        landing()
-        return result
+        return landing()
     }
 
-    suspend fun landing(): Any? {
-        return performInteraction<Any?, Any?>(
+    suspend fun landing(): LandingModel? {
+        return performInteraction<Any?, LandingModel?>(
             configuration.isOffline,
             context,
             JOURNEY_NAME,
             flowClient,
-            object : TypeToken<Any?>() {}.type,
+            object : TypeToken<LandingModel?>() {}.type,
             configuration.landingAction
         )
     }

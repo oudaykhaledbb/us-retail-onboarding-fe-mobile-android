@@ -1,10 +1,12 @@
 package com.backbase.android.flow.smeo
 
 import android.content.Context
+import com.backbase.android.flow.contracts.FlowClientContract
 import com.backbase.android.flow.smeo.common.AppActivity
 import com.backbase.android.flow.stepnavigation.HeaderDataProvider
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.dsl.module
+import org.koin.java.KoinJavaComponent
 
 class MainActivity : AppActivity(R.layout.activity_main) {
 
@@ -62,7 +64,8 @@ class MainActivity : AppActivity(R.layout.activity_main) {
         }
 
         factory {
-            ssnRouter(navController) {
+            val flow: FlowClientContract by inject()
+            ssnRouter(flow, this@MainActivity, navController) {
                 setTheme(R.style.AppTheme)
             }
         }

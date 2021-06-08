@@ -4,18 +4,22 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.util.Log
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
 import com.backbase.android.flow.address.AddressRouter
 import com.backbase.android.flow.businessrelations.BusinessRelationsRouter
 import com.backbase.android.flow.businessrelations.ui.screen.BusinessRelationsJourneyScreen
+import com.backbase.android.flow.contracts.FlowClientContract
 import com.backbase.android.flow.models.InteractionResponse
 import com.backbase.android.flow.otp.OtpRouter
 import com.backbase.android.flow.productselector.ProductSelectorRouter
 import com.backbase.android.flow.smeo.aboutyou.AboutYouRouter
 import com.backbase.android.flow.smeo.business.BusinessIdentityRouter
 import com.backbase.android.flow.smeo.business.info.BusinessInfoRouter
+import com.backbase.android.flow.smeo.landing.LandingScreen
 import com.backbase.android.flow.smeo.walkthrough.WalkthroughRouter
 import com.backbase.android.flow.ssn.SsnRouter
+import com.backbase.android.flow.ssn.models.LandingModel
 import com.backbase.android.flow.uploadfiles.UploadFilesRouter
 
 fun walkthroughRouter(
@@ -161,14 +165,18 @@ fun addressRouter(
 }
 
 fun ssnRouter(
+    flow: FlowClientContract,
+    context: Context,
     navController: NavController,
     completion: () -> Unit = {}
 ) = object : SsnRouter{
 
-    override fun onSsnFinished() {
-        print("Ssn Finished")
+    override fun onSsnFinished(it: LandingModel?) {
+        val dialogFragment = LandingScreen()?.applyBundle(it?.caseId, it?.email)
+        dialogFragment.show((context as FragmentActivity).supportFragmentManager, "LandingScreen")
         completion()
     }
+
 }
 
 fun uploadFilesRouter(
