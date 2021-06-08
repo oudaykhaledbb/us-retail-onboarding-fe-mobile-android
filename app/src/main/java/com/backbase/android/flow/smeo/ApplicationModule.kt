@@ -262,6 +262,7 @@ val applicationModule = module {
             createCaseAction = "sme-onboarding-check-case-exist"
             requestProductsAction = "get-product-list"
             submitProductAction = "select-products"
+            hideHelperLink = false
         }
     }
 
