@@ -98,7 +98,7 @@ buildscript {
             scuba                   : "net.sf.scuba:scuba-sc-android:0.0.18",
             zoomauthentication      : "com.facetec:zoom-authentication:8.12.1@aar",
             playservices            : "com.google.android.gms:play-services-vision:20.1.2",
-            flowotp                 : 'com.backbase.android.flow.otp:one-time-password-journey:2.1.2-beta01',
+            flowotp                 : 'com.backbase.android.flow.otp:one-time-password-journey:2.1.3-beta02',
             businessrelations       : "com.backbase.android.flow.businessrelations:business-relations-journey:$versions.businessrelationsVersion",
             productselection        : "com.backbase.android.flow.productselector:product-selection-journey:$versions.productselectionVersion",
             documentrequest         : "com.backbase.android.flow.uploadfiles:document-request-journey:$versions.documentrequestVersion"

@@ -127,6 +127,7 @@ val applicationModule = module {
             verifyActionName = VERIFYACTIONNAME
             availableOtpChannelsActionName = REQUEST_AVAILABLE_OTP_CHANNELS
             verificationCodeMaxLength = Integer(6)
+            fetchOtpEmailActionName = "fetch-otp-email"
 
         }
     }
@@ -288,6 +289,8 @@ class OtpUseCaseOffline(
         delay(30)
         return listOf(OtpChannel.SMS, OtpChannel.EMAIL)
     }
+
+    override suspend fun fetchOtpEmailActionName() = otpUseCaseDefaultImpl.fetchOtpEmailActionName()
 
     override suspend fun requestVerificationCode(phoneNumber: String, channel: OtpChannel) = otpUseCaseDefaultImpl.requestVerificationCode(phoneNumber, channel)
 
