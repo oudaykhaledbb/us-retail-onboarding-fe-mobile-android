@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingDefaultResource">
+
+    <ImageView
+        android:id="@+id/imgHeader"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:src="@drawable/img_landing"
+        android:scaleType="fitXY"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"/>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lblTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginTop="?spacerLarge"
+        android:layout_marginEnd="?spacerMedium"
+        android:text="@string/welcome"
+        android:textAppearance="?textAppearanceHeadline5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgHeader" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lblDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginTop="?spacerLarge"
+        android:layout_marginEnd="?spacerMedium"
+        android:text="@string/landing_description"
+        android:textAppearance="?textAppearanceBody1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblTitle" />
+
+    <com.backbase.android.design.button.BackbaseButton
+        android:id="@+id/btnContinue"
+        style="?attr/buttonStylePrimary"
+        android:layout_width="match_parent"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginTop="?spacerMedium"
+        android:layout_marginEnd="?spacerMedium"
+        android:layout_marginBottom="?spacerMedium"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="@string/track_your_application_status"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

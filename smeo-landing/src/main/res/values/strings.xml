@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="welcome">Welcome to Backbase!</string>
+    <string name="landing_description">We are reviewing your application to make sure everything looks good. We’ll send an email to <b>[Email]</b> once everything has been verified.\n\n
+        You can always follow the status of your application by going in your application center.</string>
+    <string name="track_your_application_status">Track your application status</string>
+</resources>
