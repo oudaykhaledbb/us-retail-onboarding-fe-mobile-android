@@ -92,6 +92,7 @@
      implementation project(path: ':smeo-business-info')
      implementation project(path: ':smeo-business-identity')
      implementation project(path: ':ssn')
+     implementation project(path: ':smeo-landing')
 
      testImplementation dependency.junit
 
