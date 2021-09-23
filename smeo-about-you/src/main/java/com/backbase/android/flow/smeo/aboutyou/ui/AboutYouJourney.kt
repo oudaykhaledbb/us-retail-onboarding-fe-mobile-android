@@ -9,6 +9,7 @@ import com.backbase.android.flow.common.validators.*
 import com.backbase.android.flow.common.viewmodel.handleStates
 import com.backbase.android.flow.smeo.aboutyou.AboutYouRouter
 import com.backbase.android.flow.smeo.aboutyou.R
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.journey_about_you.*
 import kotlinx.coroutines.channels.ReceiveChannel
 import org.koin.android.ext.android.inject

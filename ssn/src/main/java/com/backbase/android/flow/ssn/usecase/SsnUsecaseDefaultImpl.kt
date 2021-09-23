@@ -30,14 +30,15 @@ class SsnUsecaseDefaultImpl(
     }
 
     suspend fun landing(): LandingModel? {
-        return performInteraction<Any?, LandingModel?>(
-            configuration.isOffline,
-            context,
-            JOURNEY_NAME,
-            flowClient,
-            object : TypeToken<LandingModel?>() {}.type,
-            configuration.landingAction
-        )
+        return null
+//        return performInteraction<Any?, LandingModel?>(
+//            configuration.isOffline,
+//            context,
+//            JOURNEY_NAME,
+//            flowClient,
+//            object : TypeToken<LandingModel?>() {}.type,
+//            configuration.landingAction
+//        )
     }
 
 }

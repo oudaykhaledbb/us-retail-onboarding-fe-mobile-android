@@ -1,9 +1,13 @@
-include ':smeo-business-info'
-include ':smeo-business-identity'
 include ':ssn'
 include ':smeo-about-you'
 include ':smeo-walkthrough'
 include ':step-navigation'
 include ':app'
-include ':smeo-landing'
+//include ':lookup'
+//include ':businessrelations'
+//include ':smeo-landing'
+//include ':product-selector'
 rootProject.name = "smeo-android-reference"
+//project(":product-selector").projectDir=new File("/Users/ouday/Desktop/product-selection-journey-android/product-selector")
+//project(":lookup").projectDir=new File("/Users/ouday/Desktop/androidlookupjourney/lookup")
+//project(":businessrelations").projectDir=new File("/Users/ouday/Desktop/businessrelations/businessrelations")

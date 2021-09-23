@@ -46,26 +46,13 @@ class MainActivity : AppActivity(R.layout.activity_main) {
         }
 
         factory {
-            businessIdentityRouter(navController) {
-                setTheme(R.style.AppTheme)
-            }
-        }
-
-        factory {
-            businessInfoRouter(navController) {
+            lookupRouter(navController) {
                 setTheme(R.style.AppTheme)
             }
         }
 
         factory {
             addressRouter(navController) {
-                setTheme(R.style.AppTheme)
-            }
-        }
-
-        factory {
-            val flow: FlowClientContract by inject()
-            ssnRouter(flow, this@MainActivity, navController) {
                 setTheme(R.style.AppTheme)
             }
         }

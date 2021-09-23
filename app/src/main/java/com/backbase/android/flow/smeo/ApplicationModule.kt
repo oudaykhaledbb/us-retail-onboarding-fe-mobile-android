@@ -1,7 +1,7 @@
 package com.backbase.android.flow.smeo
 
-import android.content.Context
 import com.backbase.android.Backbase
+import com.backbase.android.dbs.dataproviders.AssetsFileDBSDataProvider
 import com.backbase.android.dbs.dataproviders.NetworkDBSDataProvider
 import com.backbase.android.flow.FlowClient
 import com.backbase.android.flow.address.AddressConfiguration
@@ -10,42 +10,25 @@ import com.backbase.android.flow.address.usecase.AddressUseCase
 import com.backbase.android.flow.address.usecase.AddressUseCaseDefaultImpl
 import com.backbase.android.flow.businessrelations.BusinessRelationsConfiguration
 import com.backbase.android.flow.businessrelations.BusinessRelationsJourneyModule
+import com.backbase.android.flow.businessrelations.UserInfoProvider
+import com.backbase.android.flow.businessrelations.model.UserInfo
 import com.backbase.android.flow.businessrelations.usecase.BusinessRelationsUseCase
 import com.backbase.android.flow.businessrelations.usecase.BusinessRelationsUseCaseDefaultImpl
-import com.backbase.android.flow.contracts.FlowClientContract
 import com.backbase.android.flow.otp.OtpConfiguration
-import com.backbase.android.flow.otp.models.OtpChannel
 import com.backbase.android.flow.otp.otpJourneyModule
 import com.backbase.android.flow.otp.usecase.OtpUseCase
 import com.backbase.android.flow.otp.usecase.OtpUseCaseDefaultImpl
-import com.backbase.android.flow.productselector.ProductSelectorConfiguration
-import com.backbase.android.flow.productselector.ProductSelectorJourneyModule
-import com.backbase.android.flow.productselector.ProductSelectorUseCase
-import com.backbase.android.flow.productselector.ProductSelectorUseCaseDefaultImpl
+import com.backbase.android.flow.productselector.*
 import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_ACTION_INIT
 import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_ACTION_SUBMIT
-import com.backbase.android.flow.smeo.Constants.Companion.DBS_PATH
 import com.backbase.android.flow.smeo.Constants.Companion.INTERACTION_NAME
 import com.backbase.android.flow.smeo.Constants.Companion.REQUEST_AVAILABLE_OTP_CHANNELS
 import com.backbase.android.flow.smeo.Constants.Companion.REQUEST_OTP_ACTIONNAME
-import com.backbase.android.flow.smeo.Constants.Companion.SERVICE_NAME
-import com.backbase.android.flow.smeo.Constants.Companion.SUBMIT_BUSINESS_DETAILS_ACTION
-import com.backbase.android.flow.smeo.Constants.Companion.SUBMIT_BUSINESS_IDENTITY_ACTION
 import com.backbase.android.flow.smeo.Constants.Companion.VERIFYACTIONNAME
-import com.backbase.android.flow.smeo.Constants.Companion.VERIFY_CASE_ACTION
 import com.backbase.android.flow.smeo.aboutyou.AboutYouConfiguration
 import com.backbase.android.flow.smeo.aboutyou.aboutYouJourneyModule
 import com.backbase.android.flow.smeo.aboutyou.usecase.AboutYouUseCase
 import com.backbase.android.flow.smeo.aboutyou.usecase.AboutYouUseCaseDefaultImpl
-import com.backbase.android.flow.smeo.business.businessIdentityConfiguration
-import com.backbase.android.flow.smeo.business.businessIdentityJourneyModule
-import com.backbase.android.flow.smeo.business.info.businessInfoConfiguration
-import com.backbase.android.flow.smeo.business.info.businessInfoJourneyModule
-import com.backbase.android.flow.smeo.business.info.usecase.BusinessInfoUseCase
-import com.backbase.android.flow.smeo.business.info.usecase.BusinessInfoUseCaseDefaultImpl
-import com.backbase.android.flow.smeo.business.usecase.BusinessIdentityUseCase
-import com.backbase.android.flow.smeo.business.usecase.BusinessIdentityUseCaseDefaultImpl
-import com.backbase.android.flow.smeo.landing.landingConfiguration
 import com.backbase.android.flow.smeo.walkthrough.walkthroughConfiguration
 import com.backbase.android.flow.ssn.ssnConfiguration
 import com.backbase.android.flow.ssn.ssnJourneyModule
@@ -56,10 +39,29 @@ import com.backbase.android.flow.uploadfiles.uploadFilesConfiguration
 import com.backbase.android.flow.uploadfiles.uploadJourneyModule
 import com.backbase.android.flow.uploadfiles.usecase.UploadFilesUseCase
 import com.backbase.android.flow.uploadfiles.usecase.UploadFilesUseCaseImpl
+import com.backbase.android.flow.v2.contracts.FlowClientContract
 import com.backbase.deferredresources.DeferredText
-import kotlinx.coroutines.delay
+import com.backbase.lookup.business_identity.businessIdentityConfiguration
+import com.backbase.lookup.business_identity.businessIdentityJourneyModule
+import com.backbase.lookup.business_identity.usecase.BusinessIdentityUseCase
+import com.backbase.lookup.business_identity.usecase.BusinessIdentityUseCaseDefaultImpl
+import com.backbase.lookup.business_info.businessInfoConfiguration
+import com.backbase.lookup.business_info.businessInfoJourneyModule
+import com.backbase.lookup.business_info.usecase.BusinessInfoUseCase
+import com.backbase.lookup.business_info.usecase.BusinessInfoUseCaseDefaultImpl
+import com.backbase.lookup.business_structure.BusinessStructureConfiguration
+import com.backbase.lookup.business_structure.businessJourneyModule
+import com.backbase.lookup.business_structure.businessStructureConfiguration
+import com.backbase.lookup.business_structure.usecase.BusinessStructureUsecase
+import com.backbase.lookup.business_structure.usecase.BusinessStructureUsecaseImpl
+import com.backbase.lookup.business_structure.usecase.LookupUsecase
+import com.backbase.lookup.business_structure.usecase.LookupUsecaseImpl
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.loadKoinModules
 import org.koin.dsl.module
+import java.lang.reflect.Type
 import java.net.URI
 
 var screenCounter = 0
@@ -68,8 +70,8 @@ val mapFragments = mapOf(
         "OtpJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.security_at_your_fingertips), DeferredText.Resource(R.string.mobile_phone_number)),
         "BusinessRelationsJourneyScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.the_business_owners), DeferredText.Resource(R.string.business_relations)),
         "ProductSelectionScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.select_your_account_type), DeferredText.Resource(R.string.choose_product)),
-        "BusinessInfoScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.your_business_details), DeferredText.Resource(R.string.your_business)),
-        "BusinessAddressScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.where_is_your_business_located), DeferredText.Resource(R.string.your_business)),
+//        "BusinessInfoScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.your_business_details), DeferredText.Resource(R.string.your_business)),
+//        "BusinessAddressScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.where_is_your_business_located), DeferredText.Resource(R.string.your_business)),
         "BusinessIdentityScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.what_does_your_company_do), DeferredText.Resource(R.string.your_business)),
         "UploadFilesJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.verify_your_business), DeferredText.Resource(R.string.upload_documents)),
         "SsnJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.verify_your_identity), DeferredText.Resource(R.string.your_ssn)),
@@ -94,15 +96,15 @@ val applicationModule = module {
         NetworkDBSDataProvider(get())
     }
 
-    single<FlowClientContract> {
-        val dbsProvider: NetworkDBSDataProvider by inject()
-        FlowClient(
-                get(),
-                URI("$baseUrl/$DBS_PATH/$SERVICE_NAME"),
-                dbsProvider,
-                null,
-                INTERACTION_NAME,
-                null
+    single<FlowClientContract>() {
+        val interactionResponseDefaultBodyType: Type =
+            object : TypeToken<Map<String, Any?>?>() {}.type
+        com.backbase.android.flow.v2.FlowClient(
+            context = get(),
+            baseUri = URI("$baseUrl/api/sme-onboarding"),
+            dataProvider = get<NetworkDBSDataProvider>(),
+            interactionName = INTERACTION_NAME,
+            interactionResponseDefaultBodyType = interactionResponseDefaultBodyType
         )
     }
 
@@ -133,57 +135,30 @@ val applicationModule = module {
     }
 
     factory<OtpUseCase> {
-        OtpUseCaseOffline(get(), OtpUseCaseDefaultImpl(get(), get()))
-//        OtpUseCaseDefaultImpl(get(), get())
+        OtpUseCaseDefaultImpl(get(), get())
     }
 
     loadKoinModules(listOf(otpJourneyModule))
     //endregion OTP
 
-    //region Business Identity
-    factory {
-        businessIdentityConfiguration {
-            isOffline = false
-            submitBusinessIdentityAction = SUBMIT_BUSINESS_IDENTITY_ACTION
-        }
-    }
-
-    factory<BusinessIdentityUseCase> {
-        BusinessIdentityUseCaseDefaultImpl(get(), get(), get())
-    }
-
-    loadKoinModules(listOf(businessIdentityJourneyModule))
-    //endregion business Identity
-
-    //region Business Info
-    factory {
-        businessInfoConfiguration {
-            isOffline = false
-            submitBusinessDetailsAction = SUBMIT_BUSINESS_DETAILS_ACTION
-        }
-    }
-
-    factory<BusinessInfoUseCase> {
-        BusinessInfoUseCaseDefaultImpl(get(), get(), get())
-    }
-
-    loadKoinModules(listOf(businessInfoJourneyModule))
-    //endregion Business Info
-
-    //region Address Validation Journey
-    factory {
-        AddressConfiguration {
-            actionName = "submit-address"
-            description = DeferredText.Resource(R.string.label_we_need_to_know_you)
-        }
-    }
-
     factory<AddressUseCase> {
         return@factory AddressUseCaseDefaultImpl(get(), get())
     }
 
+    factory<com.backbase.lookup.address.usecase.AddressUseCase> {
+        return@factory com.backbase.lookup.address.usecase.AddressUseCaseDefaultImpl(get(), get())
+    }
+
+    factory {
+        com.backbase.lookup.address.AddressConfiguration {
+            submitActionName = "submit-address"
+            description = DeferredText.Resource(R.string.label_we_need_to_know_you)
+        }
+    }
+
 
     loadKoinModules(listOf(addressJourneyModule))
+    loadKoinModules(listOf(com.backbase.lookup.address.addressJourneyModule))
     //endregion
 
     //region upload documents
@@ -232,17 +207,29 @@ val applicationModule = module {
 
         BusinessRelationsConfiguration {
             isOffline = false
-            submitRelationTypeAction = "select-relation-type"
-            updateOwnerAction = "update-owner"
-            deleteOwnerAction = "delete-business-person"
-            updateControlPersonAction = "update-control-person"
-            deleteControlPersonAction = "delete-control-person"
-            requestBusinessPersonsAction = "get-business-persons"
-            submitControlPersonAction = "select-control-person"
-            requestBusinessRolesAction = "get-business-roles"
+            createCaseActionName = "check-business-relation-and-document-requests-conditions"
+            submitRelationTypeActionName = "select-relation-type"
+            updateOwnerActionName = "update-owner"
+            updateCurrentUserOwnerActionName = "update-current-user-owner"
+            updateCurrentUserControlPersonActionName = "update-current-user-control-person"
+            deleteOwnerActionName = "delete-business-person"
+            updateControlPersonActionName = "update-control-person"
+            deleteControlPersonActionName = "delete-control-person"
+            requestBusinessPersonsActionName = "get-business-persons"
+            submitControlPersonActionName = "select-control-person"
+            requestBusinessRolesActionName = "get-business-roles"
             completeOwnersStepActionName = "complete-business-owners-step"
             completeControlPersonStepActionName = ""
             completeSummaryStepActionName = "complete-summary-step"
+            userInfoProvider = object : UserInfoProvider {
+                override fun getUserInfo() = UserInfo(
+                    firstName = "Jack",
+                    lastName = "Sparrow",
+                    email = "jack.sparrow@gmail.com",
+                    phoneNumber = "+12345678768"
+                )
+            }
+            enableCurrentUserEditing = true
         }
     }
 
@@ -257,48 +244,103 @@ val applicationModule = module {
 
 
     //region Product Selector
-    loadKoinModules(listOf(ProductSelectorJourneyModule))
     factory {
-        ProductSelectorConfiguration{
+        return@factory ProductSelectorConfiguration{
             imageBaseUrl = baseUrl
             createCaseAction = "sme-onboarding-check-case-exist"
             requestProductsAction = "get-product-list"
             submitProductAction = "select-products"
             hideHelperLink = false
+            selectionType = SelectionType.SINGLE
         }
     }
+    loadKoinModules(listOf(ProductSelectorJourneyModule))
 
     factory<ProductSelectorUseCase>{
         return@factory ProductSelectorUseCaseDefaultImpl(get(), get())
     }
     //endregion Product Selector
 
+
     factory {
-        landingConfiguration{
-            applicationCenterUrl = "$baseUrl/sme-onboarding-application-center#/application-center-init"
+        businessStructureConfiguration {
+            isOffline = false
+            createCaseActionName = "create-case"
+            requestBusinessStructureActionName = "requestBusinessStructureAction"
+            submitBusinessStructureActionName = "business-structure"
+            requestCompanyLookupActionName = "company-lookup"
+            submitCompanyDetailsActionName = "company-details"
         }
     }
 
-}
-
-class OtpUseCaseOffline(
-    private val context: Context,
-    private val otpUseCaseDefaultImpl: OtpUseCaseDefaultImpl
-) : OtpUseCase {
-    override suspend fun requestAvailableOtpChannels() : List<OtpChannel> {
-        delay(30)
-        return listOf(OtpChannel.SMS, OtpChannel.EMAIL)
+    factory {
+        businessInfoConfiguration {
+            isOffline = false
+            submitBusinessDetailsActionName = "business-details"
+        }
     }
 
-    override suspend fun fetchOtpEmailActionName() = otpUseCaseDefaultImpl.fetchOtpEmailActionName()
+    //region Backbase
+    //Backbase manages its own singleton instance, so we don't need Koin to manage it too:
+    factory { Backbase.getInstance() }
 
-    override suspend fun requestVerificationCode(phoneNumber: String, channel: OtpChannel) = otpUseCaseDefaultImpl.requestVerificationCode(phoneNumber, channel)
+    factory {
+        val backbase = get<Backbase>()
+    }
 
-    override suspend fun submitVerificationCode(
-        recipient: String,
-        channel: OtpChannel,
-        otp: String
-    ) = otpUseCaseDefaultImpl.submitVerificationCode(recipient, channel, otp)
+    single {
+        Gson()
+    }
+
+    factory {
+        AssetsFileDBSDataProvider(androidContext())
+    }
+
+    //endregion
+
+    loadKoinModules(businessJourneyModule)
+    loadKoinModules(businessInfoJourneyModule)
+
+    //region Address Validation Journey
+    factory {
+        AddressConfiguration {
+            actionName = "submit-address"
+            description = DeferredText.Resource(R.string.label_we_need_to_know_you)
+        }
+    }
+
+    loadKoinModules(listOf(addressJourneyModule))
+    //endregion
+
+    factory<BusinessStructureUsecase> {
+        val context = androidContext()
+        val config: BusinessStructureConfiguration = get()
+        return@factory BusinessStructureUsecaseImpl(context, get(), config)
+    }
+
+    factory<LookupUsecase> {
+        val context = androidContext()
+        val config: BusinessStructureConfiguration = get()
+        return@factory LookupUsecaseImpl(context, get(), config)
+    }
+
+    factory<BusinessInfoUseCase>{
+        BusinessInfoUseCaseDefaultImpl(get(), get(), get())
+    }
+
+    //region Business Identity
+    factory {
+        businessIdentityConfiguration {
+            isOffline = false
+            submitBusinessIdentityActionName = "business-identity"
+        }
+    }
+
+    factory<BusinessIdentityUseCase> {
+        BusinessIdentityUseCaseDefaultImpl(get(), get(), get())
+    }
+
+    loadKoinModules(listOf(businessIdentityJourneyModule))
+    //endregion business Identity
+
 }
-
-

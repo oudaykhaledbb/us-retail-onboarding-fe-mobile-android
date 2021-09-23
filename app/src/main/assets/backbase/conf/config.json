@@ -5,12 +5,12 @@
 	"backbase": {
 		"localModelPath": "$(contextRoot)/conf/local-model.json",
 		"experience": "sme-onboarding-us",
-		"serverURL": "http://edge.jeff-brattain-15.backbase.eu",
+			"serverURL": "http://edge.inspiring-borg-44.backbase.eu",
 		"version": "6.2.7",
         "navigationType": "graph"
 	},
 	"security": {
-		"allowedDomains": ["http://edge.thirsty-wilson-67.backbase.eu"],
+		"allowedDomains": ["http://edge.fervent-euler-36.backbase.eu"],
 		"sslPinning": {
 			"checkChain": false
 		}

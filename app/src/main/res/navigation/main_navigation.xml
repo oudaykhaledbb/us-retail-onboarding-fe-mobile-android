@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/main_navigation"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
     app:startDestination="@id/aboutYouJourney">
     <fragment
         android:id="@+id/aboutYouJourney"
@@ -14,22 +16,12 @@
         android:id="@+id/productSelectionScreen"
         android:name="com.backbase.android.flow.productselector.screen.ProductSelectionScreen"
         android:label="ProductSelectionScreen"/>
+
     <fragment
-        android:id="@+id/businessRelationsJourneyScreen"
-        android:name="com.backbase.android.flow.businessrelations.ui.screen.BusinessRelationsJourneyScreen"
-        android:label="BusinessRelationsJourneyScreen" />
-    <fragment
-        android:id="@+id/businessInfoJourney"
-        android:name="com.backbase.android.flow.smeo.business.info.ui.screens.BusinessInfoJourney"
-        android:label="BusinessInfoJourney" />
-    <fragment
-        android:id="@+id/businessAddressJourney"
-        android:name="com.backbase.android.flow.address.ui.AddressScreen"
-        android:label="BusinessAddressScreen" />
-    <fragment
-        android:id="@+id/businessIdentityJourney"
-        android:name="com.backbase.android.flow.smeo.business.ui.screens.BusinessIdentityJourney"
-        android:label="BusinessIdentityScreen" />
+        android:id="@+id/lookupJourney"
+        android:name="com.backbase.lookup.LookupJourney"
+        android:label="LookupJourney"/>
+
     <fragment
         android:id="@+id/uploadDocumentsJourney"
         android:name="com.backbase.android.flow.uploadfiles.ui.UploadFilesJourney"
@@ -38,4 +30,12 @@
         android:id="@+id/SsnJourney"
         android:name="com.backbase.android.flow.ssn.ui.SsnJourney"
         android:label="SsnJourney" />
+
+
+    <fragment
+        android:id="@+id/businessRelationsJourneyScreen"
+        android:name="com.backbase.android.flow.businessrelations.ui.screen.BusinessRelationsJourneyScreen"
+        android:label="screen_company_lookup"
+        tools:layout="@layout/screen_business_relations_journey" />
+
 </navigation>
