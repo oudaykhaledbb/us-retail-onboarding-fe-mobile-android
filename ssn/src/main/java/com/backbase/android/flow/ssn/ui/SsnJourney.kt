@@ -9,7 +9,7 @@ import com.backbase.android.flow.common.validators.*
 import com.backbase.android.flow.common.viewmodel.handleStates
 import com.backbase.android.flow.ssn.R
 import com.backbase.android.flow.ssn.SsnRouter
-import com.backbase.android.flow.ssn.models.LandingModel
+import com.backbase.android.flow.v2.models.InteractionResponse
 import kotlinx.android.synthetic.main.journey_ssn.*
 import kotlinx.coroutines.channels.ReceiveChannel
 import org.koin.android.ext.android.inject
@@ -48,7 +48,7 @@ class SsnJourney : Fragment(R.layout.journey_ssn) {
 
     private fun handleStateForSubmitApis(
         tappedButton: BackbaseButton,
-        apiState: ReceiveChannel<State<LandingModel?>>
+        apiState: ReceiveChannel<State<InteractionResponse<Map<String, Any?>??>?>>
     ) {
         handleStates(
             apiState,

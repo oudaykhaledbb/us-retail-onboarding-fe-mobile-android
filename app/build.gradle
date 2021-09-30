@@ -91,6 +91,8 @@
      implementation project(path: ':smeo-about-you')
      implementation project(path: ':step-navigation')
      implementation project(path: ':ssn')
+//     implementation project(path: ':uploadfiles')
+     implementation project(path: ':smeo-landing')
 
      testImplementation dependency.junit
 

@@ -61,6 +61,10 @@ class MainActivity : AppActivity(R.layout.activity_main) {
             uploadFilesRouter(navController)
         }
 
+        factory {
+            ssnRouter(this@MainActivity)
+        }
+
         factory { return@factory header }
 
         factory {

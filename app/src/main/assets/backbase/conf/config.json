@@ -5,7 +5,7 @@
 	"backbase": {
 		"localModelPath": "$(contextRoot)/conf/local-model.json",
 		"experience": "sme-onboarding-us",
-			"serverURL": "http://edge.inspiring-borg-44.backbase.eu",
+			"serverURL": "http://edge.xenodochial-poitras-58.backbase.eu",
 		"version": "6.2.7",
         "navigationType": "graph"
 	},

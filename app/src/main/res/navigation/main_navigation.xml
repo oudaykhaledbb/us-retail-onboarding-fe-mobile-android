@@ -26,16 +26,21 @@
         android:id="@+id/uploadDocumentsJourney"
         android:name="com.backbase.android.flow.uploadfiles.ui.UploadFilesJourney"
         android:label="UploadFilesJourney" />
+
     <fragment
         android:id="@+id/SsnJourney"
         android:name="com.backbase.android.flow.ssn.ui.SsnJourney"
         android:label="SsnJourney" />
-
 
     <fragment
         android:id="@+id/businessRelationsJourneyScreen"
         android:name="com.backbase.android.flow.businessrelations.ui.screen.BusinessRelationsJourneyScreen"
         android:label="screen_company_lookup"
         tools:layout="@layout/screen_business_relations_journey" />
+
+    <fragment
+        android:id="@+id/addressScreen"
+        android:name="com.backbase.android.flow.address.ui.AddressScreen"
+        android:label="AddressScreen" />
 
 </navigation>

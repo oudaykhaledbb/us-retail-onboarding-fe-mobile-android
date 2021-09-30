@@ -3,11 +3,13 @@ include ':smeo-about-you'
 include ':smeo-walkthrough'
 include ':step-navigation'
 include ':app'
+include ':uploadfiles'
 //include ':lookup'
-//include ':businessrelations'
-//include ':smeo-landing'
+include ':businessrelations'
+include ':smeo-landing'
 //include ':product-selector'
 rootProject.name = "smeo-android-reference"
 //project(":product-selector").projectDir=new File("/Users/ouday/Desktop/product-selection-journey-android/product-selector")
 //project(":lookup").projectDir=new File("/Users/ouday/Desktop/androidlookupjourney/lookup")
-//project(":businessrelations").projectDir=new File("/Users/ouday/Desktop/businessrelations/businessrelations")
+project(":businessrelations").projectDir=new File("/Users/ouday/Desktop/businessrelations/businessrelations")
+project(":uploadfiles").projectDir=new File("/Users/ouday/Desktop/documentrequestjourneyandroid/uploadfiles")

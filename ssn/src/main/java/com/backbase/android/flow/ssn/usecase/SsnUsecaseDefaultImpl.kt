@@ -1,14 +1,13 @@
 package com.backbase.android.flow.ssn.usecase
 
 import android.content.Context
-import com.backbase.android.flow.common.interaction.performInteraction
-import com.backbase.android.flow.contracts.FlowClientContract
+import com.backbase.android.flow.models.Action
 import com.backbase.android.flow.ssn.SsnConfiguration
-import com.backbase.android.flow.ssn.models.LandingModel
 import com.backbase.android.flow.ssn.models.SsnModel
+import com.backbase.android.flow.v2.contracts.FlowClientContract
+import com.backbase.android.flow.v2.models.InteractionResponse
 import com.google.gson.reflect.TypeToken
-
-private const val JOURNEY_NAME = "sme-onboarding-ssn"
+import java.lang.reflect.Type
 
 class SsnUsecaseDefaultImpl(
     private val context: Context,
@@ -16,29 +15,23 @@ class SsnUsecaseDefaultImpl(
     private val configuration: SsnConfiguration
 ) : SsnUsecase {
 
-    override suspend fun submitSsn(ssn: String): LandingModel? {
-        performInteraction<SsnModel, Any?>(
-            configuration.isOffline,
-            context,
-            JOURNEY_NAME,
-            flowClient,
-            object : TypeToken<Any?>() {}.type,
-            configuration.submitSsnAction,
-            SsnModel(ssn)
-        )
-        return landing()
+    override suspend fun submitSsn(ssn: String) = flowClient.performInteraction<Map<String, Any?>?>(
+        Action(configuration.submitSsnAction, SsnModel(ssn)),
+        object : TypeToken<Map<String, Any?>?>() {}.type
+    )
+
+
+    override suspend fun landing(): InteractionResponse<Map<String, Any?>?>? {
+        val responseType: Type =
+            object : TypeToken<Map<String, Any?>?>() {}.type
+        configuration.landingAction?.let {
+            return flowClient.performInteraction(
+                Action(it, null),
+                responseType
+            )
+        }
+        return null
     }
 
-    suspend fun landing(): LandingModel? {
-        return null
-//        return performInteraction<Any?, LandingModel?>(
-//            configuration.isOffline,
-//            context,
-//            JOURNEY_NAME,
-//            flowClient,
-//            object : TypeToken<LandingModel?>() {}.type,
-//            configuration.landingAction
-//        )
-    }
 
 }

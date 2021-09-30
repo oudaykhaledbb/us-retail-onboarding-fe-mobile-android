@@ -29,6 +29,7 @@ import com.backbase.android.flow.smeo.aboutyou.AboutYouConfiguration
 import com.backbase.android.flow.smeo.aboutyou.aboutYouJourneyModule
 import com.backbase.android.flow.smeo.aboutyou.usecase.AboutYouUseCase
 import com.backbase.android.flow.smeo.aboutyou.usecase.AboutYouUseCaseDefaultImpl
+import com.backbase.android.flow.smeo.landing.landingConfiguration
 import com.backbase.android.flow.smeo.walkthrough.walkthroughConfiguration
 import com.backbase.android.flow.ssn.ssnConfiguration
 import com.backbase.android.flow.ssn.ssnJourneyModule
@@ -210,8 +211,8 @@ val applicationModule = module {
             createCaseActionName = "check-business-relation-and-document-requests-conditions"
             submitRelationTypeActionName = "select-relation-type"
             updateOwnerActionName = "update-owner"
-            updateCurrentUserOwnerActionName = "update-current-user-owner"
-            updateCurrentUserControlPersonActionName = "update-current-user-control-person"
+            updateCurrentUserOwnerActionName = "update-owner"
+            updateCurrentUserControlPersonActionName = "update-control-person"
             deleteOwnerActionName = "delete-business-person"
             updateControlPersonActionName = "update-control-person"
             deleteControlPersonActionName = "delete-control-person"
@@ -304,7 +305,7 @@ val applicationModule = module {
     //region Address Validation Journey
     factory {
         AddressConfiguration {
-            actionName = "submit-address"
+            submitActionName = "submit-address"
             description = DeferredText.Resource(R.string.label_we_need_to_know_you)
         }
     }
@@ -342,5 +343,11 @@ val applicationModule = module {
 
     loadKoinModules(listOf(businessIdentityJourneyModule))
     //endregion business Identity
+
+    factory {
+        landingConfiguration{
+            applicationCenterUrl = "$baseUrl/sme-onboarding-application-center#/application-center-init"
+        }
+    }
 
 }
