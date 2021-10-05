@@ -1,18 +1,27 @@
 package com.backbase.android.flow.smeo
 
 import android.content.Context
+import android.os.Bundle
 import com.backbase.android.flow.contracts.FlowClientContract
 import com.backbase.android.flow.smeo.common.AppActivity
 import com.backbase.android.flow.stepnavigation.HeaderDataProvider
+import com.backbase.android.flow.stepnavigation.StepNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.dsl.module
 import org.koin.java.KoinJavaComponent
 
 class MainActivity : AppActivity(R.layout.activity_main) {
 
+    lateinit var header: StepNavigationView
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        header = StepNavigationView(this)
+    }
+
     override fun onResume() {
         super.onResume()
-        header.setTotalNumberOfSteps(9)
+//        header.setTotalNumberOfSteps(9)
         findNavController().addOnDestinationChangedListener(HeaderDataProvider(mapFragments, this).setStepNavigationView(header))
     }
 

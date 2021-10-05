@@ -24,7 +24,7 @@ abstract class AppActivity(
 
     private val activityModule: Module by lazy { instantiateActivityModule() }
 
-    final override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(appContentLayout)
         loadKoinModules(activityModule)
