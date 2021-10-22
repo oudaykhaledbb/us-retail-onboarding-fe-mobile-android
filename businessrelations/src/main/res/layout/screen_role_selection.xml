@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="?sizerMedium"
+    tools:context=".ui.screen.RoleSelectionScreen">
+
+    <TextView
+        android:id="@+id/label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/business_relations_role_selection_description"
+        android:textAppearance="?textAppearanceBody1" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?spacerLarge"
+        android:text="@string/business_relations_i_own_part_company_lbl"
+        android:textAppearance="?textAppearanceBody1Medium" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?sizerSmall"
+        android:text="@string/business_relations_add_more_owners_and_control_person"
+        android:textAppearance="?textAppearanceBody1" />
+
+    <com.backbase.android.design.button.BackbaseButton
+        android:id="@+id/btnAddOwners"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_arrow_next"
+        app:iconGravity="textStart"
+        android:layout_marginVertical="?sizerMedium"
+        style="?buttonStyleSecondary"
+        android:text="@string/business_relations_i_partially_own_button"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="?dividerHorizontal"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?spacerLarge"
+        android:text="@string/business_relations_i_control_lbl"
+        android:textAppearance="?textAppearanceBody1Medium" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?sizerSmall"
+        android:text="@string/business_relations_add_more_owners"
+        android:textAppearance="?textAppearanceBody1" />
+
+    <com.backbase.android.design.button.BackbaseButton
+        android:id="@+id/btnAddOwnersIamController"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/ic_arrow_next"
+        app:iconGravity="textStart"
+        android:layout_marginVertical="?sizerMedium"
+        style="?buttonStyleSecondary"
+        android:text="@string/business_relations_i_am_in_control"/>
+
+</LinearLayout>

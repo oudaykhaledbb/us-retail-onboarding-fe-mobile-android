@@ -1,16 +1,13 @@
 package com.backbase.android.flow.smeo.aboutyou.usecase
 
-import com.backbase.android.flow.common.handler.InteractionResponseHandler
 import com.backbase.android.flow.models.Action
 import com.backbase.android.flow.smeo.aboutyou.AboutYouConfiguration
 import com.backbase.android.flow.smeo.aboutyou.models.AboutYouModel
 import com.backbase.android.flow.smeo.aboutyou.models.InitSmeModel
 import com.backbase.android.flow.v2.contracts.FlowClientContract
+import com.backbase.android.flow.v2.throwExceptionIfErrorOrNull
 import com.google.gson.reflect.TypeToken
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import java.lang.reflect.Type
-import kotlin.coroutines.suspendCoroutine
 
 class AboutYouUseCaseDefaultImpl(
     private val flowClient: FlowClientContract,
@@ -43,7 +40,7 @@ class AboutYouUseCaseDefaultImpl(
             object : TypeToken<Map<String, Any?>?>() {}.type
         flowClient.performInteraction<Map<String, Any?>?>(
             Action(aboutYouConfiguration.actionInit, InitSmeModel(true)), responseType
-        )
+        ).throwExceptionIfErrorOrNull()
     }
 
     private suspend fun submitAboutYouOnline(
@@ -61,10 +58,10 @@ class AboutYouUseCaseDefaultImpl(
         val responseType: Type =
             object : TypeToken<Map<String, Any?>?>() {}.type
 
-        flowClient.performInteraction<Map<String, Any?>?>(
-            Action(aboutYouConfiguration.actionAboutYou, model),
-            responseType
-        )
+            flowClient.performInteraction<Map<String, Any?>?>(
+                Action(aboutYouConfiguration.actionAboutYou, model),
+                responseType
+            ).throwExceptionIfErrorOrNull()
     }
 
     private suspend fun initSmeOnBoardingOffline() = null

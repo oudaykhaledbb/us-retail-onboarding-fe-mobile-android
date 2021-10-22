@@ -26,7 +26,7 @@
     <string name="mobile_phone_number">Mobile phone number</string>
     <string name="security_at_your_fingertips">Security at your fingertips</string>
     <string name="what_does_your_company_do">What does your company do</string>
-    <string name="label_we_need_to_know_you">We need to know where can we send important documents and information, as well as basic account items, like checks and debit cards.</string>
+    <string name="lookup_journey_label_we_need_to_know_you">We need to know where can we send important documents and information, as well as basic account items, like checks and debit cards.</string>
     <string name="btn_continue">Continue</string>
     <string name="your_ssn">Your SSN</string>
     <string name="verify_your_identity">Let’s verify your identity</string>

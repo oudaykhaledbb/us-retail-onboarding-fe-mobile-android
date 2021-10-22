@@ -18,14 +18,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/label_required_by_law"
+            android:text="@string/ssn_journey_label_required_by_law"
             android:textAppearance="?textAppearanceBody1" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="?spacerMedium"
-            android:text="@string/label_your_social_security_number"
+            android:text="@string/ssn_journey_label_your_social_security_number"
             android:textAppearance="?textAppearanceFormLabel" />
 
         <com.google.android.material.textfield.TextInputLayout

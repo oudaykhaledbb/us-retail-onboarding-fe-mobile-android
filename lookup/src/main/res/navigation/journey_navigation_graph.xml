@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/flow_route"
+    android:label="Flow Route"
+    app:startDestination="@id/businessStructureScreen">
+
+    <fragment
+        android:id="@+id/businessInfoJourney"
+        android:name="com.backbase.lookup.business_info.ui.screens.BusinessInfoJourney"
+        android:label="BusinessInfoJourney"/>
+
+    <fragment
+        android:id="@+id/businessAddressJourney"
+        android:name="com.backbase.lookup.address.ui.LookupAddressScreen"
+        android:label="BusinessAddressScreen" />
+
+    <fragment
+        android:id="@+id/businessIdentityJourney"
+        android:name="com.backbase.lookup.business_identity.ui.screens.BusinessIdentityJourney"
+        android:label="BusinessIdentityJourney"/>
+
+    <fragment
+        android:id="@+id/businessStructureScreen"
+        android:name="com.backbase.lookup.business_structure.ui.screens.BusinessStructureScreen"
+        android:label="screen_business_structure"
+        tools:layout="@layout/screen_business_structure"/>
+
+    <fragment
+        android:id="@+id/companyLookupScreen"
+        android:name="com.backbase.lookup.business_structure.ui.screens.CompanyLookupScreen"
+        android:label="screen_company_lookup"
+        tools:layout="@layout/screen_company_lookup" />
+
+    <action
+        android:id="@+id/action_to_business_identity"
+        app:destination="@id/businessIdentityJourney"/>
+
+    <action
+        android:id="@+id/action_to_business_address"
+        app:destination="@id/businessAddressJourney"/>
+
+    <action
+        android:id="@+id/action_to_business_info"
+        app:destination="@id/businessInfoJourney"/>
+
+    <action
+        android:id="@+id/action_to_companyLookupScreen"
+        app:destination="@id/companyLookupScreen" />
+
+</navigation>
+

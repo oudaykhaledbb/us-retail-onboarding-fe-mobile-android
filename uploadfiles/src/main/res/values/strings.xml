@@ -1,0 +1,13 @@
+<resources>
+    <string name="document_request_journey_label_upload_files">Upload file(s)</string>
+    <string name="document_request_journey_label_supported_files">Only PDF, PNG, JPG supported. Max 3MB per file.</string>
+    <string name="document_request_journey_label_document">Document</string>
+    <string name="document_request_journey_label_upload_documents_later">Upload documents later</string>
+    <string name="document_request_journey_label_upload_documents_later_description">These documents are still required to secure your account, but can be delivered later. You’ll be asked after your application is complete to provide this information before your account can be created.</string>
+    <string name="btn_continue">Continue</string>
+    <string name="document_request_journey_permission_needed">Permission needed</string>
+    <string name="document_request_journey_persission_needed_read_external_storage">Read External storage is required</string>
+    <string name="document_request_journey_persission_needed_write_external_storage">Write External storage is required</string>
+    <string name="document_request_journey_title">Upload documents</string>
+    <string name="document_request_journey_subtitle">Let’s verify your business</string>
+</resources>

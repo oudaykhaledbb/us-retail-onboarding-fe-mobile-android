@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?colorSurface"
+    tools:context="com.backbase.android.flow.otp.ui.OtpScreen">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:foregroundTint="?colorPrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lblChannelDescription"
+        style="?textAppearanceBody1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="?spacerMedium"
+        android:layout_marginTop="?spacerLarge"
+        android:layout_marginEnd="?spacerMedium"
+        android:text="@string/otp_channel_selection_description"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lblChannelTitle"
+        style="?textAppearanceSubtitle1Medium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="?spacerMedium"
+        android:layout_marginTop="?spacerMedium"
+        android:layout_marginEnd="?spacerMedium"
+        android:text="@string/otp_channel_selection_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lblChannelDescription" />
+
+    <com.backbase.android.flow.common.uicomponents.hintcontainer.HintContainer
+        android:id="@+id/homeHintContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/lblChannelTitle" />
+
+    <com.backbase.android.design.button.BackbaseButton
+        android:id="@+id/btnSms"
+        style="?buttonStyleLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginTop="?spacerMedium"
+        android:layout_marginEnd="?spacerMedium"
+        android:text="@string/otp_channel_selection_btn_sms"
+        android:visibility="gone"
+        app:icon="@drawable/ic_phone"
+        app:iconGravity="textStart"
+        app:iconPadding="?spacerSmall"
+        app:iconTint="?colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lblChannelTitle"
+        app:strokeColor="?colorPrimary"
+        app:strokeWidth="1dp" />
+
+    <com.backbase.android.design.button.BackbaseButton
+        android:id="@+id/btnEmail"
+        style="?buttonStyleLink"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginEnd="?spacerMedium"
+        android:text="@string/otp_channel_selection_btn_email"
+        android:visibility="gone"
+        app:icon="@drawable/ic_mail"
+        app:iconGravity="textStart"
+        app:iconPadding="?spacerSmall"
+        app:iconTint="?colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSms"
+        app:strokeColor="?colorPrimary"
+        app:strokeWidth="1dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

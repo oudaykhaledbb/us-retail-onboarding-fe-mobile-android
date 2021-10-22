@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="268dp"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:clickable="true"
+        android:contextClickable="true"
+        android:layout_marginStart="?spacerLarge"
+        android:layout_marginEnd="?spacerLarge"
+        android:layout_marginBottom="?sizerXSmall"
+        android:layout_marginTop="?spacerLarge"
+        android:layout_gravity="center"
+        android:foregroundGravity="center"
+        android:background="@drawable/row_product_background"
+        android:layout_width="248dp"
+        android:elevation="8dp"
+        android:layout_height="300dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/headerView"
+            android:layout_width="match_parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_height="140dp">
+
+            <ImageView
+                android:id="@+id/imgProduct"
+                android:layout_width="match_parent"
+                android:layout_height="140dp"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/row_product_header"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="?colorSurface"
+            android:layout_marginStart="?sizer2XS"
+            android:layout_marginEnd="?sizer2XS"
+            app:layout_constraintBottom_toBottomOf="@id/headerView"/>
+
+        <TextView
+            android:id="@+id/lblHeader"
+            app:layout_constraintTop_toBottomOf="@id/headerView"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAppearance="?textAppearanceHeadline6"
+            android:layout_marginTop="?sizerMedium"
+            android:layout_marginStart="?spacerLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Product Name"/>
+
+        <TextView
+            android:id="@+id/lblDescription"
+            app:layout_constraintTop_toBottomOf="@id/lblHeader"
+            app:layout_constraintStart_toStartOf="parent"
+            style="?textAppearanceBody2"
+            android:layout_marginTop="?sizerXSmall"
+            android:layout_marginStart="?spacerLarge"
+            android:layout_marginEnd="?spacerLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="2"
+            tools:text="This product is the bast one for you if you are looking for this product."/>
+
+        <TextView
+            android:id="@+id/lblPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="?textAppearanceHeadline6"
+            tools:text="$ 1,47"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="?sizerMedium"
+            android:layout_marginBottom="?sizerMedium"/>
+
+        <TextView
+            android:id="@+id/lblPeriod"
+            android:textAppearance="?textAppearanceBody2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="?sizerMedium"
+            tools:text="monthly"
+            app:layout_constraintBottom_toBottomOf="@+id/lblPrice"
+            app:layout_constraintEnd_toStartOf="@id/lblPrice"
+            app:layout_constraintTop_toTopOf="@+id/lblPrice" />
+
+        <ImageView
+            android:id="@+id/imgTick"
+            android:src="@drawable/ic_checked"
+            app:tint="?colorPrimary"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="?spacerSmall"
+            android:layout_marginTop="?spacerSmall"
+            android:layout_width="?spacerLarge"
+            android:layout_height="?spacerLarge"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

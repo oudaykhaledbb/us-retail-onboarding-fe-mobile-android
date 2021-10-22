@@ -1,7 +1,7 @@
 <resources>
-    <string name="next">Next</string>
-    <string name="get_started">Get started</string>
-    <string name="skip">Skip</string>
-    <string name="back">Back</string>
-    <string name="termsAndConditions">By tapping “Get started” you agree to our Terms and Conditions as well as our Privacy Statement.</string>
+    <string name="smeo_walkthrough_next">Next</string>
+    <string name="smeo_walkthrough_get_started">Get started</string>
+    <string name="smeo_walkthrough_skip">Skip</string>
+    <string name="smeo_walkthrough_back">Back</string>
+    <string name="smeo_walkthrough_termsAndConditions">By tapping “Get started” you agree to our Terms and Conditions as well as our Privacy Statement.</string>
 </resources>

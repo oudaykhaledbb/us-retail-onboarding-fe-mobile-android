@@ -5,7 +5,7 @@
 	"backbase": {
 		"localModelPath": "$(contextRoot)/conf/local-model.json",
 		"experience": "sme-onboarding-us",
-			"serverURL": "http://edge.zealous-thompson-62.backbase.eu",
+			"serverURL": "http://edge.fervent-wright-96.backbase.eu",
 		"version": "6.2.7",
         "navigationType": "graph"
 	},

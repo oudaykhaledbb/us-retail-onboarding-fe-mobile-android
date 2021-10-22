@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/clBottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/light_black_top_rounded_rect_18"
+    app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+    app:behavior_hideable="false"
+    app:behavior_peekHeight="0dp">
+
+    <ImageView
+        android:id="@+id/imagVerified"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:adjustViewBounds="true"
+        android:scaleType="centerCrop"
+        android:src="@drawable/retry"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/lblTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?spacerLarge"
+        android:paddingLeft="?spacerMedium"
+        android:paddingRight="?spacerMedium"
+        android:text="@string/identity_verification_retry_title"
+        android:textAppearance="?textAppearanceHeadline5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imagVerified" />
+
+    <TextView
+        android:id="@+id/lblSubTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?spacerMedium"
+        android:lineSpacingExtra="?sizerXSmall"
+        android:paddingLeft="?spacerMedium"
+        android:paddingRight="?spacerMedium"
+        android:textAppearance="?textAppearanceBody1"
+        android:text="@string/identity_verification_retry_message"
+        app:layout_constraintEnd_toEndOf="@+id/lblTitle"
+        app:layout_constraintStart_toStartOf="@+id/lblTitle"
+        app:layout_constraintTop_toBottomOf="@id/lblTitle" />
+
+
+    <com.backbase.android.design.button.BackbaseButton
+        android:id="@+id/btnContinue"
+        android:layout_width="match_parent"
+        style="?attr/buttonStylePrimary"
+        android:fontFamily="sans-serif-medium"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginEnd="?spacerMedium"
+        android:layout_marginBottom="?spacerXLarge"
+        android:gravity="center"
+        android:text="@string/btn_retry"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

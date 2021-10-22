@@ -1,0 +1,128 @@
+<resources>
+    <style name="IdentityVerificationJourney" parent="Theme.Netverify">
+        <item name="colorPrimary">?colorPrimary</item>
+        <item name="colorPrimaryDark">?colorPrimaryDark</item>
+        <item name="colorSecondary">?colorSecondary</item>
+        <item name="netverify_scanOverlay">?colorNeutral_40</item>
+        <item name="netverify_scanOverlayTemplateValid">?colorPrimaryVariant</item>
+        <item name="netverify_scanOverlayTemplateInvalid">?colorNeutral_40</item>
+        <item name="netverify_scanOverlayDetectedLine">?colorPrimary</item>
+        <item name="netverify_scanOverlayDetectedLineStroke">?colorNeutral_00</item>
+        <item name="netverify_scanOverlayFill">#66FFFFFF</item>
+        <item name="netverify_scanBackground">#80000000</item>
+        <item name="jumio_toolbarStyle">@style/Jumio.Actionbar.Title</item>
+        <item name="jumio_toolbarSubStyle">@style/Jumio.Actionbar.Subtitle</item>
+        <item name="jumio_dialogNegativeButtonTextColor">?colorNeutral_50</item>
+        <item name="jumio_dialogPositiveButtonTextColor">?colorNeutral_00</item>
+        <item name="jumio_shutterbutton_pressed">?colorNeutral_00</item>
+        <item name="jumio_shutterbutton_default">?colorNeutral_90</item>
+        <item name="jumio_shutterbutton_background">?colorNeutral_00</item>
+
+         <!-- loading sdk specific colors -->
+        <item name="netverify_scanOptionsLoadingProgress">?colorNeutral_00</item>
+
+          <!-- Replace the HEX color value above to change the loading progress color (SDK start)-->
+          <!-- select document specific colors -->
+        <item name="netverify_scanOptionsLoadingBackground">?colorNeutral_00</item>
+        <item name="netverify_scanOptionsItemBackground">?colorNeutral_00</item>
+        <item name="netverify_scanOptionsItemForeground">?colorNeutral_90</item>
+        <item name="netverify_scanOptionsItemHeaderBackground">?colorNeutral_20</item>
+
+          <!-- country selection specific colors -->
+        <item name="netverify_countryListCountryName">?colorNeutral_90</item>
+        <item name="netverify_countryListSeperator">?colorNeutral_40</item>
+
+          <!-- scan instructions colors -->
+        <item name="netverify_helpBackground">?colorNeutral_90</item>
+        <item name="netverify_helpTitle">?colorNeutral_00</item>
+        <item name="netverify_helpImage">?colorNeutral_00</item>
+        <item name="netverify_helpSeperator">#33FFFFFF</item>
+        <item name="netverify_helpInstructions">?colorNeutral_00</item>
+        <item name="netverify_helpFallback">?colorNeutral_00</item>
+        <item name="netverify_helpFallbackText">?colorNeutral_90</item>
+
+          <!-- scan instructions NFC Passport specific colors -->
+        <item name="netverify_nfc_passport_cover">?colorNeutral_00</item>
+        <item name="netverify_nfc_passport_foreground">?colorNeutral_100</item>
+        <item name="netverify_nfc_passport_page_dark">?colorNeutral_50</item>
+        <item name="netverify_nfc_passport_page_light">?colorNeutral_40</item>
+        <item name="netverify_nfc_phone_background">?colorNeutral_30</item>
+
+          <!-- verification specific colors -->
+        <item name="netverify_confirmationBackground">?colorNeutral_90</item>
+        <item name="netverify_confirmationHintStyle">@style/Custom.Netverify.Confirmation.Hint
+        </item>
+
+        <item name="netverify_confirmationIcon">?colorNeutral_00</item>
+
+          <!-- submission error (error screen) specific colors -->
+        <item name="netverify_submissionErrorStatusBar">?colorNeutral_40</item>
+        <item name="netverify_submissionErrorBackground">?colorNeutral_90</item>
+        <item name="netverify_submissionErrorTitle">?colorNeutral_90</item>
+        <item name="netverify_submissionErrorDescription">?colorNeutral_90</item>
+        <item name="netverify_submissionErrorSeperator">?colorNeutral_90</item>
+        <item name="netverify_submissionErrorImage">?errorTextColor</item>
+        <item name="netverify_submissionErrorButtonBackground">?colorPrimary</item>
+        <item name="netverify_submissionErrorButtonText">?colorNeutral_00</item>
+
+          <!-- submission success (success screen) specific colors -->
+        <item name="netverify_submissionProgressSuccessTitle">?colorNeutral_90</item>
+        <item name="netverify_submissionProgressSuccessDescription">?colorNeutral_90</item>
+        <item name="netverify_submissionProgressSuccessSeperator">?colorNeutral_90</item>
+        <item name="netverify_submissionProgressSuccessImage">?colorPrimary</item>
+        <item name="netverify_submissionProgressSuccessBackground">?colorNeutral_00</item>
+        <item name="iproov_customization">@style/CustomIproov</item>
+    </style>
+    <style name="CustomIproov" parent="Iproov.Customization">
+        <item name="iproov_helpBackground">?colorNeutral_90</item>
+        <item name="iproov_helpImage">?colorSurfacePrimary</item>
+        <item name="iproov_headerTextColor">?colorSurfacePrimary</item>
+        <item name="iproov_headerBackgroundColor">?colorNeutral_90</item>
+        <item name="iproov_footerTextColor">?colorSurfacePrimary</item>
+        <item name="iproov_footerBackgroundColor">?colorNeutral_90</item>
+        <item name="iproov_livenessTintColor">?colorNeutral_70</item>
+        <item name="iproov_livenessScanningTintColor">#6DA46F</item>
+        <item name="iproov_progressBarColor">?colorPrimary</item>
+        <item name="iproov_notReadyTintColor">?colorNeutral_90</item>
+    </style>
+
+     <!-- actionbar title color -->
+    <style name="Jumio.Actionbar.Title" parent="Base.ThemeOverlay.Jumio">
+        <item name="android:textColorPrimary">?colorNeutral_00</item>
+    </style>
+     
+
+    <style name="Jumio.Actionbar.Subtitle" parent="@android:style/TextAppearance">
+        <item name="android:textColor">?colorNeutral_00</item>
+    </style>
+
+     <!-- positive button theme (verification screen) -->
+    <style name="Netverify.Confirmation.MaterialButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:textColor">?colorNeutral_00</item>
+        <item name="android:background">?colorPrimary</item>
+          <!-- For API Level 21+ -->
+        <item name="android:backgroundTint">?colorPrimary</item>
+    </style>
+     <!-- negative button theme (verification screen) -->
+    <style name="Netverify.Confirmation.MaterialButton.Outlined" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:textColor">?colorPrimary</item>
+        <item name="strokeColor">?colorPrimary</item>
+          <!-- For API Level 21+ -->
+        <item name="android:strokeColor">?colorPrimary</item>
+    </style>
+     <!-- Verification info theme (verification screen) -->
+    <style name="Custom.Netverify.Confirmation.Hint" parent="Netverify.Confirmation.Hint">
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="android:background">?colorNeutral_90</item>
+        <item name="android:textColor">?colorNeutral_00</item>
+    </style>
+
+    <style name="RetryDialogTheme">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowAnimationStyle">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+</resources>

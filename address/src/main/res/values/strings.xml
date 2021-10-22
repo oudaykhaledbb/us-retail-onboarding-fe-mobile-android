@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">address-validation-journey</string>
+    <string name="btn_continue">Continue</string>
+    <string name="address_validation_checkbox_co_applicant_same_address">Same as my address</string>
+    <string name="address_validation_main_applicant_container_title">Address</string>
+    <string name="address_validation_screen_single_applicant_title">Your address</string>
+    <string name="address_validation_screen_single_applicant_subtitle">your address</string>
+    <string name="address_validation_screen_coapplicant_title">Co-applicant address</string>
+    <string name="address_validation_screen_coapplicant_subtitle">applicants</string>
+    <string name="address_validation_screen_coapplicant_missing_address">No address available</string>
+    <string name="address_validation_screen_label_we_need_to_know_you">We need to know where can we send important documents and information, as well as basic account items, like checks and debit cards.</string>
+    <string name="address_validation_screen_label_apt_suite">Apt/Suite</string>
+    <string name="address_validation_screen_label_optional">(optional)</string>
+    <string name="address_validation_screen_label_city">City</string>
+    <string name="address_validation_screen_label_state">State</string>
+    <string name="address_validation_screen_label_street_number_and_name">Street number and name</string>
+    <string name="address_validation_screen_label_zip">Zip code</string>
+    <string name="address_validation_screen_street_required">Street number and name is required</string>
+    <string name="address_validation_screen_street_number_exceeded">Street number and name may not exceed 200 characters.</string>
+    <string name="address_validation_screen_apt_exceeded">Apt / Suite may not exceed 100 characters.</string>
+    <string name="address_validation_screen_city_requried">City is required</string>
+    <string name="address_validation_screen_city_chars_exceeded">City may not exceed 100 characters.</string>
+    <string name="address_validation_screen_state_required">State is required</string>
+    <string name="address_validation_screen_zip_required">Zip code is required</string>
+    <string name="address_validation_screen_zip_char_exceeded">Zip code should be 5 characters</string>
+
+    <string name="address_validation_screen_title_address">Home address</string>
+    <string name="address_validation_screen_subtitle_address">Where do you live?</string>
+</resources>

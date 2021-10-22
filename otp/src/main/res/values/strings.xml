@@ -1,0 +1,20 @@
+<resources>
+    <string name="otp_btn_continue">Continue</string>
+    <string name="otp_btn_request_verification_code">Send verification code</string>
+    <string name="otp_verification_description">We’ll use your %1$s to send you a verification code. This will help us in keeping your account secure.</string>
+    <string name="otp_label_phone_number">Mobile phone number</string>
+    <string name="otp_send_verification_code">Send verification code</string>
+    <string name="otp_verification_sent_message">A verification code has been sent. \nDidn’t get a code in one minute?</string>
+    <string name="otp_resend">Resend it</string>
+    <string name="otp_resend_message">Resending your code...</string>
+    <string name="otp_verification_code">Verification code</string>
+    <string name="btn_continue">Continue</string>
+    <string name="otp_channel_selection_description">To help us in keeping your account secure we will need to verify this is you.</string>
+    <string name="otp_channel_selection_title">Where can we send a verification code?</string>
+    <string name="otp_channel_selection_btn_sms">Via SMS</string>
+    <string name="otp_channel_selection_btn_email">Via Email</string>
+    <string name="otp_label_email_address">Email address</string>
+    <string name="otp_try_again_later">Please try again later</string>
+    <string name="otp_verification_screen_title">Security at your fingertips</string>
+    <string name="otp_verification_screen_subtitle">Verification code</string>
+</resources>

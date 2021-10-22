@@ -45,7 +45,7 @@ class LandingScreen : DialogFragment(R.layout.screen_landing) {
         super.onViewCreated(view, savedInstanceState)
         btnContinue.setOnClickListener { openApplicationCenter() }
         email?.let {
-            lblDescription.text = getString(R.string.landing_description)
+            lblDescription.text = getString(R.string.smeo_landing_landing_description)
                 .replace("[Email]", "<b>$it</b>")
                 .replace("\n", "<br/>")
                 .toSpanned()

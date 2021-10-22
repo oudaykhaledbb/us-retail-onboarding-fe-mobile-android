@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?colorSurface">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:paddingBottom="64dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lblNote"
+                style="?textAppearanceSubtitle1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="?spacerMedium"
+                android:layout_marginTop="?spacerMedium"
+                android:text="@string/otp_verification_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/lblMobileNumberArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/containerMobileNumber"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/lblMobileNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="?spacerMedium"
+                        android:layout_marginTop="?spacerMedium"
+                        android:text="@string/otp_label_phone_number"
+                        android:textAppearance="?textAppearanceFormLabel"
+                        app:layout_constraintStart_toStartOf="@id/lblNote"
+                        app:layout_constraintTop_toBottomOf="@id/lblNote" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="?spacerMedium"
+                        android:layout_marginTop="?spacerXSmall"
+                        android:layout_marginEnd="?spacerMedium"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/countryCodeInputLayout"
+                            style="?inputLayoutStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight=".75"
+                            app:boxStrokeColor="?colorPrimary"
+                            app:endIconMode="none"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/txtCountryCode"
+                                style="?inputEditTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:inputType="phone"
+                                android:text="+1" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/phoneNumberInputLayout"
+                            style="?inputLayoutStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="?spacerSmall"
+                            android:layout_weight=".25"
+                            app:boxStrokeColor="?colorPrimary"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/txtPhoneNumber"
+                                style="?inputEditTextStyle"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:inputType="phone" />
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/containerEmailAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="?spacerMedium"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <TextView
+                        android:id="@+id/lblEmailAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="?spacerMedium"
+                        android:text="@string/otp_label_email_address"
+                        android:textAppearance="?textAppearanceFormLabel"
+                        app:layout_constraintStart_toStartOf="@+id/emailAddressInputLayout"
+                        app:layout_constraintTop_toBottomOf="@+id/description" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/emailAddressInputLayout"
+                        style="?inputLayoutStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="?spacerMedium"
+                        android:layout_marginTop="?spacerXSmall"
+                        android:layout_marginEnd="?spacerMedium"
+                        app:boxBackgroundColor="?colorNeutral_40"
+                        app:boxStrokeWidth="0dp"
+                        app:endIconMode="none"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lblMobileNumberArea">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/txtEmailAddress"
+                            style="?inputEditTextStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:inputType="textEmailAddress" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.backbase.android.design.button.BackbaseButton
+                android:id="@+id/btnRequestVerificationCodeButton"
+                style="?attr/buttonStylePrimary"
+                android:layout_width="match_parent"
+                android:layout_marginStart="?spacerMedium"
+                android:layout_marginEnd="?spacerMedium"
+                android:enabled="false"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/otp_send_verification_code"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblMobileNumberArea" />
+
+            <LinearLayout
+                android:id="@+id/clResendArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="?spacerMedium"
+                android:layout_marginTop="?spacerMedium"
+                android:layout_marginEnd="?spacerMedium"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblMobileNumberArea">
+
+                <ProgressBar
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:foregroundTint="?colorPrimary" />
+
+                <TextView
+                    android:id="@+id/lblResendDescription"
+                    style="?textAppearanceBody1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="?spacerMedium"
+                    android:layout_marginEnd="?spacerMedium"
+                    android:text="@string/otp_resend_message"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/clVerificationArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/lblMobileNumberArea">
+
+                <ImageView
+                    android:id="@+id/imgVerificationIcon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="?spacerMedium"
+                    android:layout_marginTop="?spacerXSmall"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="?colorNeutral_80" />
+
+                <TextView
+                    android:id="@+id/lblVerificationDescription"
+                    style="?textAppearanceBody1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="?spacerMedium"
+                    android:layout_marginEnd="?spacerMedium"
+                    android:text="@string/otp_verification_sent_message"
+                    app:layout_constraintStart_toEndOf="@id/imgVerificationIcon"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/lblResend"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:clickable="true"
+                    android:text="@string/otp_resend"
+                    android:textAppearance="?textAppearanceBody1Medium"
+                    android:textColor="?colorPrimary"
+                    app:layout_constraintStart_toStartOf="@id/lblVerificationDescription"
+                    app:layout_constraintTop_toBottomOf="@id/lblVerificationDescription" />
+
+                <TextView
+                    android:id="@+id/lblVerificationCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="?spacerMedium"
+                    android:layout_marginTop="?spacerMedium"
+                    android:text="@string/otp_verification_code"
+                    android:textAppearance="?textAppearanceFormLabel"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lblResend" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/verificationCodeInputLayout"
+                    style="?inputLayoutStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="?spacerMedium"
+                    android:layout_marginEnd="?spacerMedium"
+                    app:boxStrokeColor="?colorPrimary"
+                    app:endIconMode="none"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/lblVerificationCode"
+                    app:layout_constraintTop_toBottomOf="@id/lblVerificationCode">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/txtVerificationCode"
+                        style="?inputEditTextStyle"
+                        android:layout_width="154dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="text|number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.backbase.android.flow.common.uicomponents.hintcontainer.HintContainer
+                android:id="@+id/hintContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.backbase.android.design.button.BackbaseButton
+                android:id="@+id/btnContinue"
+                style="?attr/buttonStylePrimary"
+                android:layout_width="match_parent"
+                android:layout_marginStart="?spacerMedium"
+                android:layout_marginTop="?spacerMedium"
+                android:layout_marginEnd="?spacerMedium"
+                android:layout_marginBottom="?spacerMedium"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="@string/btn_continue"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtVerificationCode" />
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

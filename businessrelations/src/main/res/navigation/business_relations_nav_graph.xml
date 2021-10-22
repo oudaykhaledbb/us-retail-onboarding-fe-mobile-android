@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/business_relations_nav_graph"
+    app:startDestination="@id/roleSelectionScreen">
+
+    <fragment
+        android:id="@+id/roleSelectionScreen"
+        android:name="com.backbase.android.flow.businessrelations.ui.screen.RoleSelectionScreen"
+        android:label="screen_role_selection"
+        tools:layout="@layout/screen_role_selection"/>
+
+    <fragment
+        android:id="@+id/addBusinessOwnerScreen"
+        android:name="com.backbase.android.flow.businessrelations.ui.screen.AddBusinessOwnerScreen"
+        android:label="AddBusinessOwnerScreen" />
+
+    <fragment
+        android:id="@+id/summaryScreen"
+        android:name="com.backbase.android.flow.businessrelations.ui.screen.SummaryScreen"
+        android:label="SummaryScreen" />
+
+    <fragment
+        android:id="@+id/selectControlPersonScreen"
+        android:name="com.backbase.android.flow.businessrelations.ui.screen.SelectControlPersonScreen"
+        android:label="SelectControlPersonScreen" />
+
+    <fragment
+        android:id="@+id/createOwnerScreen"
+        android:name="com.backbase.android.flow.businessrelations.ui.screen.CreateOwnerScreen"
+        android:label="CreateOwnerScreen" />
+
+    <action
+        android:id="@+id/action_to_selectControlPersonScreen"
+        app:destination="@id/selectControlPersonScreen" />
+
+    <action
+        android:id="@+id/action_to_summaryScreen"
+        app:destination="@id/summaryScreen" />
+
+    <action
+        android:id="@+id/action_to_addBusinessOwnerScreen"
+        app:destination="@id/addBusinessOwnerScreen" />
+
+    <action
+        android:id="@+id/action_to_createOwnerScreen"
+        app:destination="@id/createOwnerScreen" />
+
+</navigation>

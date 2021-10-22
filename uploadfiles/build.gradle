@@ -1,0 +1,91 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+ext.artifactId = "document-request-journey"
+ext.groupId = "com.backbase.android.flow.uploadfiles"
+
+android {
+    compileSdkVersion projectVersions.targetSdk
+    buildToolsVersion projectVersions.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion projectVersions.minSdk
+        targetSdkVersion projectVersions.targetSdk
+        versionCode projectVersions.versionCode
+        versionName projectVersions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        setProperty("archivesBaseName", "$artifactId-$versionName")
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+    }
+
+    viewBinding {
+        enabled true
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation dependency.backbase
+    implementation dependency.flow
+    implementation dependency.flowcommon
+    implementation dependency.designsystem
+    implementation dependency.deferredresources
+
+    implementation dependency.legacysupport
+    implementation dependency.koin
+    implementation dependency.koinviewmodel
+    implementation dependency.lifecycle
+    implementation dependency.kotlinstdLib
+    implementation dependency.corektx
+    implementation dependency.coroutines
+    implementation dependency.constraintlayout
+    implementation dependency.appcompat
+    implementation dependency.jetpacknavigation
+    implementation dependency.fragment
+    implementation dependency.gson
+    implementation dependency.rxBindingAppCompat
+    implementation dependency.material
+
+    implementation("com.squareup.moshi:moshi:1.11.0")
+    implementation 'com.github.abhishekti7:UnicornFilePicker:+'
+
+    testImplementation dependency.junit
+    testImplementation dependency.mockK
+    testImplementation dependency.koin
+    testImplementation dependency.kointest
+    testImplementation dependency.koinviewmodel
+    testImplementation dependency.truth
+    testImplementation dependency.coroutinestest
+    testImplementation dependency.archCoreTesting
+
+    androidTestImplementation dependency.junitandroidx
+    androidTestImplementation dependency.espressocore
+    androidTestImplementation dependency.kointest
+    androidTestImplementation dependency.espressoIntents
+    androidTestImplementation dependency.junitAndroidX
+    androidTestImplementation dependency.truth
+    androidTestImplementation dependency.coroutinestest
+
+    debugImplementation('androidx.fragment:fragment-testing:1.2.5') {
+        exclude group: 'androidx.test', module: 'monitor'
+    }
+}

@@ -43,4 +43,9 @@
         android:name="com.backbase.android.flow.address.ui.AddressScreen"
         android:label="AddressScreen" />
 
+    <fragment
+        android:id="@+id/idvScreen"
+        android:name="com.backbase.android.flow.identityverification.IdentityVerificationScreen"
+        android:label="idvScreen" />
+
 </navigation>

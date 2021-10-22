@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?colorSurface">
+
+    <TextView
+        android:id="@+id/lblTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginTop="?spacerXLarge"
+        android:layout_marginEnd="?spacerMedium"
+        android:gravity="center"
+        android:paddingTop="?spacerMedium"
+        android:textAppearance="?textAppearanceHeadline5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Header" />
+
+    <EditText
+        android:id="@+id/txtSearch"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginTop="?spacerMedium"
+        android:layout_marginEnd="?spacerMedium"
+        android:background="@drawable/input_selector"
+        android:hint="@string/identity_verification_search_country"
+        android:paddingStart="?spacerMedium"
+        app:layout_constraintTop_toBottomOf="@id/lblTitle" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvCountries"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="?spacerMedium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtSearch"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

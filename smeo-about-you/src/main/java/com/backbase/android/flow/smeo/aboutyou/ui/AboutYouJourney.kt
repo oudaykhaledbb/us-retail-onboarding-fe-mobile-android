@@ -5,15 +5,20 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import com.backbase.android.design.button.BackbaseButton
 import com.backbase.android.flow.common.state.State
+import com.backbase.android.flow.common.uicomponents.stepinfo.HeaderInfo
+import com.backbase.android.flow.common.uicomponents.stepinfo.StepInfo
+import com.backbase.android.flow.common.uicomponents.stepinfo.StepInfoPublisher
 import com.backbase.android.flow.common.validators.*
 import com.backbase.android.flow.common.viewmodel.handleStates
 import com.backbase.android.flow.smeo.aboutyou.AboutYouRouter
 import com.backbase.android.flow.smeo.aboutyou.R
-import com.google.gson.Gson
+import com.backbase.deferredresources.DeferredText
 import kotlinx.android.synthetic.main.journey_about_you.*
 import kotlinx.coroutines.channels.ReceiveChannel
 import org.koin.android.ext.android.inject
 import java.time.LocalDate
+
+const val JOURNEY_NAME_ABOUT_YOU = "JOURNEY_NAME_ABOUT_YOU"
 
 class AboutYouJourney : Fragment(R.layout.journey_about_you) {
 
@@ -21,6 +26,12 @@ class AboutYouJourney : Fragment(R.layout.journey_about_you) {
     private var buttonValidator: ButtonValidator? = null
     private val viewModel: AboutYouViewModel by inject()
     private val router: AboutYouRouter by inject()
+    private val stepPublisher: StepInfoPublisher by inject()
+
+    override fun onResume() {
+        super.onResume()
+        stepPublisher.publish(JourneyStepsAboutYouJourney.About_YOU.value)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -29,6 +40,7 @@ class AboutYouJourney : Fragment(R.layout.journey_about_you) {
             this.dateOfBirth = it
         }
         btnContinue.setOnClickListener {
+            hintContainer.removeHint()
             if (buttonValidator == null) {
                 this.buttonValidator = initValidators()
             }
@@ -52,21 +64,21 @@ class AboutYouJourney : Fragment(R.layout.journey_about_you) {
             btnContinue,
             txtFirstName.applyValidations(
                 txtInputFirstName,
-                ValidatorEmpty() to getString(R.string.validation_first_name_missing)
+                ValidatorEmpty() to getString(R.string.smeo_about_you_validation_first_name_missing)
             ),
             txtLastName.applyValidations(
                 txtInputLastName,
-                ValidatorEmpty() to getString(R.string.validation_last_name_missing),
+                ValidatorEmpty() to getString(R.string.smeo_about_you_validation_last_name_missing),
             ),
             calendarDateOfBirth.applyValidations(txtCalendarHelperText,
-                ValidatorCalendarNotEmpty() to getString(R.string.validation_dob_missing),
-                ValidatorDateOfBirthOver18() to getString(R.string.validation_dob_between_18_99),
-                ValidatorDateOfBirthLess99() to getString(R.string.validation_dob_between_18_99)
+                ValidatorCalendarNotEmpty() to getString(R.string.smeo_about_you_validation_dob_missing),
+                ValidatorDateOfBirthOver18() to getString(R.string.smeo_about_you_validation_dob_between_18_99),
+                ValidatorDateOfBirthLess99() to getString(R.string.smeo_about_you_validation_dob_between_18_99)
             ),
             txtEmail.applyValidations(
                 txtInputEmail,
-                ValidatorEmpty() to getString(R.string.validation_email_missing),
-                ValidatorEmail() to getString(R.string.validation_email_format),
+                ValidatorEmpty() to getString(R.string.smeo_about_you_validation_email_missing),
+                ValidatorEmail() to getString(R.string.smeo_about_you_validation_email_format),
             )
         )
 
@@ -86,10 +98,28 @@ class AboutYouJourney : Fragment(R.layout.journey_about_you) {
             {
                 router.onAboutYouFinished()
             },
-            null,
+            {
+                hintContainer.showHintFailure("${it.message}")
+            },
             { tappedButton.loading = true },
             { tappedButton.loading = false }
         )
     }
 
+    companion object{
+        val JOURNEY_HEADER_INFO_DEFAULT = linkedMapOf(
+            JourneyStepsAboutYouJourney.About_YOU.value.name to HeaderInfo(
+                DeferredText.Resource(R.string.smeo_about_you_title_about_you),
+                DeferredText.Resource(R.string.smeo_about_you_subtitle_about_you),
+                JourneyStepsAboutYouJourney.About_YOU.value.allowBack
+            )
+        )
+    }
+
 }
+
+enum class JourneyStepsAboutYouJourney(val value: StepInfo) {
+    About_YOU(StepInfo(JOURNEY_NAME_ABOUT_YOU, "About_YOU", false))
+}
+
+

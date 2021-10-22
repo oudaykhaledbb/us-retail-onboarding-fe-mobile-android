@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?sizerSmall"
+        android:background="@drawable/background_owner_card_none"
+        android:orientation="horizontal"
+        android:paddingVertical="?spacerMedium">
+
+        <com.google.android.material.radiobutton.MaterialRadioButton
+            android:id="@+id/rbControlPerson"
+            android:layout_width="?sizerXLarge"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="?spacerMedium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:id="@+id/llCenterArea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="?spacerMedium"
+            android:layout_marginEnd="?spacerXLarge"
+            android:orientation="vertical"
+            app:layout_constraintStart_toEndOf="@id/rbControlPerson"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/lblEditControllerName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?textAppearanceBody1Medium"
+                tools:text="Ouday Khaled" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/lblRoleEditable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Personal Assistant"
+                android:textAppearance="?textAppearanceBody2" />
+
+        </LinearLayout>
+
+        <com.backbase.android.design.button.BackbaseButton
+            android:id="@+id/btnMustEdit"
+            style="?buttonStyleLink"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="?spacerSmall"
+            android:layout_marginEnd="?spacerMedium"
+            android:text="@string/business_relations_edit"
+            app:icon="@drawable/ic_edit"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

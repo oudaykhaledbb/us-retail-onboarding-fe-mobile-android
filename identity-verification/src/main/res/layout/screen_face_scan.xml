@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:jumio="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?colorNeutral_90"
+    android:padding="?spacerMedium">
+
+    <ImageView
+        android:id="@+id/imgBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginTop="?spacerXLarge"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        jumio:layout_constraintStart_toStartOf="parent"
+        jumio:layout_constraintTop_toTopOf="parent"
+        jumio:tint="?colorNeutral_00" />
+
+    <ImageView
+        android:id="@+id/imgFlashLight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?spacerXLarge"
+        android:layout_marginEnd="?spacerMedium"
+        android:src="@drawable/ic_arrow_back_black_24dp"
+        jumio:layout_constraintEnd_toEndOf="parent"
+        jumio:layout_constraintTop_toTopOf="parent"
+        jumio:tint="?colorNeutral_00" />
+
+    <TextView
+        android:id="@+id/tvDocumentType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?textAppearanceHeadline6"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginTop="?spacerXLarge"
+        android:layout_marginEnd="?spacerMedium"
+        android:textColor="?colorNeutral_00"
+        android:textDirection="locale"
+        jumio:layout_constraintEnd_toEndOf="@id/imgFlashLight"
+        jumio:layout_constraintStart_toStartOf="@id/imgBack"
+        jumio:layout_constraintTop_toTopOf="parent"
+        android:text="@string/identity_verification_document_type"
+        />
+
+    <TextView
+        android:id="@+id/tvSteps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?textAppearanceCaption"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="?colorNeutral_00"
+        android:textDirection="locale"
+        jumio:layout_constraintEnd_toEndOf="@+id/tvDocumentType"
+        jumio:layout_constraintStart_toStartOf="@+id/tvDocumentType"
+        jumio:layout_constraintTop_toBottomOf="@id/tvDocumentType"
+        android:text="@string/netverify_helpview_progress_text"
+        />
+
+    <com.jumio.nv.custom.NetverifyCustomScanView
+        android:id="@+id/customScanView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="80dp"
+        jumio:jumio_ratio="0.75"
+        jumio:layout_constraintBottom_toTopOf="@+id/scanFaceHelpText"
+        jumio:layout_constraintEnd_toEndOf="parent"
+        jumio:layout_constraintHorizontal_bias="0.5"
+        jumio:layout_constraintStart_toStartOf="parent"
+        jumio:layout_constraintTop_toTopOf="parent" />
+
+    <com.jumio.nv.custom.NetverifyCustomAnimationView
+        android:id="@+id/customAnimationView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="?spacerXLarge"
+        jumio:jumio_ratio="0.95"
+        jumio:layout_constraintBottom_toTopOf="@+id/scanFaceHelpText"
+        jumio:layout_constraintEnd_toEndOf="parent"
+        jumio:layout_constraintHeight_percent="0.7"
+        jumio:layout_constraintHorizontal_bias="0.5"
+        jumio:layout_constraintStart_toStartOf="parent"
+        jumio:layout_constraintTop_toTopOf="parent"
+        jumio:layout_constraintVertical_bias="1.0"
+        jumio:layout_constraintWidth_percent="0.9" />
+
+
+    <TextView
+        android:id="@+id/tvRetry"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="?spacerSmall"
+        android:background="?colorNeutral_90"
+        android:gravity="center"
+        android:text="@string/jumio_button_retry"
+        android:textAppearance="?textAppearanceCaption"
+        android:textColor="?colorNeutral_00"
+        android:textSize="14sp"
+        android:visibility="gone"
+        jumio:layout_constraintBottom_toTopOf="@id/btnCapture"
+        jumio:layout_constraintEnd_toEndOf="parent"
+        jumio:layout_constraintStart_toStartOf="parent"
+        jumio:layout_constraintTop_toBottomOf="@+id/scanFaceHelpText" />
+
+    <com.backbase.android.design.button.BackbaseButton
+        android:id="@+id/btnCapture"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        style="?attr/buttonStylePrimary"
+        android:fontFamily="sans-serif-medium"
+        android:layout_marginLeft="?spacerMedium"
+        android:layout_marginRight="?spacerMedium"
+        android:layout_marginBottom="?spacerMedium"
+        android:paddingBottom="?spacerSmall"
+        android:paddingTop="?spacerSmall"
+        android:textAlignment="center"
+        android:visibility="gone"
+        jumio:layout_constraintBottom_toBottomOf="parent"
+        jumio:layout_constraintEnd_toEndOf="parent"
+        jumio:layout_constraintStart_toStartOf="parent"
+        android:text="@string/identity_verification_btn_scan"
+        />
+
+
+    <com.jumio.nv.custom.NetverifyCustomConfirmationView
+        android:id="@+id/customConfirmationView"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:layout_gravity="top"
+        android:textAppearance="?textAppearanceCaption"
+        android:textSize="21sp"
+        android:visibility="visible"
+        jumio:layout_constraintStart_toStartOf="parent"
+        jumio:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/customLoadingIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?colorNeutral_90"
+        android:visibility="gone">
+
+        <ProgressBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="?colorPrimary"
+            android:visibility="visible" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/scanFaceHelpText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginEnd="?spacerMedium"
+        android:textAlignment="center"
+        android:textAppearance="?textAppearanceCaption"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="14sp"
+        jumio:layout_constraintBottom_toTopOf="@+id/tvRetry"
+        jumio:layout_constraintEnd_toEndOf="parent"
+        jumio:layout_constraintStart_toStartOf="parent"
+        jumio:layout_constraintTop_toBottomOf="@+id/customAnimationView" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/fragment_nv_custom_loading_indicator_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        jumio:layout_constraintGuide_percent="0.4" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

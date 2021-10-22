@@ -1,0 +1,98 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+ext.artifactId = "company-lookup-journey-android"
+ext.groupId = "com.backbase.android.flow.lookup"
+
+android {
+    compileSdkVersion projectVersions.targetSdk
+    buildToolsVersion projectVersions.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion projectVersions.minSdk
+        targetSdkVersion projectVersions.targetSdk
+        versionName projectVersions.versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+        setProperty("archivesBaseName", "$artifactId-$versionName")
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+        // Needed to use experimental @OptIn annotation:
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: "libs", include: ["*.jar"])
+
+    implementation dependency.backbase
+    implementation dependency.flow
+    implementation dependency.flowcommon
+    implementation dependency.designsystem
+    implementation dependency.deferredresources
+
+    implementation("com.squareup.moshi:moshi:1.11.0")
+
+    implementation dependency.legacysupport
+    implementation dependency.koin
+    implementation dependency.koinviewmodel
+    implementation dependency.lifecycle
+    implementation dependency.kotlinstdLib
+    implementation dependency.corektx
+    implementation dependency.coroutines
+    implementation dependency.constraintlayout
+    implementation dependency.legacysupport
+    implementation dependency.koin
+    implementation dependency.koinviewmodel
+    implementation dependency.appcompat
+    implementation dependency.jetpacknavigationui
+    implementation dependency.jetpacknavigation
+    implementation dependency.fragment
+    implementation dependency.gson
+    implementation dependency.rxBindingAppCompat
+    implementation dependency.material
+    implementation dependency.flowcommon
+
+    testImplementation dependency.junit
+    testImplementation dependency.mockK
+    testImplementation dependency.koin
+    testImplementation dependency.kointest
+    testImplementation dependency.koinviewmodel
+    testImplementation dependency.truth
+    testImplementation dependency.coroutinestest
+    testImplementation dependency.archCoreTesting
+
+    androidTestImplementation dependency.junitandroidx
+    androidTestImplementation dependency.espressocore
+    androidTestImplementation dependency.kointest
+    androidTestImplementation dependency.espressoIntents
+    androidTestImplementation dependency.junitAndroidX
+    androidTestImplementation dependency.truth
+    androidTestImplementation dependency.coroutinestest
+
+    //TODO Collection APIs not supported yet - Below code to be removed/replaced
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.jakewharton.espresso:okhttp3-idling-resource:1.0.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.2.1'
+
+    debugImplementation('androidx.fragment:fragment-testing:1.2.5') {
+        exclude group: 'androidx.test', module: 'monitor'
+    }
+}

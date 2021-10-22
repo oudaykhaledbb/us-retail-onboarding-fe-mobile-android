@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="300dp"
+    android:minHeight="300dp"
+    android:orientation="vertical"
+    android:paddingHorizontal="?spacerLarge"
+    android:paddingVertical="?spacerMedium">
+
+    <ImageView
+        android:id="@+id/imgProduct"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:scaleType="centerInside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lblHeader"
+        style="?textAppearanceHeadline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?spacerMedium"
+        app:layout_constraintStart_toEndOf="@id/imgProduct"
+        app:layout_constraintTop_toTopOf="@id/imgProduct"
+        app:layout_constraintBottom_toBottomOf="@id/imgProduct"
+        android:text="Product" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/lblProductDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="?textAppearanceBody2"
+        android:text="This product is the bast one for you if you are looking for this product."
+        app:layout_constraintTop_toBottomOf="@id/imgProduct"
+        android:layout_marginTop="?spacerSmall"/>
+
+    <com.backbase.android.flow.productselector.screen.uicomponent.ProductFeaturesView
+        android:id="@+id/productFeatureView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?spacerSmall"
+        app:layout_constraintTop_toBottomOf="@id/lblProductDescription" />
+
+    <TextView
+        android:id="@+id/lblPrice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="?textAppearanceHeadline6"
+        tools:text="1,47"
+        android:layout_marginTop="?spacerSmall"
+        app:layout_constraintTop_toBottomOf="@id/productFeatureView"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/lblPeriod"
+        style="?textAppearanceBody1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?spacerMedium"
+        android:text="monthly"
+        app:layout_constraintStart_toEndOf="@id/lblPrice"
+        app:layout_constraintBottom_toBottomOf="@+id/lblPrice"
+        app:layout_constraintTop_toTopOf="@+id/lblPrice" />
+
+    <com.backbase.android.design.button.BackbaseButton
+        android:id="@+id/btnContinue"
+        style="?buttonStylePrimary"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginTop="?spacerMedium"
+        android:layout_marginEnd="?spacerMedium"
+        android:text="@string/btn_continue" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?colorSurface">
+
+    <TextView
+        android:id="@+id/lblHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginTop="?spacerLarge"
+        android:layout_marginEnd="?spacerMedium"
+        android:layout_marginBottom="?spacerMedium"
+        android:text="@string/identity_verification_home_description"
+        android:textAppearance="?textAppearanceSubtitle2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/llScanDocument"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginTop="?spacerLarge"
+        android:layout_marginEnd="?spacerMedium"
+        android:background="@drawable/home_bg_hint"
+        android:orientation="horizontal"
+        android:padding="?spacerMedium"
+        app:layout_constraintTop_toBottomOf="@id/lblHeader">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_identity_card"
+            app:tint="?colorNeutral_90" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="?spacerLarge"
+            android:layout_marginTop="-5dp"
+            android:layout_marginEnd="?spacerMedium"
+            android:text="@string/identity_verification_document_scan_information"
+            android:textAppearance="?textAppearanceSubtitle2" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginTop="?spacerMedium"
+        android:layout_marginBottom="?spacerMedium"
+        android:src="@drawable/ic_arrow_downward"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llScanDocument"
+        app:tint="?colorNeutral_50" />
+
+    <LinearLayout
+        android:id="@+id/llBiometricValidations"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginTop="?spacerLarge"
+        android:layout_marginEnd="?spacerMedium"
+        android:background="@drawable/home_bg_hint"
+        android:orientation="horizontal"
+        android:padding="?spacerMedium"
+        app:layout_constraintTop_toBottomOf="@id/arrow">
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_face"
+            app:tint="?colorNeutral_90" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="?spacerMedium"
+            android:layout_marginTop="-4dp"
+            android:text="@string/identity_verification_biometrics_validation"
+            android:textAppearance="?textAppearanceSubtitle2" />
+
+    </LinearLayout>
+
+    <com.backbase.android.flow.common.uicomponents.MessageView
+        android:id="@+id/messageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="?spacerMedium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llBiometricValidations" />
+
+    <com.backbase.android.design.button.BackbaseButton
+        android:id="@+id/btnContinue"
+        style="?attr/buttonStylePrimary"
+        android:layout_width="match_parent"
+        android:layout_marginStart="?spacerMedium"
+        android:layout_marginEnd="?spacerMedium"
+        android:layout_marginBottom="?spacerMedium"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:text="@string/btn_continue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

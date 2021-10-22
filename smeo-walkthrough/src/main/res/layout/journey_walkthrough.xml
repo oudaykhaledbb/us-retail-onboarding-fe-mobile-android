@@ -38,7 +38,7 @@
             android:textColorLink="?colorPrimary"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/termsAndConditions" />
+            android:text="@string/smeo_walkthrough_termsAndConditions" />
 
     </LinearLayout>
 
@@ -63,7 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="?spacerMedium"
         android:paddingVertical="0dp"
-        android:text="@string/next"
+        android:text="@string/smeo_walkthrough_next"
         app:layout_constraintBottom_toBottomOf="@id/tabIndicator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/tabIndicator" />
@@ -75,7 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="?spacerMedium"
         android:padding="0dp"
-        android:text="@string/skip"
+        android:text="@string/smeo_walkthrough_skip"
         app:layout_constraintBottom_toBottomOf="@id/tabIndicator"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/tabIndicator" />

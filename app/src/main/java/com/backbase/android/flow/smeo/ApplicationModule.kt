@@ -3,9 +3,9 @@ package com.backbase.android.flow.smeo
 import com.backbase.android.Backbase
 import com.backbase.android.dbs.dataproviders.AssetsFileDBSDataProvider
 import com.backbase.android.dbs.dataproviders.NetworkDBSDataProvider
-import com.backbase.android.flow.FlowClient
 import com.backbase.android.flow.address.AddressConfiguration
 import com.backbase.android.flow.address.addressJourneyModule
+import com.backbase.android.flow.address.models.AddressModel
 import com.backbase.android.flow.address.usecase.AddressUseCase
 import com.backbase.android.flow.address.usecase.AddressUseCaseDefaultImpl
 import com.backbase.android.flow.businessrelations.BusinessRelationsConfiguration
@@ -14,6 +14,12 @@ import com.backbase.android.flow.businessrelations.UserInfoProvider
 import com.backbase.android.flow.businessrelations.model.UserInfo
 import com.backbase.android.flow.businessrelations.usecase.BusinessRelationsUseCase
 import com.backbase.android.flow.businessrelations.usecase.BusinessRelationsUseCaseDefaultImpl
+import com.backbase.android.flow.common.uicomponents.stepinfo.StepInfoPublisher
+import com.backbase.android.flow.identityverification.DocScannerDataCenter
+import com.backbase.android.flow.identityverification.IdentityVerificationConfiguration
+import com.backbase.android.flow.identityverification.IdentityVerificationJourneyModule
+import com.backbase.android.flow.identityverification.usecase.IdentityVerificationUseCase
+import com.backbase.android.flow.identityverification.usecase.IdentityVerificationUseCaseDefaultImpl
 import com.backbase.android.flow.otp.OtpConfiguration
 import com.backbase.android.flow.otp.otpJourneyModule
 import com.backbase.android.flow.otp.usecase.OtpUseCase
@@ -22,6 +28,8 @@ import com.backbase.android.flow.productselector.*
 import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_ACTION_INIT
 import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_ACTION_SUBMIT
 import com.backbase.android.flow.smeo.Constants.Companion.INTERACTION_NAME
+import com.backbase.android.flow.smeo.Constants.Companion.JUMIO_API_SECRET
+import com.backbase.android.flow.smeo.Constants.Companion.JUMIO_API_TOKEN
 import com.backbase.android.flow.smeo.Constants.Companion.REQUEST_AVAILABLE_OTP_CHANNELS
 import com.backbase.android.flow.smeo.Constants.Companion.REQUEST_OTP_ACTIONNAME
 import com.backbase.android.flow.smeo.Constants.Companion.VERIFYACTIONNAME
@@ -42,6 +50,7 @@ import com.backbase.android.flow.uploadfiles.usecase.UploadFilesUseCase
 import com.backbase.android.flow.uploadfiles.usecase.UploadFilesUseCaseImpl
 import com.backbase.android.flow.v2.contracts.FlowClientContract
 import com.backbase.deferredresources.DeferredText
+import com.backbase.lookup.LocalStorage
 import com.backbase.lookup.business_identity.businessIdentityConfiguration
 import com.backbase.lookup.business_identity.businessIdentityJourneyModule
 import com.backbase.lookup.business_identity.usecase.BusinessIdentityUseCase
@@ -67,13 +76,13 @@ import java.net.URI
 
 var screenCounter = 0
 val mapFragments = mapOf(
-        "AboutYouJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.nice_to_meet_you), DeferredText.Resource(R.string.personal_details)),
+        "AboutYouJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.smeo_about_you_nice_to_meet_you), DeferredText.Resource(R.string.smeo_about_you_personal_details)),
         "OtpJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.security_at_your_fingertips), DeferredText.Resource(R.string.mobile_phone_number)),
         "BusinessRelationsJourneyScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.the_business_owners), DeferredText.Resource(R.string.business_relations)),
         "ProductSelectionScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.select_your_account_type), DeferredText.Resource(R.string.choose_product)),
 //        "BusinessInfoScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.your_business_details), DeferredText.Resource(R.string.your_business)),
 //        "BusinessAddressScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.where_is_your_business_located), DeferredText.Resource(R.string.your_business)),
-        "BusinessIdentityScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.what_does_your_company_do), DeferredText.Resource(R.string.your_business)),
+        "BusinessIdentityScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.what_does_your_company_do), DeferredText.Resource(R.string.lookup_journey_your_business)),
         "UploadFilesJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.verify_your_business), DeferredText.Resource(R.string.upload_documents)),
         "SsnJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.verify_your_identity), DeferredText.Resource(R.string.your_ssn)),
 )
@@ -146,16 +155,23 @@ val applicationModule = module {
         return@factory AddressUseCaseDefaultImpl(get(), get())
     }
 
-    factory<com.backbase.lookup.address.usecase.AddressUseCase> {
-        return@factory com.backbase.lookup.address.usecase.AddressUseCaseDefaultImpl(get(), get())
+    factory<com.backbase.lookup.address.usecase.LookupAddressUseCase> {
+        return@factory com.backbase.lookup.address.usecase.LookupAddressUseCaseDefaultImpl(
+            get(),
+            get(),
+            get()
+        )
     }
 
     factory {
-        com.backbase.lookup.address.AddressConfiguration {
+        val localAddressStorage: LocalStorage by inject()
+        com.backbase.lookup.address.LookupAddressConfiguration {
             submitActionName = "submit-address"
-            description = DeferredText.Resource(R.string.label_we_need_to_know_you)
+            description = DeferredText.Resource(R.string.lookup_journey_label_we_need_to_know_you)
+            prefillAddress = { localAddressStorage.getAddressModel() }
         }
     }
+
 
 
     loadKoinModules(listOf(addressJourneyModule))
@@ -211,7 +227,7 @@ val applicationModule = module {
             createCaseActionName = "check-business-relation-and-document-requests-conditions"
             submitRelationTypeActionName = "select-relation-type"
             updateOwnerActionName = "update-owner"
-            updateCurrentUserOwnerActionName = "update-owner"
+            updateCurrentUserOwnerActionName = "update-current-user-owner"
             updateCurrentUserControlPersonActionName = "update-control-person"
             deleteOwnerActionName = "delete-business-person"
             updateControlPersonActionName = "update-control-person"
@@ -266,7 +282,7 @@ val applicationModule = module {
     factory {
         businessStructureConfiguration {
             isOffline = false
-            createCaseActionName = "create-case"
+            createCaseActionName = null
             requestBusinessStructureActionName = "requestBusinessStructureAction"
             submitBusinessStructureActionName = "business-structure"
             requestCompanyLookupActionName = "company-lookup"
@@ -305,8 +321,17 @@ val applicationModule = module {
     //region Address Validation Journey
     factory {
         AddressConfiguration {
+            val localAddressStorage: LocalStorage by inject()
             submitActionName = "submit-address"
-            description = DeferredText.Resource(R.string.label_we_need_to_know_you)
+            description = DeferredText.Resource(R.string.lookup_journey_label_we_need_to_know_you)
+            prefillAddress = AddressModel(
+                localAddressStorage.getAddressModel().numberAndStreet,
+                localAddressStorage.getAddressModel().apt,
+                localAddressStorage.getAddressModel().city,
+                localAddressStorage.getAddressModel().state,
+                localAddressStorage.getAddressModel().zipCode,
+
+            )
         }
     }
 
@@ -345,9 +370,38 @@ val applicationModule = module {
     //endregion business Identity
 
     factory {
-        landingConfiguration{
-            applicationCenterUrl = "$baseUrl/sme-onboarding-application-center#/application-center-init"
+        landingConfiguration {
+            applicationCenterUrl =
+                "$baseUrl/sme-onboarding-application-center#/application-center-init"
         }
     }
+
+    //region IDV
+    loadKoinModules(listOf(IdentityVerificationJourneyModule))
+
+    factory {
+        IdentityVerificationConfiguration {
+            apiToken = JUMIO_API_TOKEN
+            apiSecretKey = JUMIO_API_SECRET
+            dataCenter = DocScannerDataCenter.EU
+            initiationActionName = "identity-verification-initiation"
+            verificationActionName = "identity-verification-result"
+        }
+    }
+
+    factory<IdentityVerificationUseCase> {
+        IdentityVerificationUseCaseDefaultImpl(get(), get())
+    }
+    //endregion IDV
+
+
+    single {
+        return@single LocalStorage(androidContext())
+    }
+
+    single {
+        return@single StepInfoPublisher()
+    }
+
 
 }

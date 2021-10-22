@@ -1,0 +1,10 @@
+<resources>
+    <string name="btn_continue">Select this product</string>
+    <string name="product_selection_journey_which_product_is_best_for_me">\"Which product is the best for me?\"</string>
+    <string name="product_selection_journey_benefit">Benefit</string>
+    <string name="product_selection_journey_select_product">Select this product</string>
+    <string name="product_selection_journey_unselect_product">Unselect this product</string>
+    <string name="product_selection_journey_button_continue">Continue (%s)</string>
+    <string name="product_selection_journey_title">Choose product</string>
+    <string name="product_selection_journey_subtitle">Select your account type</string>
+</resources>
