@@ -28,10 +28,11 @@ class OtpVerificationScreen : SecureFragment(R.layout.screen_otp_verification), 
     private val compositeDisposable = CompositeDisposable()
     private lateinit var verificationType: OtpChannel
     private val phoneVerificationPattern = Pattern.compile(configuration.phoneVerificationPattern)
+    private var email: String? = null
     private val recipient: String
         get() = when (verificationType) {
             OtpChannel.SMS -> "${txtCountryCode.text}${txtPhoneNumber.text}"
-            OtpChannel.EMAIL -> txtEmailAddress.text.toString()
+            OtpChannel.EMAIL -> if (txtEmailAddress.isEnabled) txtEmailAddress.text.toString() else "$email"
         }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -109,6 +110,7 @@ class OtpVerificationScreen : SecureFragment(R.layout.screen_otp_verification), 
                 viewModel.apiRequestEmail.state,
                 onSuccess = { email ->
                     email?.let{ emailString ->
+                        OtpVerificationScreen@ this.email = emailString
                         txtEmailAddress.setText(maskEmail(emailString))
                     }
                 },
