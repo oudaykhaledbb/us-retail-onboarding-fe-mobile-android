@@ -6,8 +6,8 @@
      artifactId = 'alpha-flow'
      versionName = projectVersions.versionName
      appCenterName = [
-             production: "Backbase/Flow-Android",
-             beta      : "Backbase/Flow-Android-Beta"
+             production: "Backbase/Flow-SME-Android",
+             beta      : "Backbase/Flow-SME-Android-Beta"
      ]
      appCenterGroup = 'Collaborators'
  }
