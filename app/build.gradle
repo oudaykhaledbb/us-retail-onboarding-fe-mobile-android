@@ -32,7 +32,14 @@
 
      signingConfigs {
          release {
-             // release configurations are on Jenkins
+             keyAlias System.getenv("BITRISEIO_ANDROID_KEYSTORE_ALIAS")
+             keyPassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD")
+             storeFile file(System.getenv("HOME") + "/keystores/keystore.jks")
+             storePassword System.getenv("BITRISEIO_ANDROID_KEYSTORE_PASSWORD")
+
+             // Optional, specify signing versions used
+             v1SigningEnabled true
+             v2SigningEnabled true
          }
      }
 
