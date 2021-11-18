@@ -79,31 +79,20 @@
      implementation dependency.jetpacknavigation
      implementation dependency.jetpacknavigationui
      implementation dependency.fragment
-//     implementation dependency.flowotp
-//     implementation dependency.flowaddressvalidation
-//     implementation dependency.businessrelations
-//     implementation dependency.productselection
-//     implementation dependency.documentrequest
-//     implementation dependency.lookup
-     implementation dependency.flowdesign
+     implementation dependency.flowotp
+     implementation dependency.flowaddressvalidation
+     implementation dependency.businessrelations
+     implementation dependency.productselection
+     implementation dependency.documentrequest
+     implementation dependency.lookup
+     implementation dependency.identityVerification
+     implementation dependency.stepNavigation
 
      implementation dependency.legacysupport
      implementation project(path: ':smeo-walkthrough')
      implementation project(path: ':smeo-about-you')
-     implementation project(path: ':stepnavigation')
      implementation project(path: ':ssn')
      implementation project(path: ':smeo-landing')
-     implementation project(path: ':stepnavigation')
-
-
-     implementation project(path: ':uploadfiles')
-     implementation project(path: ':businessrelations')
-     implementation project(path: ':product-selector')
-     implementation project(path: ':otp')
-     implementation project(path: ':identity-verification')
-     implementation project(path: ':address')
-     implementation project(path: ':lookup')
-
 
      testImplementation dependency.junit
 

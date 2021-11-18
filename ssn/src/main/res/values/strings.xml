@@ -2,7 +2,7 @@
     <string name="ssn_journey_label_required_by_law">"We are required by law to ask for your Social Security Number. "</string>
     <string name="ssn_journey_label_your_social_security_number">Your Social Security Number (SSN)</string>
     <string name="ssn_journey_label_safe_secure">Safe and secure</string>
-    <string name="ssn_journey_label_safe_secure_description">"Your information is never shared and uses 100% secure encryption for sending and receiving. "</string>
+    <string name="ssn_journey_label_safe_secure_description">"Your information is never shared and uses 100%% secure encryption for sending and receiving. "</string>
     <string name="ssn_journey_label_credit_not_affected">Your credit score will not be affected</string>
     <string name="ssn_journey_label_credit_not_affected_description">This will not be used for a credit check and will not impact your credit score.</string>
     <string name="ssn_journey_field_required">This field is required</string>

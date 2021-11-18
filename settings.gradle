@@ -1,25 +1,6 @@
 include ':ssn'
 include ':smeo-about-you'
 include ':smeo-walkthrough'
-include ':stepnavigation'
 include ':app'
 include ':smeo-landing'
 rootProject.name = "smeo-android-reference"
-
-include ':businessrelations'
-include ':uploadfiles'
-include ':otp'
-include ':identity-verification'
-include ':address'
-include ':product-selector'
-include ':lookup'
-include ':stepnavigation'
-
-//project(":product-selector").projectDir=new File("/Users/ouday/Desktop/product-selection-journey-android/product-selector")
-//project(":lookup").projectDir=new File("/Users/ouday/Desktop/androidlookupjourney/lookup")
-//project(":businessrelations").projectDir=new File("/Users/ouday/Desktop/businessrelations/businessrelations")
-//project(":uploadfiles").projectDir=new File("/Users/ouday/Desktop/documentrequestjourneyandroid/uploadfiles")
-//project(":otp").projectDir=new File("/Users/ouday/AndroidStudioProjects/one-time-password-journey-android/otp")
-//project(":identity-verification").projectDir=new File("/Users/ouday/Desktop/identity-verification-journey-android/identity-verification")
-//project(":address").projectDir=new File("/Users/ouday/AndroidStudioProjects/address-validation-journey-android/address")
-//project(":stepnavigation").projectDir=new File("/Users/ouday/AndroidStudioProjects/stepnavigation/stepnavigation")

@@ -2,7 +2,6 @@ package com.backbase.android.flow.smeo
 
 import android.content.Context
 import android.os.Bundle
-import android.widget.Toast
 import com.backbase.android.flow.address.ui.AddressScreen
 import com.backbase.android.flow.address.ui.JOURNEY_NAME_ADDRESS
 import com.backbase.android.flow.businessrelations.ui.screen.BusinessRelationsJourneyScreen
@@ -35,10 +34,8 @@ import org.koin.dsl.module
 class MainActivity : AppActivity(R.layout.activity_main), StepInfoObserver {
 
     private val stepInfoPublisher: StepInfoPublisher by inject()
-    var stepsCount: Int = 0
     var counter = 0
 
-    // TODO Wrap this into a specific class
     private val headerInfo = JourneysHeaderInfo(
         linkedMapOf(
             JOURNEY_NAME_ABOUT_YOU to AboutYouJourney.JOURNEY_HEADER_INFO_DEFAULT,

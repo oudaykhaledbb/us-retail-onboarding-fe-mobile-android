@@ -60,7 +60,7 @@ dependencies {
     implementation dependency.gson
     implementation dependency.rxBindingAppCompat
     implementation dependency.material
-    implementation project(path: ':stepnavigation')
+    implementation dependency.stepNavigation
 
     testImplementation dependency.junit
     testImplementation dependency.mockK

@@ -84,11 +84,9 @@ fun productSelection(
         completion()
     }
 
-
     override fun showHelpWhichProductToUse() {
 
     }
-
 
 }
 
