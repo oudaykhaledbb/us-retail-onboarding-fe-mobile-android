@@ -9,7 +9,7 @@ buildscript {
     ext.projectVersions = [
             minSdk              : 21,
             targetSdk           : 30,
-            versionName         : '0.2.0-rc01',
+            versionName         : '0.1.0-rc01',
             versionCode         : 1,
             buildToolsVersion   : "30.0.2",
     ]
