@@ -121,7 +121,7 @@ class MainActivity : AppActivity(R.layout.activity_main), StepInfoObserver {
 
         factory {
             val context: Context by inject()
-            return@factory HeaderDataProvider(mapFragments, context).setStepNavigationView(header)
+            return@factory HeaderDataProvider(mapOf(), context).setStepNavigationView(header)
         }
 
     }

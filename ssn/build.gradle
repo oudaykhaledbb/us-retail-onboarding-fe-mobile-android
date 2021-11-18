@@ -46,8 +46,6 @@ dependencies {
     implementation dependency.designsystem
     implementation dependency.deferredresources
 
-    implementation("com.squareup.moshi:moshi:1.11.0")
-
     implementation dependency.legacysupport
     implementation dependency.koin
     implementation dependency.koinviewmodel

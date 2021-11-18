@@ -11,9 +11,7 @@ class SsnViewModel(private val usecase: SsnUsecase) : ViewModel() {
     internal val apiSubmitSsn =
         ApiPublisher<InteractionResponse<Map<String, Any?>?>?>(this.viewModelScope)
 
-    fun submitSsn(
-        ssn: String
-    ) {
+    fun submitSsn(ssn: String) {
         apiSubmitSsn.submit("submitSsn()") {
             usecase.submitSsn(ssn)
             return@submit usecase.landing()

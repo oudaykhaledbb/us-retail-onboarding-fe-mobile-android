@@ -99,6 +99,3 @@ class SsnJourney : Fragment(R.layout.journey_ssn) {
 enum class JourneyStepsSSN(val value: StepInfo) {
     SSN(StepInfo(JOURNEY_NAME_SSN, "SSN", false))
 }
-
-
-

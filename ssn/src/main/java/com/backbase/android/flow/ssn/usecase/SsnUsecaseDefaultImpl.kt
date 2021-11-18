@@ -17,15 +17,14 @@ class SsnUsecaseDefaultImpl(
 ) : SsnUsecase {
 
     override suspend fun submitSsn(ssn: String) = flowClient.performInteraction<Map<String, Any?>?>(
-        Action(configuration.submitSsnAction, SsnModel(ssn)),
+        Action(configuration.submitSsnActionName, SsnModel(ssn)),
         object : TypeToken<Map<String, Any?>?>() {}.type
     ).throwExceptionIfErrorOrNull()
-
 
     override suspend fun landing(): InteractionResponse<Map<String, Any?>?>? {
         val responseType: Type =
             object : TypeToken<Map<String, Any?>?>() {}.type
-        configuration.landingAction?.let {
+        configuration.landingActionName?.let {
             return flowClient.performInteraction<Map<String, Any?>?>(
                 Action(it, null),
                 responseType
@@ -33,6 +32,5 @@ class SsnUsecaseDefaultImpl(
         }
         return null
     }
-
 
 }

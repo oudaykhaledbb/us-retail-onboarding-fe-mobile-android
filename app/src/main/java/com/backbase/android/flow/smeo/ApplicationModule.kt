@@ -25,14 +25,9 @@ import com.backbase.android.flow.otp.otpJourneyModule
 import com.backbase.android.flow.otp.usecase.OtpUseCase
 import com.backbase.android.flow.otp.usecase.OtpUseCaseDefaultImpl
 import com.backbase.android.flow.productselector.*
-import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_ACTION_INIT
-import com.backbase.android.flow.smeo.Constants.Companion.ABOUT_YOU_ACTION_SUBMIT
 import com.backbase.android.flow.smeo.Constants.Companion.INTERACTION_NAME
 import com.backbase.android.flow.smeo.Constants.Companion.JUMIO_API_SECRET
 import com.backbase.android.flow.smeo.Constants.Companion.JUMIO_API_TOKEN
-import com.backbase.android.flow.smeo.Constants.Companion.REQUEST_AVAILABLE_OTP_CHANNELS
-import com.backbase.android.flow.smeo.Constants.Companion.REQUEST_OTP_ACTIONNAME
-import com.backbase.android.flow.smeo.Constants.Companion.VERIFYACTIONNAME
 import com.backbase.android.flow.smeo.aboutyou.AboutYouConfiguration
 import com.backbase.android.flow.smeo.aboutyou.aboutYouJourneyModule
 import com.backbase.android.flow.smeo.aboutyou.usecase.AboutYouUseCase
@@ -43,7 +38,6 @@ import com.backbase.android.flow.ssn.ssnConfiguration
 import com.backbase.android.flow.ssn.ssnJourneyModule
 import com.backbase.android.flow.ssn.usecase.SsnUsecase
 import com.backbase.android.flow.ssn.usecase.SsnUsecaseDefaultImpl
-import com.backbase.android.flow.stepnavigation.HeaderLabels
 import com.backbase.android.flow.uploadfiles.uploadFilesConfiguration
 import com.backbase.android.flow.uploadfiles.uploadJourneyModule
 import com.backbase.android.flow.uploadfiles.usecase.UploadFilesUseCase
@@ -74,27 +68,12 @@ import org.koin.dsl.module
 import java.lang.reflect.Type
 import java.net.URI
 
-var screenCounter = 0
-val mapFragments = mapOf(
-        "AboutYouJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.smeo_about_you_nice_to_meet_you), DeferredText.Resource(R.string.smeo_about_you_personal_details)),
-        "OtpJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.security_at_your_fingertips), DeferredText.Resource(R.string.mobile_phone_number)),
-        "BusinessRelationsJourneyScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.the_business_owners), DeferredText.Resource(R.string.business_relations)),
-        "ProductSelectionScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.select_your_account_type), DeferredText.Resource(R.string.choose_product)),
-//        "BusinessInfoScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.your_business_details), DeferredText.Resource(R.string.your_business)),
-//        "BusinessAddressScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.where_is_your_business_located), DeferredText.Resource(R.string.your_business)),
-        "BusinessIdentityScreen" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.what_does_your_company_do), DeferredText.Resource(R.string.lookup_journey_your_business)),
-        "UploadFilesJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.verify_your_business), DeferredText.Resource(R.string.upload_documents)),
-        "SsnJourney" to HeaderLabels(++screenCounter, DeferredText.Resource(R.string.verify_your_identity), DeferredText.Resource(R.string.your_ssn)),
-)
-
-
 /**
  * Koin module defining the app-level Authentication Journey configurations.
  */
 val applicationModule = module {
 
     val baseUrl = "${Backbase.getInstance()?.configuration?.experienceConfiguration?.serverURL}"
-
 
     factory {
         walkthroughConfiguration {
@@ -119,14 +98,17 @@ val applicationModule = module {
     }
 
     factory<AboutYouUseCase> {
-        return@factory AboutYouUseCaseDefaultImpl(get(), get())
+        return@factory AboutYouUseCaseDefaultImpl(
+            flowClient = get(),
+            aboutYouConfiguration = get()
+        )
     }
 
     factory {
         AboutYouConfiguration {
             isOffline = false
-            actionInit = ABOUT_YOU_ACTION_INIT
-            actionAboutYouSubmit = ABOUT_YOU_ACTION_SUBMIT
+            actionInit = "sme-onboarding-init"
+            actionAboutYouSubmit = "sme-onboarding-anchor-data"
         }
     }
 
@@ -135,9 +117,9 @@ val applicationModule = module {
     //region OTP
     factory {
         OtpConfiguration {
-            requestActionName = REQUEST_OTP_ACTIONNAME
-            verifyActionName = VERIFYACTIONNAME
-            availableOtpChannelsActionName = REQUEST_AVAILABLE_OTP_CHANNELS
+            requestActionName = "request-otp"
+            verifyActionName = "verify-otp"
+            availableOtpChannelsActionName = "available-otp-channels"
             verificationCodeMaxLength = Integer(6)
             fetchOtpEmailActionName = "fetch-otp-email"
 
@@ -145,21 +127,27 @@ val applicationModule = module {
     }
 
     factory<OtpUseCase> {
-        OtpUseCaseDefaultImpl(get(), get())
+        OtpUseCaseDefaultImpl(
+            flowClient = get(),
+            configuration = get()
+        )
     }
 
     loadKoinModules(listOf(otpJourneyModule))
     //endregion OTP
 
     factory<AddressUseCase> {
-        return@factory AddressUseCaseDefaultImpl(get(), get())
+        return@factory AddressUseCaseDefaultImpl(
+            flowClient = get(),
+            configuration = get()
+        )
     }
 
     factory<com.backbase.lookup.address.usecase.LookupAddressUseCase> {
         return@factory com.backbase.lookup.address.usecase.LookupAddressUseCaseDefaultImpl(
-            get(),
-            get(),
-            get()
+            flowClient = get(),
+            configurationLookup = get(),
+            localAddressStorage = get()
         )
     }
 
@@ -171,8 +159,6 @@ val applicationModule = module {
             prefillAddress = { localAddressStorage.getAddressModel() }
         }
     }
-
-
 
     loadKoinModules(listOf(addressJourneyModule))
     loadKoinModules(listOf(com.backbase.lookup.address.addressJourneyModule))
@@ -194,7 +180,11 @@ val applicationModule = module {
     }
 
     factory<UploadFilesUseCase> {
-        return@factory UploadFilesUseCaseImpl(get(), get(), get())
+        return@factory UploadFilesUseCaseImpl(
+            context = get(),
+            flowClient = get(),
+            configuration = get()
+        )
     }
 
     loadKoinModules(listOf(uploadJourneyModule))
@@ -205,18 +195,21 @@ val applicationModule = module {
     factory {
         ssnConfiguration{
             isOffline = false
-            submitSsnAction = "submit-ssn"
-            landingAction = "sme-onboarding-landing-data"
+            submitSsnActionName = "submit-ssn"
+            landingActionName = "sme-onboarding-landing-data"
         }
     }
 
     factory<SsnUsecase> {
-        return@factory SsnUsecaseDefaultImpl(get(), get(), get())
+        return@factory SsnUsecaseDefaultImpl(
+            context = get(),
+            flowClient = get(),
+            configuration = get()
+        )
     }
 
     loadKoinModules(listOf(ssnJourneyModule))
     //endregion SSN
-
 
     //region business relations
     loadKoinModules(listOf(BusinessRelationsJourneyModule))
@@ -252,13 +245,12 @@ val applicationModule = module {
 
     factory <BusinessRelationsUseCase>{
         return@factory BusinessRelationsUseCaseDefaultImpl(
-            get(),
-            get(),
-            get()
+            context = get(),
+            flowClient = get(),
+            businessRelationsConfiguration = get()
         )
     }
     //endregion business relations
-
 
     //region Product Selector
     factory {
@@ -273,11 +265,13 @@ val applicationModule = module {
     }
     loadKoinModules(listOf(ProductSelectorJourneyModule))
 
-    factory<ProductSelectorUseCase>{
-        return@factory ProductSelectorUseCaseDefaultImpl(get(), get())
+    factory<ProductSelectorUseCase> {
+        return@factory ProductSelectorUseCaseDefaultImpl(
+            flowClient = get(),
+            productSelectorConfiguration = get()
+        )
     }
     //endregion Product Selector
-
 
     factory {
         businessStructureConfiguration {
@@ -350,8 +344,12 @@ val applicationModule = module {
         return@factory LookupUsecaseImpl(context, get(), config)
     }
 
-    factory<BusinessInfoUseCase>{
-        BusinessInfoUseCaseDefaultImpl(get(), get(), get())
+    factory<BusinessInfoUseCase> {
+        BusinessInfoUseCaseDefaultImpl(
+            context = get(),
+            flowClient = get(),
+            configuration = get()
+        )
     }
 
     //region Business Identity
@@ -363,7 +361,11 @@ val applicationModule = module {
     }
 
     factory<BusinessIdentityUseCase> {
-        BusinessIdentityUseCaseDefaultImpl(get(), get(), get())
+        BusinessIdentityUseCaseDefaultImpl(
+            context = get(),
+            flowClient = get(),
+            configuration = get()
+        )
     }
 
     loadKoinModules(listOf(businessIdentityJourneyModule))
@@ -390,10 +392,12 @@ val applicationModule = module {
     }
 
     factory<IdentityVerificationUseCase> {
-        IdentityVerificationUseCaseDefaultImpl(get(), get())
+        IdentityVerificationUseCaseDefaultImpl(
+            flowClient = get(),
+            configuration = get()
+        )
     }
     //endregion IDV
-
 
     single {
         return@single LocalStorage(androidContext())
@@ -402,6 +406,5 @@ val applicationModule = module {
     single {
         return@single StepInfoPublisher()
     }
-
 
 }

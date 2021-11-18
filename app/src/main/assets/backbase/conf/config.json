@@ -5,12 +5,17 @@
 	"backbase": {
 		"localModelPath": "$(contextRoot)/conf/local-model.json",
 		"experience": "sme-onboarding-us",
-			"serverURL": "https://app.flw.rnd.live.backbaseservices.com",
+			"serverURL": "https://app.dev.rnd.live.backbaseservices.com",
 		"version": "6.2.7",
         "navigationType": "graph"
 	},
+	"custom": {
+		"default-http-headers": {
+			"X-PRDL-BAAS": "prdl-ds-83454123-a854-4515-8f07-d1b8c74f2ad4"
+		}
+	},
 	"security": {
-		"allowedDomains": ["http://edge.fervent-euler-36.backbase.eu"],
+		"allowedDomains": [],
 		"sslPinning": {
 			"checkChain": false
 		}
