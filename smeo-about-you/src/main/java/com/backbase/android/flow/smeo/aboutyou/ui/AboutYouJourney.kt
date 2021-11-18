@@ -30,7 +30,7 @@ class AboutYouJourney : Fragment(R.layout.journey_about_you) {
 
     override fun onResume() {
         super.onResume()
-        stepPublisher.publish(JourneyStepsAboutYouJourney.About_YOU.value)
+        stepPublisher.publish(JourneyStepsAboutYouJourney.ABOUT_YOU.value)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -108,10 +108,10 @@ class AboutYouJourney : Fragment(R.layout.journey_about_you) {
 
     companion object{
         val JOURNEY_HEADER_INFO_DEFAULT = linkedMapOf(
-            JourneyStepsAboutYouJourney.About_YOU.value.name to HeaderInfo(
+            JourneyStepsAboutYouJourney.ABOUT_YOU.value.name to HeaderInfo(
                 DeferredText.Resource(R.string.smeo_about_you_title_about_you),
                 DeferredText.Resource(R.string.smeo_about_you_subtitle_about_you),
-                JourneyStepsAboutYouJourney.About_YOU.value.allowBack
+                JourneyStepsAboutYouJourney.ABOUT_YOU.value.allowBack
             )
         )
     }
@@ -119,7 +119,7 @@ class AboutYouJourney : Fragment(R.layout.journey_about_you) {
 }
 
 enum class JourneyStepsAboutYouJourney(val value: StepInfo) {
-    About_YOU(StepInfo(JOURNEY_NAME_ABOUT_YOU, "About_YOU", false))
+    ABOUT_YOU(StepInfo(JOURNEY_NAME_ABOUT_YOU, "About_YOU", false))
 }
 
 
