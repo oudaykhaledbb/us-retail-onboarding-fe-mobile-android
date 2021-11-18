@@ -10,8 +10,6 @@
              beta      : "Backbase/Flow-Android-Beta"
      ]
      appCenterGroup = 'Collaborators'
-     schemeName = 'flow'
-     hostName = 'smeo'
  }
 
  apply from: '../publish-app.gradle'
