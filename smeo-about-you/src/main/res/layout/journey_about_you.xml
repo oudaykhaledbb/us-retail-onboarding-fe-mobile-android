@@ -12,17 +12,22 @@
         android:orientation="vertical"
         android:paddingHorizontal="?spacerMedium">
 
+        <com.backbase.android.flow.common.uicomponents.hintcontainer.HintContainer
+            android:id="@+id/hintContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/label_get_your_account_set_up"
+            android:text="@string/smeo_about_you_label_get_your_account_set_up"
             android:textAppearance="?textAppearanceBody1" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="?spacerMedium"
-            android:text="@string/label_first_name"
+            android:text="@string/smeo_about_you_label_first_name"
             android:textAppearance="?textAppearanceFormLabel" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -41,7 +46,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_last_name"
+            android:text="@string/smeo_about_you_label_last_name"
             android:textAppearance="?textAppearanceFormLabel" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -60,7 +65,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_date_of_birth"
+            android:text="@string/smeo_about_you_label_date_of_birth"
             android:textAppearance="?textAppearanceFormLabel" />
 
         <LinearLayout
@@ -79,9 +84,9 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="?spacerXSmall"
                     android:layout_weight="0.6"
-                    android:text="@string/set_date"
+                    android:text="@string/smeo_about_you_set_date"
                     app:calendarDateFormat="dd MMM yyyy"
-                    app:calendarTitle="@string/select_date" />
+                    app:calendarTitle="@string/smeo_about_you_select_date" />
 
             </LinearLayout>
 
@@ -100,7 +105,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="?spacerMedium"
-            android:text="@string/label_email"
+            android:text="@string/smeo_about_you_label_email"
             android:textAppearance="?textAppearanceFormLabel" />
 
         <com.google.android.material.textfield.TextInputLayout
@@ -116,6 +121,8 @@
                 android:layout_height="wrap_content" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
+        </com.backbase.android.flow.common.uicomponents.hintcontainer.HintContainer>
 
         <com.backbase.android.design.button.BackbaseButton
             android:id="@+id/btnContinue"

@@ -1,14 +1,13 @@
 package com.backbase.android.flow.smeo.aboutyou.usecase
 
-import com.backbase.android.flow.common.handler.InteractionResponseHandler
-import com.backbase.android.flow.contracts.FlowClientContract
 import com.backbase.android.flow.models.Action
 import com.backbase.android.flow.smeo.aboutyou.AboutYouConfiguration
 import com.backbase.android.flow.smeo.aboutyou.models.AboutYouModel
 import com.backbase.android.flow.smeo.aboutyou.models.InitSmeModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
-import kotlin.coroutines.suspendCoroutine
+import com.backbase.android.flow.v2.contracts.FlowClientContract
+import com.backbase.android.flow.v2.throwExceptionIfErrorOrNull
+import com.google.gson.reflect.TypeToken
+import java.lang.reflect.Type
 
 class AboutYouUseCaseDefaultImpl(
     private val flowClient: FlowClientContract,
@@ -36,36 +35,34 @@ class AboutYouUseCaseDefaultImpl(
             email
         )
 
-    private suspend fun initSmeOnBoardingOnline() =
-        withContext(Dispatchers.Default) {
-            suspendCoroutine<Any?> { continuation ->
-                flowClient.performInteraction(
-                    Action(aboutYouConfiguration.actionInit, InitSmeModel(true)),
-                    InteractionResponseHandler(continuation, aboutYouConfiguration.actionInit)
-                )
-            }
-        }
+    private suspend fun initSmeOnBoardingOnline() {
+        val responseType: Type =
+            object : TypeToken<Map<String, Any?>?>() {}.type
+        flowClient.performInteraction<Map<String, Any?>?>(
+            Action(aboutYouConfiguration.actionInit, InitSmeModel(true)), responseType
+        ).throwExceptionIfErrorOrNull()
+    }
 
     private suspend fun submitAboutYouOnline(
         firstName: String,
         lastName: String,
         dateOfBirth: String,
         email: String
-    ) =
-        withContext(Dispatchers.Default) {
-            suspendCoroutine<Any?> { continuation ->
-                val model = AboutYouModel(
-                    firstName,
-                    lastName,
-                    dateOfBirth,
-                    email
-                )
-                flowClient.performInteraction(
-                    Action(aboutYouConfiguration.actionAboutYou, model),
-                    InteractionResponseHandler(continuation, aboutYouConfiguration.actionAboutYou)
-                )
-            }
-        }
+    ) {
+        val model = AboutYouModel(
+            firstName,
+            lastName,
+            dateOfBirth,
+            email
+        )
+        val responseType: Type =
+            object : TypeToken<Map<String, Any?>?>() {}.type
+
+            flowClient.performInteraction<Map<String, Any?>?>(
+                Action(aboutYouConfiguration.actionAboutYou, model),
+                responseType
+            ).throwExceptionIfErrorOrNull()
+    }
 
     private suspend fun initSmeOnBoardingOffline() = null
 

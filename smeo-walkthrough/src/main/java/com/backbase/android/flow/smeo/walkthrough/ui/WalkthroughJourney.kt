@@ -50,12 +50,12 @@ class WalkthroughJourney : Fragment(R.layout.journey_walkthrough), ViewPager.OnP
 
     private fun handleSkipButtonWhenPageChanged(position: Int) {
         if (position > 0) {
-            btnSkip.setText(R.string.back)
+            btnSkip.setText(R.string.smeo_walkthrough_back)
             btnSkip.setOnClickListener {
                 viewPager.setCurrentItem(position - 1, true)
             }
         } else {
-            btnSkip.setText(R.string.skip)
+            btnSkip.setText(R.string.smeo_walkthrough_skip)
             btnSkip.setOnClickListener {
                 viewPager.setCurrentItem(configuration.pages.size, true)
             }
@@ -66,12 +66,12 @@ class WalkthroughJourney : Fragment(R.layout.journey_walkthrough), ViewPager.OnP
         if (position < configuration.pages.size - 1) {
             termsAndConditions.visibility = View.GONE
             lblNext.isEnabled = true
-            lblNext.setText(R.string.next)
+            lblNext.setText(R.string.smeo_walkthrough_next)
             lblNext.setOnClickListener {
                 viewPager.setCurrentItem(position + 1, true)
             }
         } else {
-            lblNext.setText(R.string.get_started)
+            lblNext.setText(R.string.smeo_walkthrough_get_started)
             cbTermsAndConditions.isChecked = false
             lblNext.isEnabled = false
             termsAndConditions.visibility = View.VISIBLE
@@ -82,7 +82,7 @@ class WalkthroughJourney : Fragment(R.layout.journey_walkthrough), ViewPager.OnP
     }
 
     private fun prepareTermsAndConditionsTextView() {
-        val spannableString = SpannableString(getString(R.string.termsAndConditions))
+        val spannableString = SpannableString(getString(R.string.smeo_walkthrough_termsAndConditions))
 
         val termsAndConditionsSpan: ClickableSpan = object : ClickableSpan() {
             override fun onClick(textView: View) {

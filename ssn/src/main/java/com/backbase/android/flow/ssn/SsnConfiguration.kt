@@ -10,8 +10,8 @@ import com.backbase.android.flow.ssn.SsnConfiguration.Builder
  */
 class SsnConfiguration private constructor(
     val isOffline: Boolean,
-    val submitSsnAction: String,
-    val landingAction: String
+    val submitSsnActionName: String,
+    val landingActionName: String? = null
 ) {
 
     /**
@@ -25,13 +25,13 @@ class SsnConfiguration private constructor(
         var isOffline: Boolean = false
 
         @set:JvmSynthetic
-        lateinit var submitSsnAction: String
+        lateinit var submitSsnActionName: String
 
         @set:JvmSynthetic
-        lateinit var landingAction: String
+        var landingActionName: String? = null
 
         fun build() =
-            SsnConfiguration(isOffline, submitSsnAction, landingAction)
+            SsnConfiguration(isOffline, submitSsnActionName, landingActionName)
     }
 
 }

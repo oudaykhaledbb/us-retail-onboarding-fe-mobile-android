@@ -45,9 +45,6 @@ dependencies {
     implementation dependency.flowcommon
     implementation dependency.designsystem
     implementation dependency.deferredresources
-    implementation dependency.flowaddressvalidation
-
-    implementation("com.squareup.moshi:moshi:1.11.0")
 
     implementation dependency.legacysupport
     implementation dependency.koin
@@ -63,7 +60,7 @@ dependencies {
     implementation dependency.gson
     implementation dependency.rxBindingAppCompat
     implementation dependency.material
-    implementation project(path: ':step-navigation')
+    implementation dependency.stepNavigation
 
     testImplementation dependency.junit
     testImplementation dependency.mockK

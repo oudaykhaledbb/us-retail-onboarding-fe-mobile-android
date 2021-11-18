@@ -13,13 +13,9 @@ class AboutYouViewModel(private val useCase: AboutYouUseCase)
 
     fun submitAboutYou(firstName: String, lastName: String, dateOfBirth: String, email: String){
         apiSubmitAboutYou.submit("submitAboutYou()"){
-            try{
                 useCase.initSmeOnBoarding()
                 delay(30)
                 return@submit useCase.submitAboutYou(firstName, lastName, dateOfBirth, email)
-            }catch (ex: Exception){
-                ex.printStackTrace()
-            }
         }
     }
 

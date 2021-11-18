@@ -22,7 +22,7 @@
         android:layout_marginStart="?spacerMedium"
         android:layout_marginTop="?spacerLarge"
         android:layout_marginEnd="?spacerMedium"
-        android:text="@string/welcome"
+        android:text="@string/smeo_landing_welcome"
         android:textAppearance="?textAppearanceHeadline5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imgHeader" />
@@ -34,7 +34,7 @@
         android:layout_marginStart="?spacerMedium"
         android:layout_marginTop="?spacerLarge"
         android:layout_marginEnd="?spacerMedium"
-        android:text="@string/landing_description"
+        android:text="@string/smeo_landing_landing_description"
         android:textAppearance="?textAppearanceBody1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/lblTitle" />
@@ -49,7 +49,7 @@
         android:layout_marginBottom="?spacerMedium"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:text="@string/track_your_application_status"
+        android:text="@string/smeo_landing_track_your_application_status"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

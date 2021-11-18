@@ -1,9 +1,6 @@
-include ':smeo-business-info'
-include ':smeo-business-identity'
 include ':ssn'
 include ':smeo-about-you'
 include ':smeo-walkthrough'
-include ':step-navigation'
 include ':app'
 include ':smeo-landing'
 rootProject.name = "smeo-android-reference"

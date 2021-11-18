@@ -20,13 +20,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/label_credit_not_affected"
+            android:text="@string/ssn_journey_label_credit_not_affected"
             android:textAppearance="?textAppearanceSubtitle2" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/label_credit_not_affected_description"
+            android:text="@string/ssn_journey_label_credit_not_affected_description"
             android:textColor="?colorTextSupport"
             android:textAppearance="?textAppearanceCaption" />
 
