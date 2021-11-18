@@ -150,38 +150,43 @@ buildscript {
 
 apply from: 'sonar.gradle'
 
+List<String> repoDefinitions = [
+        "android-flow-production",
+        "gradle-main-repos",
+        "design-android"
+]
+List<String> artifactsDefinitions = [
+        "android-flow-development",
+        "android3",
+        "android-retail3"
+]
+
 allprojects {
     repositories {
+        repoDefinitions.forEach { repository ->
+            maven {
+                url = "https://repo.backbase.com/$repository"
+                credentials {
+                    // These 2 variables must be set up on your machine's global gradle.properties:
+                    username = mvnUser
+                    password = mvnPass
+                }
+            }
+        }
+
+        artifactsDefinitions.forEach { repository ->
+            maven {
+                url = "https://artifacts.backbase.com/$repository"
+                credentials {
+                    // These 2 variables must be set up on your machine's global gradle.properties:
+                    username = mvnUser
+                    password = mvnArtifactsPass
+                }
+            }
+        }
+
         google()
-        jcenter()
-        maven {
-            url = flowArtifactsUrl
-            credentials {
-                username = mvnUser
-                password = mvnArtifactsPass
-            }
-        }
-        maven {
-            url = artifactsRepoUrl + '3'
-            credentials {
-                username = mvnUser
-                password = mvnArtifactsPass
-            }
-        }
-        maven {
-            url = artifactsRetailRepoUrl + '3'
-            credentials {
-                username = mvnUser
-                password = mvnArtifactsPass
-            }
-        }
-        maven {
-            url = artifactsDesignRepoUrl
-            credentials {
-                username = mvnUser
-                password = mvnArtifactsPass
-            }
-        }
+        mavenCentral()
         maven { url 'https://jitpack.io' }
         maven { url 'https://mobile-sdk.jumio.com' }
     }
