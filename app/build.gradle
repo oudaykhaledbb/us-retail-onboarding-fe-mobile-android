@@ -69,7 +69,6 @@
      implementation dependency.flow
      implementation dependency.flowcommon
      implementation dependency.flowdesign
-//     implementation dependency.flowaddressvalidation
      implementation dependency.deferredresources
      implementation dependency.designsystem
      implementation dependency.kotlinstdLib
@@ -88,6 +87,7 @@
      implementation dependency.jetpacknavigationui
      implementation dependency.fragment
      implementation dependency.flowotp
+
      implementation dependency.flowaddressvalidation
      implementation dependency.businessrelations
      implementation dependency.productselection

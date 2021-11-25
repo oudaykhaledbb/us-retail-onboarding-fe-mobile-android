@@ -35,7 +35,7 @@ buildscript {
             assertJVersion          : '3.16.1',
             documentrequestVersion  : '0.2.0-rc01',
             plaid                   : "3.2.0",
-            businessrelationsVersion: "0.3.0-rc01",
+            businessrelationsVersion: "0.3.0-rc02",
             productselectionVersion : '0.3.2-rc01',
             jumio                   : "3.9.2"
     ]
@@ -98,7 +98,7 @@ buildscript {
             scuba                   : "net.sf.scuba:scuba-sc-android:0.0.18",
             zoomauthentication      : "com.facetec:zoom-authentication:8.12.1@aar",
             playservices            : "com.google.android.gms:play-services-vision:20.1.2",
-            flowotp                 : "com.backbase.android.flow.otp:one-time-password-journey:3.2.0-rc02",
+            flowotp                 : "com.backbase.android.flow.otp:one-time-password-journey:3.2.0-rc03",
             businessrelations       : "com.backbase.android.flow.businessrelations:business-relations-journey:$versions.businessrelationsVersion",
             productselection        : "com.backbase.android.flow.productselector:product-selection-journey:$versions.productselectionVersion",
             documentrequest         : "com.backbase.android.flow.uploadfiles:document-request-journey:$versions.documentrequestVersion",
@@ -133,6 +133,7 @@ buildscript {
         google()
         jcenter()
     }
+
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
