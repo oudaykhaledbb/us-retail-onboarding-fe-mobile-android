@@ -36,4 +36,5 @@
     <string name="choose_product">Choose product</string>
     <string name="the_business_owners">The business owners</string>
     <string name="business_relations">Business relations</string>
+    <string name="otp_header_title">Security at your fingertips</string>
 </resources>

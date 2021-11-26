@@ -69,7 +69,6 @@
      implementation dependency.flow
      implementation dependency.flowcommon
      implementation dependency.flowdesign
-//     implementation dependency.flowaddressvalidation
      implementation dependency.deferredresources
      implementation dependency.designsystem
      implementation dependency.kotlinstdLib
