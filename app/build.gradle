@@ -87,7 +87,6 @@
      implementation dependency.jetpacknavigationui
      implementation dependency.fragment
      implementation dependency.flowotp
-
      implementation dependency.flowaddressvalidation
      implementation dependency.businessrelations
      implementation dependency.productselection
