@@ -67,6 +67,7 @@
  dependencies {
      implementation dependency.backbase
      implementation dependency.flow
+     implementation dependency.playservices
      implementation dependency.flowcommon
      implementation dependency.flowdesign
      implementation dependency.deferredresources
