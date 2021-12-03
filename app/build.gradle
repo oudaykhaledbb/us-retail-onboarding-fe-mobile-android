@@ -10,8 +10,6 @@
              beta      : "Backbase/Flow-SME-Android-Beta"
      ]
      appCenterGroup = 'Collaborators'
-     schemeName = 'flow'
-     hostName = 'smeo'
  }
 
  apply from: '../publish-app.gradle'
@@ -30,8 +28,6 @@
          testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
          setProperty("archivesBaseName", "$artifactId-$projectVersions.versionName")
          multiDexEnabled true
-
-         manifestPlaceholders = [hostName: "$hostName", schemeName: "$schemeName"]
      }
 
      signingConfigs {
